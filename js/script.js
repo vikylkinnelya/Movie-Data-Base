@@ -34,10 +34,13 @@ genre.textContent = 'ДРАМА';
 const background = document.querySelector('.promo__bg');
 background.style.backgroundImage = "url(img/bg.jpg)";
 
-let watchedFilms = document.querySelectorAll('.promo__interactive-item');
+const watchedFilms = document.querySelector('.promo__interactive-list');
 movieDB.movies.sort();
-watchedFilms.forEach((el, idx) => el.textContent = `#${idx+1} ${movieDB.movies[idx]}`);
-
-
-
-
+watchedFilms.innerHTML = '';
+movieDB.movies.forEach( (el, idx) => {
+    watchedFilms.innerHTML += `
+    <li class="promo__interactive-item"> #${idx+1} ${el}
+        <div class="delete"></div>
+            </li> 
+    `;
+});
