@@ -24,3 +24,19 @@ const movieDB = {
     ]
 };
 
+
+const reklam = document.querySelector('.promo__adv').remove();
+
+const genre = document.querySelector('.promo__genre');
+genre.textContent = 'ДРАМА';
+
+const background = document.querySelector('.promo__bg');
+background.style.backgroundImage = "url(img/bg.jpg)";
+
+let watchedFilms = document.querySelectorAll('.promo__interactive-item');
+movieDB.movies.sort();
+watchedFilms.forEach((el, idx) => el.textContent = `#${idx+1} ${movieDB.movies[idx]}`);
+
+
+
+
