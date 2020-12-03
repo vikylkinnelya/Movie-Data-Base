@@ -36,47 +36,59 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox = addForm.querySelector('[type = checkbox]'),
         button = addForm.querySelector('button');
     
-    reklam.forEach(el => el.remove());
+    const delAdv = (arr) => {
+        arr.forEach(el => el.remove());
+    };
+    delAdv(reklam);
     
-    genre.textContent = 'ДРАМА';
-    
-    background.style.backgroundImage = "url(img/bg.jpg)";
-    
-    function movieDBRefresher() {
-        watchedFilms.innerHTML = ''; //очищен список просмотренных по умолчанию 
-        movieDB.movies.sort();
-        movieDB.movies.forEach( (el, idx) => {
-            watchedFilms.innerHTML += `
-            <li class="promo__interactive-item"> #${idx+1} ${el}
+    const makeChanges = () => {
+        genre.textContent = 'ДРАМА';
+        background.style.backgroundImage = "url(img/bg.jpg)";
+    };
+    makeChanges();
+
+    const sortArr = (arr) => {
+        arr.sort();
+    };
+    sortArr(movieDB.movies);
+
+    function movieDBRefresher(films, parrent) {
+        parrent.innerHTML = ''; //очищаем список
+        films.forEach( (film, idx) => {
+            parrent.innerHTML += `
+            <li class="promo__interactive-item"> #${idx+1} ${film}
                 <div class="delete"></div>
                     </li> 
             `;
         });
     }
-    movieDBRefresher();
+    movieDBRefresher(movieDB.movies, watchedFilms);
 
-    button.addEventListener('click', (ev) => {
-        ev.preventDefault();
-    
-        if (addInput.value.length > 21) {
-            
-            movieDB.movies.push(addInput.value.slice(0,21) + '...');
-            movieDBRefresher();
+    addForm.addEventListener('submit', (ev) => {
+        ev.preventDefault(); //отключена перезагрузка страницы
+        
+        let newFilm = addInput.value;
+        const favorite = checkbox.checked; //стоит ли галочка булевое значение
 
-        } else {
-            movieDB.movies.push(addInput.value);
-            movieDBRefresher();
+        if (newFilm) { //если пустая строка,условие не выполнится
+           
+            if (newFilm.length > 21) {
+                newFilm = `${newFilm.substring(0,22)}...`; 
+            } 
+
+            movieDB.movies.push(newFilm);
+            sortArr(movieDB.movies);
+            movieDBRefresher(movieDB.movies, watchedFilms);
+
+            if (favorite) { //если стоит галочка на любимом фильме
+                console.log('Добавляем любимый фильм');
+        } 
         }
-        console.log(movieDB.movies);
-        if(checkbox.checked == true) {
-            console.log('Добавляем любимый фильм');
-        }
-    
-    
+
+        ev.target.reset();
             
     });
     
-    console.log(movieDB.movies);
 
     
 
