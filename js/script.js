@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         watchedFilms = document.querySelector('.promo__interactive-list'),
         addForm = document.querySelector('form.add'),
         addInput = addForm.querySelector('.adding__input'),
-        checkbox = addForm.querySelector('[type = checkbox]'),
-        button = addForm.querySelector('button');
+        checkbox = addForm.querySelector('[type = checkbox]');
+        
     
     const delAdv = (arr) => {
         arr.forEach(el => el.remove());
@@ -50,18 +50,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortArr = (arr) => {
         arr.sort();
     };
-    sortArr(movieDB.movies);
 
     function movieDBRefresher(films, parrent) {
         parrent.innerHTML = ''; //очищаем список
+        sortArr(movieDB.movies);
+       
         films.forEach( (film, idx) => {
             parrent.innerHTML += `
-            <li class="promo__interactive-item"> #${idx+1} ${film}
+            <li class="promo__interactive-item" > ${idx+1} ${film}
                 <div class="delete"></div>
-                    </li> 
-            `;
+                    </li>`;
         });
+
+        document.querySelectorAll('.delete').forEach((btn, idx) => { //форИч для каждого элемента корзмны
+            btn.addEventListener('click', () => { //для конкретной кнопки конкретная функция
+                btn.parentElement.remove(); //удаляется родитель кнопки
+                movieDB.movies.splice(idx, 1);
+                
+                movieDBRefresher(films, parrent); //обновление нум путем вызова той же самой функции
+            });
+        });    
     }
+
     movieDBRefresher(movieDB.movies, watchedFilms);
 
     addForm.addEventListener('submit', (ev) => {
@@ -82,24 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (favorite) { //если стоит галочка на любимом фильме
                 console.log('Добавляем любимый фильм');
-        } 
+            } 
         }
-
         ev.target.reset();
-            
     });
-    
-
-    
-
-
-
-
-
 });
-
-
-
 
 
 
