@@ -4,7 +4,7 @@ import {
   Layout,
   Input,
   Row,
-  Col, Empty,
+  Col,
   Card,
   Space,
   Tag,
@@ -146,16 +146,23 @@ function App() {
               icon={<DislikeOutlined style={{ fontSize: '20px' }} />}>
               bad
         </Menu.Item>
+
           </Menu>
         </Sider>
         <Layout className='layout'>
           <Header style={{ background: '#FFD500' }}>
             <SearchBox searchHandler={setQuery} /> {/*поиск по введенным параметрам кот сохр в обьект*/}
           </Header>
-          <Content style={{ padding: '0 50px' }}>
+          <Content
+            style={{ padding: '0 50px' }}>
             <div style={{ background: 'fff', padding: 24, minHeight: 280 }} >
               <Row gutter={16} type='flex' justify='center'>
-
+                {loading && <Loader />}
+                {error !== null &&
+                  <div style={{ margin: '20px 0' }}>
+                    <Alert message={error} type='error' />
+                  </div>
+                }
                 {data !== null && data.length > 0 && data.map((result, idx) => (
                   <CardsBox
                     ShowDetail={setShowDetail}
@@ -176,77 +183,79 @@ function App() {
     </div >
   )
 
-}
+  const SearchBox = ({ searchHandler }) => { //элемент поиска фильмов
+    return (
+      <Row marginTop='150px' justify='center'>
+        <Col span={15} >
+          <Search style={{ marginTop: 12, type: 'flex' }}
+            placeholder="enter movie, series"
+            size="large"
+            onSearch={value => searchHandler(value)} //задает срабатывание опр скрипта когда польз выполняет поиск в инпуте
+          />
+        </Col>
+      </Row>
 
-const SearchBox = ({ searchHandler }) => { //элемент поиска фильмов
-  return (
-    <Row marginTop='150px' justify='center'>
-      <Col span={15} >
-        <Search style={{ marginTop: 12, type: 'flex' }}
-          placeholder="enter movie, series"
-          size="large"
-          onSearch={value => searchHandler(value)} //задает срабатывание опр скрипта когда польз выполняет поиск в инпуте
-        />
-      </Col>
-    </Row>
-
-  )
-}
-
-const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
-
-  const clickHandler = () => {
-    console.log('hello')
+    )
   }
 
-  fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
-    .then(resp => resp)
-    .then(resp => resp.json())
-    .then(response => {
-      DetailRequest(false);
-      ShowDetail(response)
-    })
-    .catch(({ message }) => {
-      DetailRequest(false)
-    })
+  const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
 
-  return (
-    <Col
-      style={{ margin: '20px 0' }}
-      className='gutter-box'
-      span={4}>
-      <div className='gutter-box'>
-        <Card
-          style={{ width: 200 }}
-          cover={
-            <img alt={Title}
-              src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
-            />
-          }
-          onClick={() => clickHandler()}
-        >
-          <Meta
-            Title={Title}
-            description={false}
-          />
-          <Row
-            style={{ marginTop: '10px' }}
-            className='gutter-row'
+    const clickHandler = () => {
+      DetailRequest(true)
+    }
+
+    fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
+      .then(resp => resp)
+      .then(resp => resp.json())
+      .then(response => {
+        DetailRequest(false);
+        ShowDetail(response)
+      })
+      .catch(({ message }) => {
+        DetailRequest(false)
+      })
+
+    return (
+      <Col
+        style={{ margin: '20px 0' }}
+        className='gutter-box'
+        span={4}>
+        <div className='gutter-box'>
+          <Card
+            style={{ width: 200, type: 'flex' }}
+            cover={
+              <img alt={Title}
+                src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
+              />
+            }
+            onClick={() => clickHandler()}
           >
-            <Col>
-              <Tag color='magenta'>{Type}</Tag>
-            </Col>
-          </Row>
-        </Card>
-      </div>
-    </Col>
+            <Meta
+              Title={Title}
+              description={false}
+            />
+            <Row
+              style={{ marginTop: '10px' }}
+              className='gutter-row'>
+              <Col>
+                <Tag color='magenta'>{Type}</Tag>
+              </Col>
+            </Row>
+          </Card>
+        </div>
+      </Col>
+    )
+  }
+
+  const Loader = () => (
+    <div style={{ margin: '20px 0', textAlign: 'center' }}>
+      <Spin />
+    </div>
   )
-}
 
 
 
 
 
 
-
-export default App;
+  export default App;
