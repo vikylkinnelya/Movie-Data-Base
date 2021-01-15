@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
+import SearchBox from '../search-box';
+import MenuSider from '../menu-sider';
+
 
 import {
   Layout,
-  Input,
   Row,
   Col,
   Card,
-  Space,
   Tag,
   Spin,
   Alert,
-  Button,
-  Modal,
   Typography,
-  Menu,
-  Switch,
 } from 'antd';
 import 'antd/dist/antd.css'
 
-import {
-  VideoCameraOutlined,
-  EyeInvisibleOutlined,
-  EyeOutlined,
-  LikeOutlined,
-  DislikeOutlined,
-  HeartOutlined,
-} from '@ant-design/icons'
 
 import './app.css';
 
@@ -34,7 +23,6 @@ import './app.css';
 const API_KEY = 'eb9d8a81';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { Search } = Input;
 const { Meta } = Card;
 const TextTitle = Typography.Title;
 
@@ -85,69 +73,9 @@ function App() {
             setCollapsed(!collapsed)
           }}
         >
-          <Menu
-            style={{
-              height: '100vh',
-              background: '#212121',
-              color: '#D6D9DC',
-              paddingTop: '60px',
-              paddingLeft: '20px',
-              borderRight: '0px',
-              fontSize: '26px',
-            }}
-            defaultSelectedKeys={['1']}
-            mode="inline"
-            inlineCollapsed={collapsed}
-          >
-            <Menu.Item
-              key="1"
-              mode="inline"
-              className="customclass"
-              icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}>
-              films
-        </Menu.Item>
-            <Menu.Item
-              key="2"
-              className="customclass"
-              style={{ marginTop: '10px' }}
-              icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}>
-              serials
-        </Menu.Item>
-            <Menu.Item
-              key="3"
-              className="customclass"
-              style={{ marginTop: '20px' }}
-              icon={<EyeOutlined style={{ fontSize: '20px' }} />}>
-              watched
-        </Menu.Item>
-            <Menu.Item
-              key="4"
-              className="customclass"
-              style={{ marginTop: '10px' }}
-              icon={<EyeInvisibleOutlined style={{ fontSize: '20px' }} />}>
-              to watch
-        </Menu.Item>
-            <Menu.Item
-              key="5"
-              className="customclass"
-              style={{ marginTop: '20px' }}
-              icon={<HeartOutlined style={{ fontSize: '20px' }} />}>
-              liked
-        </Menu.Item>
-            <Menu.Item
-              key="6"
-              className="customclass"
-              icon={<LikeOutlined style={{ fontSize: '20px' }} />}>
-              good
-        </Menu.Item>
-            <Menu.Item
-              key="7"
-              className="customclass"
-              icon={<DislikeOutlined style={{ fontSize: '20px' }} />}>
-              bad
-        </Menu.Item>
+          <MenuSider
+            collapsed={collapsed} />
 
-          </Menu>
         </Sider>
         <Layout className='layout'>
           <Header style={{ background: '#FFD500' }}>
@@ -182,80 +110,68 @@ function App() {
       </Layout>
     </div >
   )
+}
 
-  const SearchBox = ({ searchHandler }) => { //элемент поиска фильмов
-    return (
-      <Row marginTop='150px' justify='center'>
-        <Col span={15} >
-          <Search style={{ marginTop: 12, type: 'flex' }}
-            placeholder="enter movie, series"
-            size="large"
-            onSearch={value => searchHandler(value)} //задает срабатывание опр скрипта когда польз выполняет поиск в инпуте
-          />
-        </Col>
-      </Row>
 
-    )
+
+const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
+
+  const clickHandler = () => {
+    DetailRequest(true)
   }
 
-  const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
+  fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
+    .then(resp => resp)
+    .then(resp => resp.json())
+    .then(response => {
+      DetailRequest(false);
+      ShowDetail(response)
+    })
+    .catch(({ message }) => {
+      DetailRequest(false)
+    })
 
-    const clickHandler = () => {
-      DetailRequest(true)
-    }
-
-    fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
-      .then(resp => resp)
-      .then(resp => resp.json())
-      .then(response => {
-        DetailRequest(false);
-        ShowDetail(response)
-      })
-      .catch(({ message }) => {
-        DetailRequest(false)
-      })
-
-    return (
-      <Col
-        style={{ margin: '20px 0' }}
-        className='gutter-box'
-        span={4}>
-        <div className='gutter-box'>
-          <Card
-            style={{ width: 200, type: 'flex' }}
-            cover={
-              <img alt={Title}
-                src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
-              />
-            }
-            onClick={() => clickHandler()}
-          >
-            <Meta
-              Title={Title}
-              description={false}
+  return (
+    <Col
+      style={{ margin: '20px 0' }}
+      className='gutter-box'
+      span={4}>
+      <div className='gutter-box'>
+        <Card
+          style={{ width: 200, type: 'flex' }}
+          cover={
+            <img alt={Title}
+              src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
             />
-            <Row
-              style={{ marginTop: '10px' }}
-              className='gutter-row'>
-              <Col>
-                <Tag color='magenta'>{Type}</Tag>
-              </Col>
-            </Row>
-          </Card>
-        </div>
-      </Col>
-    )
-  }
-
-  const Loader = () => (
-    <div style={{ margin: '20px 0', textAlign: 'center' }}>
-      <Spin />
-    </div>
+          }
+          onClick={() => clickHandler()}
+        >
+          <Meta
+            Title={Title}
+            description={false}
+          />
+          <Row
+            style={{ marginTop: '10px' }}
+            className='gutter-row'>
+            <Col>
+              <Tag color='magenta'>{Type}</Tag>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+    </Col>
   )
+}
+
+const Loader = () => (
+  <div style={{ margin: '20px 0', textAlign: 'center' }}>
+    <Spin />
+  </div>
+)
 
 
 
 
 
 
-  export default App;
+export default App;
