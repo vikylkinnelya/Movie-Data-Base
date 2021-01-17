@@ -3,9 +3,13 @@ import {
     Row,
     Col,
     Card,
-    Tag
+    Tag,
+    Button
 } from 'antd';
-import 'antd/dist/antd.css'
+import {
+    EyeOutlined,
+    HeartOutlined,
+} from '@ant-design/icons'
 
 
 const { Meta } = Card;
@@ -15,8 +19,11 @@ const API_KEY = 'eb9d8a81';
 const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
 
     const clickHandler = () => {
+        ActivateModal(true)
         DetailRequest(true)
     }
+
+
 
     fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
         .then(resp => resp)
@@ -29,14 +36,25 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
             DetailRequest(false)
         })
 
+
+
     return (
-        <Col
-            style={{ margin: '20px 0' }}
+        <Col span={6}
+            style={{ margin: '15px 0' }}
             className='gutter-box'
-            span={4}>
-            <div className='gutter-box'>
+        >
+            <div className='gutter-box'
+                style={{ //как будут отображаться карточки в совокупности
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignContent: 'space - between',
+                    alignItems: 'center',
+                    flexDirection: 'colum'
+                }}>
                 <Card
-                    style={{ width: 200, type: 'flex' }}
+                    style={{
+                        maxWidth: 200, type: 'flex', zIndex: 1,
+                    }}
                     cover={
                         <img alt={Title}
                             src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
@@ -44,13 +62,43 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                     }
                     onClick={() => clickHandler()}
                 >
+                    <Row>
+                        <Button ghost
+                            class='customclass'
+                            type='link'
+                            icon={<EyeOutlined style={{ fontSize: '23px' }}/>}
+                            style={{
+                                width: '30px',
+                                position: 'absolute',
+                                bottom: '95px',
+                                left: '5px',
+                                zIndex: 999,
+                                color: '#FFD500'
+                            }} />
+                        <Button ghost
+                            class='customclass'
+                            type='link'
+                            icon={<HeartOutlined style={{ fontSize: '23px' }}/>}
+                            style={{
+                                width: '30px',
+                                position: 'absolute',
+                                bottom: '95px',
+                                right: '5px',
+                                zIndex: 999,
+                                color: '#FFD500'
+                            }} />
+                    </Row>
                     <Meta
-                        Title={Title}
+                        title={Title}
                         description={false}
+                        style={{ padding: 0 }}
                     />
                     <Row
-                        style={{ marginTop: '10px' }}
-                        className='gutter-row'>
+                        style={{
+                            marginTop: '10px'
+                        }}
+                        className='gutter-row'
+                    >
                         <Col>
                             <Tag color='magenta'>{Type}</Tag>
                         </Col>

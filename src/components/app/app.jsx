@@ -3,11 +3,13 @@ import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import CardsBox from '../cards-box';
+import MovieDetail from '../movie-detail'
 
 import {
   Layout,
   Row,
   Col,
+  Modal,
   Alert,
   Typography,
 } from 'antd';
@@ -20,7 +22,6 @@ import './app.css';
 const API_KEY = 'eb9d8a81';
 
 const { Header, Content, Footer, Sider } = Layout;
-const TextTitle = Typography.Title;
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
 
+  
+
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки
@@ -44,7 +47,7 @@ function App() {
       .then(resp => resp)
       .then(resp => resp.json())
       .then(response => {
-        if (response.Response === 'false') { //если нет ответа
+        if (response.Response === 'False') { //если нет ответа
           setError(response.Error) //записать в обьект ошибки ошибку
         }
         else {
@@ -75,9 +78,9 @@ function App() {
             <SearchBox searchHandler={setQuery} /> {/*поиск по введенным параметрам кот сохр в обьект*/}
           </Header>
           <Content
-            style={{ padding: '0 50px' }}>
-            <div style={{ background: 'fff', padding: 24, minHeight: 280 }} >
-              <Row gutter={16} type='flex' justify='center'>
+            style={{ padding: '20px 20px' }}>
+            <div style={{ background: 'fff', minHeight: 270 }} >
+              <Row type='flex' justify='center'>
                 {loading && <Loader />}
                 {error !== null &&
                   <div style={{ margin: '20px 0' }}>
@@ -94,6 +97,18 @@ function App() {
                 ))}
               </Row>
             </div>
+            <Modal
+              title='Detail'
+              centered
+              visible={activateModal}
+              onCancel={() => setActivateModal(false)}
+              footer={null}
+              width={900}
+            >
+              {detailRequest === false ?
+                (<MovieDetail {...detail} />) :
+                (<Loader />)}
+            </Modal>
           </Content>
           <Footer>
             footer
