@@ -18,12 +18,12 @@ const API_KEY = 'eb9d8a81';
 
 const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
 
+
+
     const clickHandler = () => {
         ActivateModal(true)
         DetailRequest(true)
     }
-
-
 
     fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
         .then(resp => resp)
@@ -66,7 +66,7 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                         <Button ghost
                             class='customclass'
                             type='link'
-                            icon={<EyeOutlined style={{ fontSize: '23px' }}/>}
+                            icon={<EyeOutlined style={{ fontSize: '23px' }} />}
                             style={{
                                 width: '30px',
                                 position: 'absolute',
@@ -78,7 +78,7 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                         <Button ghost
                             class='customclass'
                             type='link'
-                            icon={<HeartOutlined style={{ fontSize: '23px' }}/>}
+                            icon={<HeartOutlined style={{ fontSize: '23px' }} />}
                             style={{
                                 width: '30px',
                                 position: 'absolute',

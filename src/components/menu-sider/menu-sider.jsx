@@ -4,6 +4,7 @@ import { Menu } from 'antd';
 import 'antd/dist/antd.css'
 
 import {
+    DatabaseOutlined,
     VideoCameraOutlined,
     EyeOutlined,
     HeartOutlined,
@@ -30,25 +31,32 @@ const MenuSider = (collapsed) => {
                     key="1"
                     mode="inline"
                     className="customclass"
+                    icon={<DatabaseOutlined  style={{ fontSize: '20px' }} />}>
+                    movie data base
+        </Menu.Item>
+                <Menu.Item
+                    key="2"
+                    mode="inline"
+                    className="customclass"
                     icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}>
                     films
         </Menu.Item>
                 <Menu.Item
-                    key="2"
+                    key="3"
                     className="customclass"
                     style={{ marginTop: '10px' }}
                     icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}>
                     series
         </Menu.Item>
                 <Menu.Item
-                    key="3"
+                    key="4"
                     className="customclass"
                     style={{ marginTop: '20px' }}
                     icon={<HeartOutlined style={{ fontSize: '20px' }} />}>
                     liked
         </Menu.Item>
                 <Menu.Item
-                    key="4"
+                    key="5"
                     className="customclass"
                     style={{ marginTop: '20px' }}
                     icon={<EyeOutlined style={{ fontSize: '20px' }} />}>

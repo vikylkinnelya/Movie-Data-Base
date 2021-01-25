@@ -4,6 +4,7 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import CardsBox from '../cards-box';
 import MovieDetail from '../movie-detail'
+import OMDBService from '../../services/omdb'
 
 import {
   Layout,
