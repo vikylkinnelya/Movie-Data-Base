@@ -16,14 +16,23 @@
 .overlay {
     position: absolute;
     transition: 0.5s ease;
-    opacity: 0.3;
+    opacity: 0.1;
     z-Index: 998;
+    bottom: 48px;
+    width: 100%;
+    background-color: rgba(139, 139, 139, 0.4);
 }
 
-.overlay.like {
-    margin-left: 140px;
+.overlay>.like {
+    right: 23.5px;
+    width: 50.9%;
 }
 
-.overlay.watch {
-    margin-left: -15px;
+.overlay>.watch {
+    left: -25.5px;
+    width: 50.5%;
+}
+
+.overlay>.like:active {
+    color: magenta
 }

@@ -42,17 +42,16 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                 onClick={() => clickHandler()}
             >
                 <div className='overlay'>
-                    <Button 
-                        type="link"
-                        className='overlay watch'
-                        icon={<FolderViewOutlined style={{ fontSize: '23px' }} />}
-                    />
-
-                    <Button
-                        type="link"
-                        className='overlay like'
-                        icon={<HeartOutlined style={{ fontSize: '23px' }} />}
-                    />
+                    <Button className='overlay watch'
+                        type="text"
+                        icon={<FolderViewOutlined style={{ fontSize: '23px'}} />}>
+                    </Button>
+                    
+                    <Button className='overlay like'
+                        type="text"
+                        icon={<HeartOutlined style={{ fontSize: '23px'}} />}>
+                    </Button>
+                    
                 </div>
                 <Meta
                     title={Title}
