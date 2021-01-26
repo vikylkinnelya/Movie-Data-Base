@@ -1,10 +1,9 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import CardsBox from '../cards-box';
 import MovieDetail from '../movie-detail'
-import OMDBService from '../../services/omdb'
 
 import {
   Layout,
@@ -29,7 +28,9 @@ function App() {
   const [data, setData] = useState(null); //будет хранить обьект ответа
   const [error, setError] = useState(null); //будет обновляться только при ошибке
   const [loading, setLoading] = useState(false); //обект ожидания
-  const [q, setQuery] = useState('batman'); //хранит искомые параметры запроса 
+  const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
+
+  const [fav, setFav] = useState(null); //список избранных
 
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает данные
@@ -37,30 +38,34 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
 
+
   
 
   useEffect(() => {
+
     setLoading(true); //ждём
     setError(null); //обнуление ошибки
     setData(null); //обнуление обьекта данных
+    
+    const getMovieReqest = async () => { //запрос на сервер
+      const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
+  
+      const response = await fetch(url);
+      const responseJson = await response.json();
+  
+      if (responseJson.Response === 'False') { //если нет ответа
+        setError(response.Error) //записать в обьект ошибки ошибку
+      }
+      if (responseJson.Search) {
+        setData(responseJson.Search) //записать в состояние ответ
+      }
+    } 
+    
+    getMovieReqest(q);
+    setLoading(false)
+  }, [q]); //ищем черещ getmovie с параметрами q
 
-    fetch(`http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`)
-      .then(resp => resp)
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.Response === 'False') { //если нет ответа
-          setError(response.Error) //записать в обьект ошибки ошибку
-        }
-        else {
-          setData(response.Search) //записать в обьект ответ
-        }
-        setLoading(false) //больше не ждём
-      })
-      .catch(({ message }) => {
-        setError(message); //показать сообщение в случае ошибки
-        setLoading(false)
-      })
-  }, [q]);
+  
 
 
   return (
@@ -80,8 +85,8 @@ function App() {
           </Header>
           <Content
             style={{ padding: '20px 20px' }}>
-            <div style={{ background: 'fff', minHeight: 270 }} >
-              <Row type='flex' justify='center'>
+            <div style={{ background: 'fff'}} >
+              <Row justify='center'>
                 {loading && <Loader />}
                 {error !== null &&
                   <div style={{ margin: '20px 0' }}>

@@ -1,0 +1,29 @@
+.card-container {
+    position: relative;
+    z-Index: 1;
+    transition: transform 0.2s;
+}
+
+.card-container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.card-container:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    transition: 0.5s ease;
+    opacity: 0.3;
+    z-Index: 998;
+}
+
+.overlay.like {
+    margin-left: 140px;
+}
+
+.overlay.watch {
+    margin-left: -15px;
+}
