@@ -17,22 +17,27 @@
     position: absolute;
     transition: 0.5s ease;
     opacity: 0.1;
-    z-Index: 998;
-    bottom: 48px;
-    width: 100%;
-    background-color: rgba(139, 139, 139, 0.4);
+    z-Index: 2;
+    bottom: 50px;
+    background-color: rgba(167, 167, 167, 0.5);
+    color: #FFD500;
 }
 
-.overlay>.like {
-    right: 23.5px;
-    width: 50.9%;
+.overlay.like {
+    width: 50%;
+    left: 160px;
 }
 
-.overlay>.watch {
-    left: -25.5px;
-    width: 50.5%;
+.overlay .watch {
+    width: 50%;
+    left: 10px;
+    align-items: stretch;
 }
 
-.overlay>.like:active {
-    color: magenta
+.overlay.watch:hover {
+    background-color: rgba(167, 167, 167, 0.7);
+}
+
+.overlay.like:hover {
+    background-color: rgba(167, 167, 167, 0.7);
 }

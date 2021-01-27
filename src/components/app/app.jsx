@@ -31,14 +31,13 @@ function App() {
   const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
 
   const [fav, setFav] = useState(null); //список избранных
+  const [watch, setWatch] = useState(null); //список к просмотру 
 
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает данные
   const [detailRequest, setDetailRequest] = useState(false); //отображение загрузчика
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
-
-
   
 
   useEffect(() => {
@@ -60,7 +59,6 @@ function App() {
         setData(responseJson.Search) //записать в состояние ответ
       }
     } 
-    
     getMovieReqest(q);
     setLoading(false)
   }, [q]); //ищем черещ getmovie с параметрами q
