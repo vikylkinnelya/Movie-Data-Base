@@ -16,7 +16,6 @@
 .overlay {
     position: absolute;
     transition: 0.5s ease;
-    opacity: 0.1;
     z-Index: 2;
     bottom: 50px;
     background-color: rgba(167, 167, 167, 0.5);
@@ -26,18 +25,62 @@
 .overlay.like {
     width: 50%;
     left: 160px;
+    opacity: 0.3;
 }
 
 .overlay .watch {
     width: 50%;
     left: 10px;
-    align-items: stretch;
+    opacity: 0.3;
 }
 
 .overlay.watch:hover {
     background-color: rgba(167, 167, 167, 0.7);
+    color: #FFD500;
 }
 
 .overlay.like:hover {
     background-color: rgba(167, 167, 167, 0.7);
+    color: #FFD500;
+}
+
+.overlay .like:active {
+    background-color: rgba(167, 167, 167, 0.7);
+    color: #FFD500;
+}
+
+.ant-btn {
+    color: #FFD500;
+}
+
+.ant-btn:focus {
+    color: #FFD500;
+    border-color: #FFD500;
+}
+
+.ant-btn:active {
+    color: #FFD500;
+    background: #fff;
+    border-color: #FFD500;
+}
+
+.ant-btn-primary {
+    color: #fff;
+    background: #FFD500;
+    border-color: #FFD500;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.ant-btn-primary:active {
+    color: #fff;
+    background: #FFD500;
+    border-color: #FFD500;
+}
+
+.ant-btn-ghost:active {
+    color: #FFD500;
+    background: transparent;
+    border-color: #FFD500;
 }
