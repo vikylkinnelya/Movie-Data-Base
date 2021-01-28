@@ -17,7 +17,7 @@
     position: absolute;
     transition: 0.5s ease;
     z-Index: 2;
-    bottom: 50px;
+    bottom: 48px;
     background-color: rgba(167, 167, 167, 0.5);
     color: #FFD500;
 }
@@ -44,11 +44,6 @@
     color: #FFD500;
 }
 
-.overlay .like:active {
-    background-color: rgba(167, 167, 167, 0.7);
-    color: #FFD500;
-}
-
 .ant-btn {
     color: #212121;
     border-color: rgba(167, 167, 167, 0.7);
@@ -56,11 +51,13 @@
 
 .ant-btn:focus {
     color: #FFD500;
-    border-color: #212121;
+    border-color: rgba(167, 167, 167, 0.7);
     background-color: rgba(167, 167, 167, 0.7);
 }
 
 .overlay .like .active {
+    /* при нажатии на кнопку добавляется класс эктив */
     background-color: rgba(167, 167, 167, 0.7);
+    border-color: #FFD500;
     color: #FFD500;
 }

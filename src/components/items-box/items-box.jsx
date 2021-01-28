@@ -5,32 +5,32 @@ import {
     Card,
     Button,
     Tag,
-    Checkbox,
 } from 'antd';
-
 import {
     FolderViewOutlined,
     HeartOutlined,
 } from '@ant-design/icons'
-
 import './items-box.css'
-
-
 const { Meta } = Card;
 
 
 const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
 
-    const itemClickHandler = () => {
-        ActivateModal(true)
-        DetailRequest(true)
+    const itemClickHandler = () => { //обработчик события клика. при клике на карточку
+        ActivateModal(true); //показать модалку. эл импортируется из другого компонента
+        DetailRequest(true); //запрос к серверу за деталями фильма
     }
-    const watchClickHandler = () => {
+    const watchClickHandler = (data) => { //при клике на глаз
+        
+        
         console.log('watch')
     }
-    const likeClickHandler = () => {
+    const favClickHandler = () => {
         console.log('like')
     }
+
+    const magenta = <Tag color='magenta'>{Type}</Tag> 
+    const green = <Tag color='green'>{Type}</Tag>
 
 
     return (
@@ -41,20 +41,22 @@ const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
             <div className='overlay'>
                 <Button
                     className='overlay watch'
-                    onClick={() => watchClickHandler()}
                     type="primary"
                     shape='circle'
-                    icon={<FolderViewOutlined style={{ fontSize: '23px' }} />}>
+                    icon={<FolderViewOutlined style={{ fontSize: '23px' }} />}
+                    onClick={() => watchClickHandler()}
+                >
                 </Button>
                 <Button
                     className='overlay like'
-                    onClick={()=>likeClickHandler()}
                     type="primary"
                     shape='circle'
-                    icon={<HeartOutlined style={{ fontSize: '23px', marginTop: '2px' }} />}>
+                    icon={<HeartOutlined style={{ fontSize: '23px', marginTop: '2px' }} />}
+                    onClick={() => favClickHandler()}
+                >
                 </Button>
             </div>
-            <Card
+            <Card /* карточка  с фото */
                 style={{ maxWidth: 200 }}
                 cover={
                     <img
@@ -64,24 +66,20 @@ const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                         onClick={() => itemClickHandler()}
                     />}
             >
-
-                <Meta
+                <Meta /* краткая информация */
                     title={Title}
                     description={false}
                     style={{ padding: 0 }}
                 />
                 <Row
-                    style={{
-                        marginTop: '10px'
-                    }}
+                    style={{ marginTop: '1px' }}
                     className='gutter-row'
                 >
                     <Col>
-                        <Tag color='magenta'>{Type}</Tag>
+                        {Type === 'movie' ? magenta : green}
                     </Col>
                 </Row>
             </Card>
-
         </div >
     )
 }
