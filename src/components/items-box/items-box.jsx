@@ -13,15 +13,15 @@ import {
     HeartOutlined,
 } from '@ant-design/icons'
 
-import './cards-box.css'
-import { red } from '@ant-design/colors';
+import './items-box.css'
+
 
 const { Meta } = Card;
 
 
-const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
+const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
 
-    const cardClickHandler = () => {
+    const itemClickHandler = () => {
         ActivateModal(true)
         DetailRequest(true)
     }
@@ -42,14 +42,14 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                 <Button
                     className='overlay watch'
                     onClick={() => watchClickHandler()}
-                    type="link"
+                    type="primary"
                     shape='circle'
                     icon={<FolderViewOutlined style={{ fontSize: '23px' }} />}>
                 </Button>
                 <Button
                     className='overlay like'
                     onClick={()=>likeClickHandler()}
-                    type="link"
+                    type="primary"
                     shape='circle'
                     icon={<HeartOutlined style={{ fontSize: '23px', marginTop: '2px' }} />}>
                 </Button>
@@ -61,7 +61,7 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                         style={{ height: 290 }}
                         alt={Title}
                         src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
-                        onClick={() => cardClickHandler()}
+                        onClick={() => itemClickHandler()}
                     />}
             >
 
@@ -86,4 +86,4 @@ const CardsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
     )
 }
 
-export default CardsBox;
+export default ItemsBox;

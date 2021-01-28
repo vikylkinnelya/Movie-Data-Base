@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
-import CardsBox from '../cards-box';
+import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail'
 
 import {
@@ -16,6 +16,7 @@ import {
 import 'antd/dist/antd.css'
 
 import './app.css';
+import FavBox from '../favPage/fav-box';
 
 //lessc src/components/app/main.less node_modules/antd/dist/antd.css --js
 
@@ -63,7 +64,10 @@ function App() {
     setLoading(false)
   }, [q]); //ищем черещ getmovie с параметрами q
 
-  
+  const addFav = (item) => {
+    const newFavList = [...fav, item];
+    setFav(newFavList)
+  }
 
 
   return (
@@ -92,12 +96,20 @@ function App() {
                   </div>
                 }
                 {data !== null && data.length > 0 && data.map((result, idx) => (
-                  <CardsBox
+                  <ItemsBox
                     ShowDetail={setShowDetail}
                     DetailRequest={setDetailRequest}
                     ActivateModal={setActivateModal}
                     key={idx}
                     {...result} />
+                ))}
+                {fav !== null && fav.length > 0 && fav.map((result, idx) =>(
+                  <FavBox
+                  
+                  likeClickHandler={addFav}
+                  key={idx}
+                  {...result}
+                  />
                 ))}
               </Row>
             </div>
