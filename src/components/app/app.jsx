@@ -4,6 +4,9 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
+
+import AddFavorites from '../add-favorites';
+
 import FavBox from '../favPage';
 
 import {
@@ -30,8 +33,8 @@ function App() {
   const [loading, setLoading] = useState(false); //обект ожидания
   const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
 
-  const [favList, setFavList] = useState([]); //список избранных
-  const [watchList, setWatchList] = useState([]); //список к просмотру
+  const [favList, setFav] = useState([]); //список избранных
+  const [watchList, setWatch] = useState([]); //список к просмотру
   const [favBtn, setFavBtn] = useState(false); //активность кнопки лайков
   const [watchBtn, setWatchBtn] = useState(false); //активн кнопки просмотреть
 
@@ -66,14 +69,14 @@ function App() {
     setLoading(false);
   }, [q]); //ищем черещ getmovie с параметрами q
 
-  const addFavItem = (item) => { //добавл в список избранных
+  const addFavItem = (item) => { //добавл в список избранныx
     const newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
-    setFavList(newFavList) //перезаписываем обьект списка избранных
+    setFav(newFavList) //перезаписываем обьект списка избранных
     
   }
   const addWatchItem = (item) => {
     const newWatchList = [...favList, item];
-    setWatchList(newWatchList)
+    setWatch(newWatchList)
   }
 
 
@@ -109,7 +112,10 @@ function App() {
                     ShowDetail={setShowDetail}
                     DetailRequest={setDetailRequest}
                     ActivateModal={setActivateModal}
-                    favClickHandler={addFavItem}
+
+                    AddFavorites={AddFavorites}
+                    handleFavouritesClick = {() =>addFavItem(data)}
+                    
                     key={idx}
                     {...result} /> /* показ самих элементов */
                 ))}

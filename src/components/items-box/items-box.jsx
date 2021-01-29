@@ -6,30 +6,29 @@ import {
     Button,
     Tag,
 } from 'antd';
-import {
-    FolderViewOutlined,
-    HeartOutlined,
-} from '@ant-design/icons'
+import { FolderViewOutlined } from '@ant-design/icons'
 import './items-box.css'
+import AddFavorites from '../add-favorites';
 const { Meta } = Card;
 
 
-const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal }) => {
+const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, ActivateModal, AddFavorites }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
     }
-    const watchClickHandler = (data) => { //при клике на глаз
-        
-        
+
+    const watchClickHandler = (item) => { //при клике на глаз
         console.log('watch')
     }
-    const favClickHandler = () => {
+
+    const favClickHandler = (item) => {
         console.log('like')
     }
 
-    const magenta = <Tag color='magenta'>{Type}</Tag> 
+
+    const magenta = <Tag color='magenta'>{Type}</Tag>
     const green = <Tag color='green'>{Type}</Tag>
 
 
@@ -39,6 +38,11 @@ const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
             style={{ margin: '15px', display: 'flex', }}
         >
             <div className='overlay'>
+                <AddFavorites
+                    onClick={() => this.handleFavouritesClick()}
+                />
+
+
                 <Button
                     className='overlay watch'
                     type="primary"
@@ -47,14 +51,8 @@ const ItemsBox = ({ Title, imdbID, Poster, Type, ShowDetail, DetailRequest, Acti
                     onClick={() => watchClickHandler()}
                 >
                 </Button>
-                <Button
-                    className='overlay like'
-                    type="primary"
-                    shape='circle'
-                    icon={<HeartOutlined style={{ fontSize: '23px', marginTop: '2px' }} />}
-                    onClick={() => favClickHandler()}
-                >
-                </Button>
+
+
             </div>
             <Card /* карточка  с фото */
                 style={{ maxWidth: 200 }}
