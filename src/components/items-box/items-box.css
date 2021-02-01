@@ -22,13 +22,13 @@
     color: #FFD500;
 }
 
-.overlay.like {
+.overlay>.like {
     width: 50%;
     left: 160px;
     opacity: 0.3;
 }
 
-.overlay .watch {
+.overlay>.watch {
     width: 50%;
     left: 10px;
     opacity: 0.3;
@@ -55,9 +55,8 @@
     background-color: rgba(167, 167, 167, 0.7);
 }
 
-.overlay .like .active {
+.overlay.like.active {
     /* при нажатии на кнопку добавляется класс эктив */
-    background-color: rgba(167, 167, 167, 0.7);
     border-color: #FFD500;
     color: #FFD500;
 }

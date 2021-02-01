@@ -66,25 +66,29 @@ function App() {
   const addFavItem = (item) => { //добавл в список избранныx
     const newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
     setFav(newFavList) //перезаписываем обьект списка избранных
+    setFavBtn(!favBtn)
+    //переключаем класс активности
   };
 
   const addWatchItem = (item) => {
     const newWatchList = [...watchList, item];
     setWatch(newWatchList)
+    setWatchBtn(!watchBtn)
   };
 
   const removeFavItem = (item) => {
     const newFavList = favList.filter(fav => fav.imdbID !== item.imdbID)
     setFav(newFavList) //перезаписываем обьект списка избранных
+    setFavBtn(!favBtn)
 
   }
 
   const removeWatchItem = (item) => {
     const newWatchList = watchList.filter(watch => watch.imdbID !== item.imdbID)
     setFav(newWatchList) //перезаписываем обьект списка избранных
+    setWatchBtn(!watchBtn)
   }
-
-
+  
 
   return (
     <div className='App'>
@@ -113,13 +117,15 @@ function App() {
                 }
                 <ItemsBox
                   data={data} //передаем обьект с данными на уровень ниже
+                  
                   ShowDetail={setShowDetail}
                   DetailRequest={setDetailRequest}
                   ActivateModal={setActivateModal}
 
                   AddFavItem={addFavItem} //передаем на уровень ниже функцию добавления кликнутого элемента в список избранных
                   AddWatchItem={addWatchItem}
-
+                  RemoveFavItem={removeFavItem}
+                  RemoveWatchItem={removeWatchItem}
                 />
 
                 {/* {favList !== null && favList.length > 0 && favList.map((result, idx) => (

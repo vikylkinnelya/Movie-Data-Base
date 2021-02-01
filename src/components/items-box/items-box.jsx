@@ -11,43 +11,53 @@ import { HeartOutlined, FolderViewOutlined } from '@ant-design/icons'
 const { Meta } = Card;
 
 
-const ItemsBox = ({ data, AddFavItem, AddWatchItem, imdbID, ShowDetail, DetailRequest, ActivateModal }) => {
+const ItemsBox = ({ data, AddFavItem, AddWatchItem, RemoveFavItem, RemoveWatchItem, favBtn, watchBtn, imdbID, ShowDetail, DetailRequest, ActivateModal }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
     }
 
-    const watchClickHandler = () => { //при клике на глаз
-        console.log('watch')
 
+    const toggleFav = (item) => {
+        if (!favBtn) {
+            AddFavItem(item)
+            classNamesFav += ' active'
+        } else {
+            RemoveFavItem(item)
+            classNamesFav = classNamesFav.slice(0, -6)
+        }
     }
 
-    const favClickHandler = (item) => {
-        console.log('like')
-        console.log(item)
+
+
+    let classNamesFav = 'overlay like';
+    let classNamesWatch = 'overlay watch';
+
+
+    if (watchBtn) {
+        classNamesWatch += 'active'
     }
 
     return (
         <>
-            {data !== null && data.length > 0 && data.map((result, idx) => ( /* перебор обьекта даты */
+            {data !== null && data.length > 0 && data.map((result) => ( /* перебор обьекта даты */
                 <div
-                    key={idx}
+                    key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
                     className='card-container'
                     style={{ margin: '15px', display: 'flex', }}
                 >
                     <div className='overlay'>
                         <Button
-                            className='overlay like'
+                            className={classNamesFav}
                             type="primary"
                             shape='circle'
                             icon={<HeartOutlined style={{ fontSize: '23px', marginTop: '2px' }} />}
-                            onClick={() => AddFavItem(result)}
-                            //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
+                            onClick={() => toggleFav(result)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
                         >
                         </Button>
                         <Button
-                            className='overlay watch'
+                            className={classNamesWatch}
                             type="primary"
                             shape='circle'
                             icon={<FolderViewOutlined style={{ fontSize: '23px' }} />}
