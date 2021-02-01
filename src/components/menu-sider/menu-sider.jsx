@@ -26,7 +26,7 @@ const MenuSider = (collapsed) => {
                 }}
                 defaultSelectedKeys={['1']}
                 mode="inline"
-                inlineCollapsed={collapsed} >
+                collapsed={collapsed} >
                 <Menu.Item
                     key="1"
                     mode="inline"

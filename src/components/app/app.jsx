@@ -5,14 +5,10 @@ import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
 
-import AddFavorites from '../add-favorites';
-
-import FavBox from '../favPage';
 
 import {
   Layout,
   Row,
-  Col,
   Modal,
   Alert,
 } from 'antd';
@@ -45,38 +41,47 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
 
+  const getMovieReqest = async (q) => { //запрос на сервер
+    const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
+
+    const response = await fetch(url); //запрос к серверу
+    const responseJson = await response.json();
+
+    if (responseJson.Response === 'False') { //если нет ответа
+      setError(response.Error) //записать в обьект ошибки ошибку
+    }
+    if (responseJson.Search) {
+      setData(responseJson.Search) //записать в обьект с данными полученный ответ
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-
     setLoading(true); //ждём
     setError(null); //обнуление ошибки
     setData(null); //обнуление обьекта данных
-
-    const getMovieReqest = async () => { //запрос на сервер
-      const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
-
-      const response = await fetch(url); //запрос к серверу
-      const responseJson = await response.json();
-
-      if (responseJson.Response === 'False') { //если нет ответа
-        setError(response.Error) //записать в обьект ошибки ошибку
-      }
-      if (responseJson.Search) {
-        setData(responseJson.Search) //записать в состояние ответ
-      }
-    }
     getMovieReqest(q);
-    setLoading(false);
   }, [q]); //ищем черещ getmovie с параметрами q
 
   const addFavItem = (item) => { //добавл в список избранныx
     const newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
     setFav(newFavList) //перезаписываем обьект списка избранных
-    
-  }
+  };
+
   const addWatchItem = (item) => {
-    const newWatchList = [...favList, item];
+    const newWatchList = [...watchList, item];
     setWatch(newWatchList)
+  };
+
+  const removeFavItem = (item) => {
+    const newFavList = favList.filter(fav => fav.imdbID !== item.imdbID)
+    setFav(newFavList) //перезаписываем обьект списка избранных
+
+  }
+
+  const removeWatchItem = (item) => {
+    const newWatchList = watchList.filter(watch => watch.imdbID !== item.imdbID)
+    setFav(newWatchList) //перезаписываем обьект списка избранных
   }
 
 
@@ -86,9 +91,8 @@ function App() {
       <Layout className='Layout' style={{ minHeight: '100vh' }}>
         <Sider /* боковая панель */
           collapsible /* сворачивающаяся */
-          onCollapse={() => {
-            setCollapsed(!collapsed)
-          }}>
+          onCollapse={() => { setCollapsed(!collapsed) }}
+        >
           <MenuSider
             collapsed={collapsed} /> {/* зависит от того, свернута ли бок панель */}
         </Sider>
@@ -107,26 +111,23 @@ function App() {
                     <Alert message={error} type='error' />
                   </div>
                 }
-                {data !== null && data.length > 0 && data.map((result, idx) => ( /* перебор обьекта даты */
-                  <ItemsBox
-                    ShowDetail={setShowDetail}
-                    DetailRequest={setDetailRequest}
-                    ActivateModal={setActivateModal}
+                <ItemsBox
+                  data={data} //передаем обьект с данными на уровень ниже
+                  ShowDetail={setShowDetail}
+                  DetailRequest={setDetailRequest}
+                  ActivateModal={setActivateModal}
 
-                    AddFavorites={AddFavorites}
-                    handleFavouritesClick = {() =>addFavItem(data)}
-                    
-                    key={idx}
-                    {...result} /> /* показ самих элементов */
-                ))}
-                {favList !== null && favList.length > 0 && favList.map((result, idx) => (
+                  AddFavItem={addFavItem} //передаем на уровень ниже функцию добавления кликнутого элемента в список избранных
+                  AddWatchItem={addWatchItem}
+
+                />
+
+                {/* {favList !== null && favList.length > 0 && favList.map((result, idx) => (
                   <FavBox
-                    
-
                     key={idx}
                     {...result}
                   />
-                ))}
+                ))} */}
               </Row>
             </div>
             <Modal
@@ -137,9 +138,10 @@ function App() {
               footer={null}
               width={900}
             >
-              {detailRequest === false ?
-                (<MovieDetail {...detail} />) :
-                (<Loader />)}
+              {detailRequest === false ? /* если получен ответ от сервера с деталями */
+                (<MovieDetail {...detail} />) : /* показать детали */
+                (<Loader />)
+              }
             </Modal>
           </Content>
           <Footer>
