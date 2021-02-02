@@ -22,41 +22,56 @@
     color: #FFD500;
 }
 
-.overlay>.like {
-    width: 50%;
-    left: 160px;
-    opacity: 0.3;
-}
-
-.overlay>.watch {
-    width: 50%;
-    left: 10px;
-    opacity: 0.3;
-}
-
-.overlay.watch:hover {
-    background-color: rgba(167, 167, 167, 0.7);
-    color: #FFD500;
-}
-
-.overlay.like:hover {
-    background-color: rgba(167, 167, 167, 0.7);
-    color: #FFD500;
-}
-
 .ant-btn {
     color: #212121;
     border-color: rgba(167, 167, 167, 0.7);
 }
 
 .ant-btn:focus {
-    color: #FFD500;
+    color: #212121;
     border-color: rgba(167, 167, 167, 0.7);
     background-color: rgba(167, 167, 167, 0.7);
 }
 
-.overlay.like.active {
+.overlay>.like {
+    left: 160px;
+}
+
+.overlay>.watch {
+    left: 10px;
+}
+
+.overlay>.like,
+.overlay>.watch {
+    width: 50%;
+    opacity: 0.3;
+}
+
+.overlay.watch:hover,
+.overlay.like:hover {
+    background-color: rgba(167, 167, 167, 0.7);
+    color: #FFD500;
+}
+
+.overlay.like.active,
+.overlay.watch.active {
     /* при нажатии на кнопку добавляется класс эктив */
     border-color: #FFD500;
     color: #FFD500;
+    opacity: 0.9;
+}
+
+.anticon.anticon-heart.custom,
+.anticon.anticon-folder-view.custom {
+    font-size: 23px;
+    margin-left: 1px;
+}
+
+.anticon.anticon-heart.custom {
+    margin-top: 2px;
+}
+
+.ant-row.ant-row-center .card-container {
+    margin: 15px;
+    display: flex;
 }

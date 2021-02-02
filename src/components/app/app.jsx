@@ -31,10 +31,7 @@ function App() {
 
   const [favList, setFav] = useState([]); //список избранных
   const [watchList, setWatch] = useState([]); //список к просмотру
-  const [favBtn, setFavBtn] = useState(false); //активность кнопки лайков
-  const [watchBtn, setWatchBtn] = useState(false); //активн кнопки просмотреть
-
-
+  
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
   const [detailRequest, setDetailRequest] = useState(false); //отображение загрузчика
@@ -63,32 +60,46 @@ function App() {
     getMovieReqest(q);
   }, [q]); //ищем черещ getmovie с параметрами q
 
-  const addFavItem = (item) => { //добавл в список избранныx
+  /* const addFavItem = (item) => { //добавл в список избранныx
     const newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
     setFav(newFavList) //перезаписываем обьект списка избранных
-    setFavBtn(!favBtn)
-    //переключаем класс активности
-  };
+  }; */
 
-  const addWatchItem = (item) => {
+  /* const addWatchItem = (item) => {
     const newWatchList = [...watchList, item];
     setWatch(newWatchList)
-    setWatchBtn(!watchBtn)
-  };
+  }; */
 
-  const removeFavItem = (item) => {
+  /* const removeFavItem = (item) => {
     const newFavList = favList.filter(fav => fav.imdbID !== item.imdbID)
     setFav(newFavList) //перезаписываем обьект списка избранных
-    setFavBtn(!favBtn)
+  } */
 
-  }
-
-  const removeWatchItem = (item) => {
+  /* const removeWatchItem = (item) => {
     const newWatchList = watchList.filter(watch => watch.imdbID !== item.imdbID)
     setFav(newWatchList) //перезаписываем обьект списка избранных
-    setWatchBtn(!watchBtn)
+  } */
+
+  const toggleFav = (item) => {
+    let newFavList
+    if (favList.includes(item)) {
+      newFavList = favList.filter(fav => fav.imdbID !== item.imdbID) //в новый список попадают все кроме выбранного на удаление
+    }
+    if (!favList.includes(item)) {
+      newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
+    }
+    setFav(newFavList) //перезаписываем обьект списка избранных
   }
-  
+  const toggleWatch = (item) => {
+    let newWatchList
+    if (watchList.includes(item)) {
+      newWatchList = watchList.filter(watch => watch.imdbID !== item.imdbID)
+    }
+    if (!watchList.includes(item)) {
+      newWatchList = [...watchList, item];
+    }
+    setWatch(newWatchList)
+  }
 
   return (
     <div className='App'>
@@ -117,15 +128,15 @@ function App() {
                 }
                 <ItemsBox
                   data={data} //передаем обьект с данными на уровень ниже
-                  
+                  favList={favList}
+                  watchList={watchList}
+
                   ShowDetail={setShowDetail}
                   DetailRequest={setDetailRequest}
                   ActivateModal={setActivateModal}
 
-                  AddFavItem={addFavItem} //передаем на уровень ниже функцию добавления кликнутого элемента в список избранных
-                  AddWatchItem={addWatchItem}
-                  RemoveFavItem={removeFavItem}
-                  RemoveWatchItem={removeWatchItem}
+                  ToggleFav={toggleFav}
+                  ToggleWatch={toggleWatch}
                 />
 
                 {/* {favList !== null && favList.length > 0 && favList.map((result, idx) => (
