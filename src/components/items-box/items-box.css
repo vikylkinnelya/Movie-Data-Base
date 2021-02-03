@@ -61,17 +61,33 @@
     opacity: 0.9;
 }
 
-.anticon.anticon-heart.custom,
-.anticon.anticon-folder-view.custom {
+.anticon.anticon-heart,
+.anticon.anticon-folder-view {
     font-size: 23px;
     margin-left: 1px;
 }
 
-.anticon.anticon-heart.custom {
+.anticon.anticon-heart {
     margin-top: 2px;
 }
 
 .ant-row.ant-row-center .card-container {
     margin: 15px;
     display: flex;
+}
+
+.ant-card.ant-card-bordered {
+    max-width: 200px
+}
+
+.ant-card-cover * {
+    height: 290px
+}
+
+.ant-card-meta {
+    padding: 0px
+}
+
+.ant-row .gutter-row {
+    margin-top: 3px
 }

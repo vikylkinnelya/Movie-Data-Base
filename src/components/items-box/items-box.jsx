@@ -35,9 +35,7 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
                             className={favList.includes(result) ? classNamesFav : classNamesNotFav}
                             type="primary"
                             shape='circle'
-                            icon={<HeartOutlined
-                                className='custom'
-                            />}
+                            icon={<HeartOutlined />}
                             onClick={() => ToggleFav(result)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
                         >
                         </Button>
@@ -45,17 +43,14 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
                             className={watchList.includes(result) ? classNamesWatch : classNamesNotWatch}
                             type="primary"
                             shape='circle'
-                            icon={<FolderViewOutlined
-                                className='custom' />}
+                            icon={<FolderViewOutlined/>}
                             onClick={() => ToggleWatch(result)}
                         >
                         </Button>
                     </div>
                     <Card /* карточка  с фото */
-                        style={{ maxWidth: 200 }}
                         cover={
                             <img
-                                style={{ height: 290 }}
                                 alt={result.Title}
                                 src={result.Poster === 'N/A' ?
                                     'https://placehold.it/198x264&text=Image+Not+Found' :
@@ -66,12 +61,8 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
                         <Meta /* краткая информация */
                             title={result.Title}
                             description={false}
-                            style={{ padding: 0 }}
                         />
-                        <Row
-                            style={{ marginTop: '3px' }}
-                            className='gutter-row'
-                        >
+                        <Row className='gutter-row'>
                             <Col>
                                 {result.Type === 'movie' ?
                                     <Tag color='magenta'>{result.Type}</Tag> :

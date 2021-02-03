@@ -15,3 +15,19 @@ a {
     background-color: #FFD500;
     color: #FFD500;
 }
+
+.ant-layout .ant-layout-has-sider .Layout {
+    min-height: 100vh;
+}
+
+.ant-layout-header {
+    background: #FFD500
+}
+
+.ant-layout-content {
+    padding: 20px 20px;
+}
+
+.ant-modal {
+    width: 90%
+}
