@@ -12,18 +12,15 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
         DetailRequest(true); //запрос к серверу за деталями фильма
     }
 
-    const renderItem = (arr) => {
-        return arr.map((item) => )
-    }
-
     let classNamesFav = 'overlay like active';
     let classNamesWatch = 'overlay watch active';
     let classNamesNotFav = 'overlay like';
     let classNamesNotWatch = 'overlay watch';
 
-    return (
-        <>
-            { data !== null && data.length > 0 && data.map((result) => ( /* перебор обьекта даты */
+    const renderItem = (arr) => {
+        
+        return <>
+            { data !== null && data.length > 0 && arr.map((result) => ( /* перебор обьекта даты */
                 <div
                     key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
                     className='card-container'
@@ -71,6 +68,12 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
                 </div >
             ))}
         </>
+    }
+
+
+
+    return (
+        
     )
 }
 

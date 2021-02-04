@@ -22,10 +22,12 @@ const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
 
-  const [data, setData] = useState(null); //будет хранить обьект ответа от сервера
+  const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null); //будет обновляться только при ошибке
   const [loading, setLoading] = useState(false); //обект ожидания
   const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
+
+  const [activeCategory, setCategory] = useState(null);
 
   const [favList, setFav] = useState([]); //список избранных
   const [watchList, setWatch] = useState([]); //список к просмотру
@@ -46,7 +48,7 @@ function App() {
       setError(response.Error) //записать в обьект ошибки ошибку
     }
     if (responseJson.Search) {
-      setData(responseJson.Search) //записать в обьект с данными полученный ответ
+      setMovie(responseJson.Search) //записать в обьект с данными полученный ответ
     }
     setLoading(false);
   };
@@ -54,7 +56,7 @@ function App() {
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки
-    setData(null); //обнуление обьекта данных
+    setMovie(null); //обнуление обьекта данных
     getMovieReqest(q);
   }, [q]); //ищем черещ getmovie с параметрами q
 
@@ -86,7 +88,11 @@ function App() {
           collapsible /* сворачивающаяся */
           onCollapse={() => setCollapsed(!collapsed)}
         >
-          <MenuSider collapsed={collapsed} /> {/* зависит от того, свернута ли бок панель */}
+          <MenuSider
+            collapsed={collapsed} 
+            setCategory={setCategory}
+            
+            /> {/* зависит от того, свернута ли бок панель */}
         </Sider>
         <Layout className='layout'>
           <Header>
@@ -102,10 +108,8 @@ function App() {
                 </div>
               }
               <ItemsBox
-                data={data} //передаем обьект с данными на уровень ниже
-                favList={favList}
-                watchList={watchList}
-
+                data={movie} //передаем обьект с данными на уровень ниже
+                
                 ShowDetail={setShowDetail}
                 DetailRequest={setDetailRequest}
                 ActivateModal={setActivateModal}

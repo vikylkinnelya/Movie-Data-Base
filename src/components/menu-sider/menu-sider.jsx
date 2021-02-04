@@ -22,7 +22,9 @@ const MenuSider = (collapsed) => {
                     key="1"
                     mode="inline"
                     className="customclass"
-                    icon={<DatabaseOutlined />}>
+                    icon={<DatabaseOutlined />}
+                    
+                >
                     movie data base
                 </Menu.Item>
                 <Menu.Item
@@ -41,13 +43,17 @@ const MenuSider = (collapsed) => {
                 <Menu.Item
                     key="4"
                     className="customclass"
-                    icon={<HeartOutlined />}>
+                    icon={<HeartOutlined />}
+                    
+                    >
                     liked
                 </Menu.Item>
                 <Menu.Item
                     key="5"
                     className="customclass"
-                    icon={<EyeOutlined />}>
+                    icon={<EyeOutlined />}
+                    
+                    >
                     watch later
                 </Menu.Item>
             </Menu>
