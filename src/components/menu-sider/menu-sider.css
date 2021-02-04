@@ -1,0 +1,33 @@
+.ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
+    background: #212121;
+}
+
+.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
+    height: '100vh';
+    color: #D6D9DC;
+    background: #212121;
+    padding-top: 60px;
+    padding-left: 20px;
+    border-right: 0px;
+    font-size: 26px;
+}
+
+.ant-layout-sider-trigger {
+    background-color: #c0a001;
+}
+
+.ant-menu-item.customclass.ant-menu-item-selected {
+    background-color: #FFD500;
+    color: #212121;
+}
+
+.ant-menu-item {
+    margin-top: 10px;
+}
+
+.anticon.anticon-database,
+.anticon.anticon-video-camera,
+.anticon.anticon-heart,
+.anticon.anticon-eye {
+    font-size: 20px;
+}
