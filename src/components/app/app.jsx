@@ -4,7 +4,7 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
-
+import FavPage from '../pages/fav-page'
 
 import {
   Layout,
@@ -81,15 +81,12 @@ function App() {
 
   return (
     <div className='App'>
-      <Layout 
-      className='Layout'
-      >
+      <Layout className='Layout'>
         <Sider /* боковая панель */
           collapsible /* сворачивающаяся */
-          onCollapse={() => { setCollapsed(!collapsed) }}
+          onCollapse={() => setCollapsed(!collapsed)}
         >
-          <MenuSider
-            collapsed={collapsed} /> {/* зависит от того, свернута ли бок панель */}
+          <MenuSider collapsed={collapsed} /> {/* зависит от того, свернута ли бок панель */}
         </Sider>
         <Layout className='layout'>
           <Header>
@@ -97,27 +94,27 @@ function App() {
               searchHandler={setQuery} /> {/* поиск по введенным параметрам кот сохр в обьект */}
           </Header>
           <Content>
-              <Row justify='center'>
-                {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
-                {error !== null &&
-                  <div style={{ margin: '20px 0' }}>
-                    <Alert message={error} type='error' />
-                  </div>
-                }
-                <ItemsBox
-                  data={data} //передаем обьект с данными на уровень ниже
-                  favList={favList}
-                  watchList={watchList}
+            <Row justify='center'>
+              {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+              {error !== null &&
+                <div style={{ margin: '20px 0' }}>
+                  <Alert message={error} type='error' />
+                </div>
+              }
+              <ItemsBox
+                data={data} //передаем обьект с данными на уровень ниже
+                favList={favList}
+                watchList={watchList}
 
-                  ShowDetail={setShowDetail}
-                  DetailRequest={setDetailRequest}
-                  ActivateModal={setActivateModal}
+                ShowDetail={setShowDetail}
+                DetailRequest={setDetailRequest}
+                ActivateModal={setActivateModal}
 
-                  ToggleFav={toggleFav}
-                  ToggleWatch={toggleWatch}
-                />
-              </Row>
-            
+                ToggleFav={toggleFav}
+                ToggleWatch={toggleWatch}
+              />
+            </Row>
+
             <Modal
               title='Detail'
               centered

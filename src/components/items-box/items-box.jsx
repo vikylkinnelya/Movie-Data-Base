@@ -1,21 +1,19 @@
 import React from 'react';
-import {
-    Row,
-    Col,
-    Card,
-    Tag, Button
-} from 'antd';
-import './items-box.css'
+import { Row, Col, Card, Tag, Button } from 'antd';
 import { HeartOutlined, FolderViewOutlined } from '@ant-design/icons'
+import './items-box.css'
 
 const { Meta } = Card;
-
 
 const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest, ActivateModal, ToggleFav, ToggleWatch }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
+    }
+
+    const renderItem = (arr) => {
+        return arr.map((item) => )
     }
 
     let classNamesFav = 'overlay like active';
@@ -43,7 +41,7 @@ const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest,
                             className={watchList.includes(result) ? classNamesWatch : classNamesNotWatch}
                             type="primary"
                             shape='circle'
-                            icon={<FolderViewOutlined/>}
+                            icon={<FolderViewOutlined />}
                             onClick={() => ToggleWatch(result)}
                         >
                         </Button>
