@@ -4,7 +4,15 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
-import FavPage from '../pages/fav-page'
+import FavPage from '../pages/fav-page';
+import FilmPage from '../pages/film-page';
+import MainPage from '../pages/main-page';
+import SeriesPage from '../pages/series-page'
+import WatchPage from '../pages/watch-page'
+
+
+
+
 
 import {
   Layout,
@@ -15,6 +23,7 @@ import {
 import 'antd/dist/antd.css'
 
 import './app.css';
+import { Route } from 'react-router-dom';
 
 const API_KEY = 'eb9d8a81';
 
@@ -89,10 +98,10 @@ function App() {
           onCollapse={() => setCollapsed(!collapsed)}
         >
           <MenuSider
-            collapsed={collapsed} 
+            collapsed={collapsed}
             setCategory={setCategory}
-            
-            /> {/* зависит от того, свернута ли бок панель */}
+
+          /> {/* зависит от того, свернута ли бок панель */}
         </Sider>
         <Layout className='layout'>
           <Header>
@@ -100,37 +109,56 @@ function App() {
               searchHandler={setQuery} /> {/* поиск по введенным параметрам кот сохр в обьект */}
           </Header>
           <Content>
-            <Row justify='center'>
-              {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
-              {error !== null &&
-                <div style={{ margin: '20px 0' }}>
-                  <Alert message={error} type='error' />
-                </div>
-              }
-              <ItemsBox
-                data={movie} //передаем обьект с данными на уровень ниже
-                
-                ShowDetail={setShowDetail}
-                DetailRequest={setDetailRequest}
-                ActivateModal={setActivateModal}
+            <Switch>
+              <Row justify='center'>
+                {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+                {error !== null &&
+                  <div style={{ margin: '20px 0' }}>
+                    <Alert message={error} type='error' />
+                  </div>
+                }
+                <ItemsBox
+                  data={movie} //передаем обьект с данными на уровень ниже
 
-                ToggleFav={toggleFav}
-                ToggleWatch={toggleWatch}
-              />
-            </Row>
+                  ShowDetail={setShowDetail}
+                  DetailRequest={setDetailRequest}
+                  ActivateModal={setActivateModal}
 
-            <Modal
-              title='Detail'
-              centered
-              visible={activateModal}
-              onCancel={() => setActivateModal(false)}
-              footer={null}
-            >
-              {detailRequest === false ? /* если получен ответ от сервера с деталями */
-                (<MovieDetail {...detail} />) : /* показать детали */
-                (<Loader />)
-              }
-            </Modal>
+                  ToggleFav={toggleFav}
+                  ToggleWatch={toggleWatch}
+                />
+              </Row>
+
+              <Route exact patch='/'>
+                <MainPage/>
+              </Route>
+              <Route exact patch='/favorites'>
+                <FavPage/>
+              </Route>
+              <Route exact patch='/to-watch'>
+                <WatchPage/>
+              </Route>
+              <Route exact patch='/films'>
+                <FilmPage/>
+              </Route>
+              <Route exact patch='/series'>
+                <SeriesPage/>
+              </Route>
+
+              <Modal
+                title='Detail'
+                centered
+                visible={activateModal}
+                onCancel={() => setActivateModal(false)}
+                footer={null}
+              >
+                {detailRequest === false ? /* если получен ответ от сервера с деталями */
+                  (<MovieDetail {...detail} />) : /* показать детали */
+                  (<Loader />)
+                }
+              </Modal>
+
+            </Switch>
           </Content>
           <Footer>
             footer
