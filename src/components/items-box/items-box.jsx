@@ -1,79 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, Tag, Button } from 'antd';
 import { HeartOutlined, FolderViewOutlined } from '@ant-design/icons'
 import './items-box.css'
 
 const { Meta } = Card;
 
-const ItemsBox = ({ data, favList, watchList, imdbID, ShowDetail, DetailRequest, ActivateModal, ToggleFav, ToggleWatch }) => {
+const ItemsBox = ({ result, movie, isActive, isWatch, toggleFav, toggleWatch, favList, watchList, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type, imdbID }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
     }
-
-    let classNamesFav = 'overlay like active';
-    let classNamesWatch = 'overlay watch active';
-    let classNamesNotFav = 'overlay like';
-    let classNamesNotWatch = 'overlay watch';
-
-    const renderItem = (arr) => {
-        
-        return <>
-            { data !== null && data.length > 0 && arr.map((result) => ( /* перебор обьекта даты */
-                <div
-                    key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
-                    className='card-container'
-                >
-                    <div className='overlay'>
-                        <Button
-                            className={favList.includes(result) ? classNamesFav : classNamesNotFav}
-                            type="primary"
-                            shape='circle'
-                            icon={<HeartOutlined />}
-                            onClick={() => ToggleFav(result)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
-                        >
-                        </Button>
-                        <Button
-                            className={watchList.includes(result) ? classNamesWatch : classNamesNotWatch}
-                            type="primary"
-                            shape='circle'
-                            icon={<FolderViewOutlined />}
-                            onClick={() => ToggleWatch(result)}
-                        >
-                        </Button>
-                    </div>
-                    <Card /* карточка  с фото */
-                        cover={
-                            <img
-                                alt={result.Title}
-                                src={result.Poster === 'N/A' ?
-                                    'https://placehold.it/198x264&text=Image+Not+Found' :
-                                    result.Poster}
-                                onClick={() => itemClickHandler()}
-                            />}
-                    >
-                        <Meta /* краткая информация */
-                            title={result.Title}
-                            description={false}
-                        />
-                        <Row className='gutter-row'>
-                            <Col>
-                                {result.Type === 'movie' ?
-                                    <Tag color='magenta'>{result.Type}</Tag> :
-                                    <Tag color='green'>{result.Type}</Tag>}
-                            </Col>
-                        </Row>
-                    </Card>
-                </div >
-            ))}
-        </>
-    }
-
-
+    
+    const classNameFav = isActive ? 'overlay like active' : 'overlay like'
+    const classNameWatch = isWatch ? 'overlay watch active' : 'overlay watch'
 
     return (
-        
+        <>
+            <div className='overlay'>
+                <Button
+                    className={classNameFav}
+                    type="primary"
+                    shape='circle'
+                    icon={<HeartOutlined />}
+                    onClick={() => toggleFav(result)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
+                >
+                </Button>
+                <Button
+                    className={classNameWatch}
+                    type="primary"
+                    shape='circle'
+                    icon={<FolderViewOutlined />}
+                    onClick={() => toggleWatch(result)}
+                >
+                </Button>
+            </div>
+            <Card /* карточка  с фото */
+                cover={
+                    <img
+                        alt={Title}
+                        src={Poster === 'N/A' ?
+                            'https://placehold.it/198x264&text=Image+Not+Found' :
+                            Poster}
+                        onClick={() => itemClickHandler()}
+                    />}
+            >
+                <Meta /* краткая информация */
+                    title={Title}
+                    description={false}
+                />
+                <Row className='gutter-row'>
+                    <Col>
+                        {Type === 'movie' ?
+                            <Tag color='magenta'>{Type}</Tag> :
+                            <Tag color='green'>{Type}</Tag>}
+                    </Col>
+                </Row>
+            </Card>
+        </>
     )
 }
 

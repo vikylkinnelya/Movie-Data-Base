@@ -7,12 +7,8 @@ import MovieDetail from '../movie-detail';
 import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
-import SeriesPage from '../pages/series-page'
-import WatchPage from '../pages/watch-page'
-
-
-
-
+import SeriesPage from '../pages/series-page';
+import WatchPage from '../pages/watch-page';
 
 import {
   Layout,
@@ -23,11 +19,11 @@ import {
 import 'antd/dist/antd.css'
 
 import './app.css';
-import { Route } from 'react-router-dom';
-
-const API_KEY = 'eb9d8a81';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const { Header, Content, Footer, Sider } = Layout;
+
+const API_KEY = 'eb9d8a81';
 
 function App() {
 
@@ -36,38 +32,14 @@ function App() {
   const [loading, setLoading] = useState(false); //обект ожидания
   const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
 
-  const [activeCategory, setCategory] = useState(null);
-
-  const [favList, setFav] = useState([]); //список избранных
-  const [watchList, setWatch] = useState([]); //список к просмотру
-
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
   const [detailRequest, setDetailRequest] = useState(false); //отображение загрузчика
 
+  const [favList, setFav] = useState([]); //список избранных
+  const [watchList, setWatch] = useState([]); //список к просмотру
+
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
-
-  const getMovieReqest = async (q) => { //запрос на сервер
-    const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
-
-    const response = await fetch(url); //запрос к серверу
-    const responseJson = await response.json();
-
-    if (responseJson.Response === 'False') { //если нет ответа
-      setError(response.Error) //записать в обьект ошибки ошибку
-    }
-    if (responseJson.Search) {
-      setMovie(responseJson.Search) //записать в обьект с данными полученный ответ
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    setLoading(true); //ждём
-    setError(null); //обнуление ошибки
-    setMovie(null); //обнуление обьекта данных
-    getMovieReqest(q);
-  }, [q]); //ищем черещ getmovie с параметрами q
 
   const toggleFav = (item) => {
     let newFavList
@@ -90,83 +62,133 @@ function App() {
     setWatch(newWatchList)
   }
 
+  const getMovieReqest = async (q) => { //запрос на сервер
+    const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
+
+    const response = await fetch(url); //запрос к серверу
+    const responseJson = await response.json();
+
+    if (responseJson.Response === 'False') { //если нет ответа
+      setError(response.Error) //записать в обьект ошибки ошибку
+    }
+    if (responseJson.Search) {
+      setMovie(responseJson.Search) //записать в обьект с данными полученный ответ
+      responseJson.Search.key = responseJson.Search.imdbID
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setLoading(true); //ждём
+    setError(null); //обнуление ошибки
+    setMovie(null); //обнуление обьекта данных
+    getMovieReqest(q);
+  }, [q]); //ищем черещ getmovie с параметрами q
+
+
   return (
-    <div className='App'>
-      <Layout className='Layout'>
-        <Sider /* боковая панель */
-          collapsible /* сворачивающаяся */
-          onCollapse={() => setCollapsed(!collapsed)}
-        >
-          <MenuSider
-            collapsed={collapsed}
-            setCategory={setCategory}
+    <Router>
+      <div className='App'>
+        <Layout className='Layout'>
+          <Sider /* боковая панель */
+            collapsible /* сворачивающаяся */
+            onCollapse={() => setCollapsed(!collapsed)}
+          >
+            <MenuSider /* зависит от того, свернута ли бок панель */
+              collapsed={collapsed}
+            />
+          </Sider>
+          <Layout className='layout'>
+            <Header>
+              <SearchBox
+                searchHandler={setQuery} /> {/* поиск по введенным параметрам кот сохр в обьект */}
+            </Header>
+            <Content>
+              <Switch>
+                <Row justify='center'>
+                  {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+                  {error !== null &&
+                    <div style={{ margin: '20px 0' }}>
+                      <Alert message={error} type='error' />
+                    </div>
+                  }
 
-          /> {/* зависит от того, свернута ли бок панель */}
-        </Sider>
-        <Layout className='layout'>
-          <Header>
-            <SearchBox
-              searchHandler={setQuery} /> {/* поиск по введенным параметрам кот сохр в обьект */}
-          </Header>
-          <Content>
-            <Switch>
-              <Row justify='center'>
-                {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
-                {error !== null &&
-                  <div style={{ margin: '20px 0' }}>
-                    <Alert message={error} type='error' />
-                  </div>
-                }
-                <ItemsBox
-                  data={movie} //передаем обьект с данными на уровень ниже
+                  {/* <ItemsBox
+                    data={movie} //передаем обьект с данными на уровень ниже
 
-                  ShowDetail={setShowDetail}
-                  DetailRequest={setDetailRequest}
-                  ActivateModal={setActivateModal}
+                    ShowDetail={setShowDetail}
+                    DetailRequest={setDetailRequest}
+                    ActivateModal={setActivateModal}
 
-                  ToggleFav={toggleFav}
-                  ToggleWatch={toggleWatch}
-                />
-              </Row>
+                    ToggleFav={toggleFav}
+                    ToggleWatch={toggleWatch}
+                  /> */}
 
-              <Route exact patch='/'>
-                <MainPage/>
-              </Route>
-              <Route exact patch='/favorites'>
-                <FavPage/>
-              </Route>
-              <Route exact patch='/to-watch'>
-                <WatchPage/>
-              </Route>
-              <Route exact patch='/films'>
-                <FilmPage/>
-              </Route>
-              <Route exact patch='/series'>
-                <SeriesPage/>
-              </Route>
+                  <Route exact patch='/'>
+                    <MainPage
+                      movie={movie}  //передаем обьект с данными на уровень ниже
 
-              <Modal
-                title='Detail'
-                centered
-                visible={activateModal}
-                onCancel={() => setActivateModal(false)}
-                footer={null}
-              >
-                {detailRequest === false ? /* если получен ответ от сервера с деталями */
-                  (<MovieDetail {...detail} />) : /* показать детали */
-                  (<Loader />)
-                }
-              </Modal>
+                      setLoading={setLoading}
+                      setError={setError}
+                      setMovie={setMovie}
+                      getMovieReqest={getMovieReqest}
+                      q={q}
+                      
 
-            </Switch>
-          </Content>
-          <Footer>
-            footer
+
+                      setShowDetail={setShowDetail}
+                      setDetailRequest={setDetailRequest}
+                      setActivateModal={setActivateModal}
+
+                      toggleFav={toggleFav}
+                      toggleWatch={toggleWatch}
+
+                      favList={favList}
+                      watchList={watchList}
+
+                    //getMovieReqest={getMovieReqest}
+
+                    />
+                  </Route>
+                  <Route exact patch='/favorites'>
+                    <FavPage />
+                  </Route>
+                  <Route exact patch='/to-watch'>
+                    <WatchPage />
+                  </Route>
+                  <Route exact patch='/films'>
+                    <FilmPage />
+                  </Route>
+                  <Route exact patch='/series'>
+                    <SeriesPage />
+                  </Route>
+
+                </Row>
+
+
+                <Modal
+                  title='Detail'
+                  centered
+                  visible={activateModal}
+                  onCancel={() => setActivateModal(false)}
+                  footer={null}
+                >
+                  {detailRequest === false ? /* если получен ответ от сервера с деталями */
+                    (<MovieDetail {...detail} />) : /* показать детали */
+                    (<Loader />)
+                  }
+                </Modal>
+
+              </Switch>
+            </Content>
+            <Footer>
+              footer
         </Footer>
-        </Layout>
+          </Layout>
 
-      </Layout>
-    </div >
+        </Layout>
+      </div >
+    </Router>
   )
 }
 
