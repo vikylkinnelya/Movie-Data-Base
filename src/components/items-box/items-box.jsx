@@ -62,3 +62,4 @@ const ItemsBox = ({ result, isActive, isWatch, toggleFav, toggleWatch, ShowDetai
 }
 
 export default ItemsBox;
+

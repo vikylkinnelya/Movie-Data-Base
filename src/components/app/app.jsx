@@ -70,12 +70,12 @@ function App() {
     setLoading(false);
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки
     setMovie(null); //обнуление обьекта данных
     getMovieReqest(q);
-  }, [q]); //ищем черещ getmovie с параметрами q */
+  }, [q]); //ищем черещ getmovie с параметрами q 
 
 
   return (
@@ -86,7 +86,7 @@ function App() {
             collapsible /* сворачивающаяся */
             onCollapse={() => setCollapsed(!collapsed)}
           >
-            <MenuSider/>
+            <MenuSider />
           </Sider>
           <Layout className='layout'>
             <Header>
@@ -113,15 +113,10 @@ function App() {
                     ToggleWatch={toggleWatch}
                   /> */}
                 <Switch>
-                  
+
                   <Route path='/main' >
                     <MainPage
                       movie={movie}  //передаем обьект с данными на уровень ниже
-                      setLoading={setLoading}
-                      setError={setError}
-                      setMovie={setMovie}
-                      getMovieReqest={getMovieReqest}
-                      q={q}
 
                       setShowDetail={setShowDetail}
                       setDetailRequest={setDetailRequest}
@@ -149,15 +144,24 @@ function App() {
                   </Route>
                   <Route path='/to-watch'>
                     <WatchPage
-                      setShowDetail={setShowDetail}
-                      setDetailRequest={setDetailRequest}
-                      setActivateModal={setActivateModal}
+                      watchList={watchList}
+                    >
+                      <ItemsBox
+                        ShowDetail={setShowDetail}
+                        DetailRequest={setDetailRequest}
+                        ActivateModal={setActivateModal}
 
-                      toggleFav={toggleFav}
-                      toggleWatch={toggleWatch}
+                        toggleFav={toggleFav}
+                        toggleWatch={toggleWatch}
 
-                      favList={favList}
-                      watchList={watchList} />
+                        favList={favList}
+
+                        isActive={false}
+                        isWatch={false}
+
+                      />
+
+                    </WatchPage>
                   </Route>
                   <Route path='/films'>
                     <FilmPage />
@@ -196,3 +200,5 @@ function App() {
 }
 
 export default App;
+
+
