@@ -2,17 +2,39 @@ import React from 'react';
 import ItemsBox from '../items-box/items-box';
 import { withRouter } from 'react-router-dom'
 
-const FavPage = ({ data, movie, favList, watchList, imdbID, ShowDetail, DetailRequest, ActivateModal, ToggleFav, ToggleWatch }) => {
+const FavPage = ({ setShowDetail, setDetailRequest, setActivateModal, toggleFav, toggleWatch, favList, watchList }) => {
+
+    const data = favList;
+    const ShowDetail = setShowDetail
+    const DetailRequest = setDetailRequest
+    const ActivateModal = setActivateModal
 
 
     return (
-        <ItemsBox
-            data={data} //передаем обьект с данными на уровень ниже
-            
+        <>
+            { data !== null && data.length > 0 && data.map((result) => ( /* перебор обьекта даты */
+                <div className='card-container' >
+                    <ItemsBox
+                        key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+                        result={result}
 
-        
-        />
+                        ShowDetail={ShowDetail}
+                        DetailRequest={DetailRequest}
+                        ActivateModal={ActivateModal}
+
+                        toggleFav={toggleFav}
+                        toggleWatch={toggleWatch}
+
+                        isActive={favList.includes(result)}
+                        isWatch={watchList.includes(result)}
+
+                        {...result}
+                    />
+                </div>
+            ))}
+        </>
     )
 }
+
 
 export default FavPage

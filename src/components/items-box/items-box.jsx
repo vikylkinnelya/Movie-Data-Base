@@ -5,19 +5,20 @@ import './items-box.css'
 
 const { Meta } = Card;
 
-const ItemsBox = ({ result, movie, isActive, isWatch, toggleFav, toggleWatch, favList, watchList, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type, imdbID }) => {
+const ItemsBox = ({ result, isActive, isWatch, toggleFav, toggleWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type, imdbID }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
     }
-    
+
     const classNameFav = isActive ? 'overlay like active' : 'overlay like'
     const classNameWatch = isWatch ? 'overlay watch active' : 'overlay watch'
 
     return (
         <>
-            <div className='overlay'>
+            <div className='overlay'
+                >
                 <Button
                     className={classNameFav}
                     type="primary"

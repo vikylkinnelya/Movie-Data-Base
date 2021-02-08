@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { NavLink, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import 'antd/dist/antd.css'
 import './menu-sider.css'
 import {
@@ -10,31 +10,28 @@ import {
     HeartOutlined,
 } from '@ant-design/icons'
 
-const MenuSider = (collapsed) => {
+const MenuSider = () => {
 
     return (
         <>
             <Menu
                 defaultSelectedKeys={['1']}
                 mode="inline"
-                collapsed={collapsed} >
-
+            >
                 <Menu.Item
                     key="1"
-                    mode="inline"
                     className="customclass"
                     icon={<DatabaseOutlined />} >
                     movie data base
-                    <NavLink to='/' />
+                    <Link to='/main' />
                 </Menu.Item>
 
                 <Menu.Item
                     key="2"
-                    mode="inline"
                     className="customclass"
                     icon={<VideoCameraOutlined />}>
                     film
-                    <NavLink to='/films' />
+                    <Link to='/films' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -42,7 +39,7 @@ const MenuSider = (collapsed) => {
                     className="customclass"
                     icon={<VideoCameraOutlined />}>
                     series
-                    <NavLink to='/series' />
+                    <Link to='/series' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -50,7 +47,7 @@ const MenuSider = (collapsed) => {
                     className="customclass"
                     icon={<HeartOutlined />}>
                     liked
-                    <NavLink to='/favorites' />
+                    <Link to='/favorites' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -58,7 +55,7 @@ const MenuSider = (collapsed) => {
                     className="customclass"
                     icon={<EyeOutlined />}>
                     watch later
-                    <NavLink to='/to-watch' />
+                    <Link to='/to-watch' />
                 </Menu.Item>
 
             </Menu>
