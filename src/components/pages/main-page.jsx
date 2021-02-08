@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom'
 
 const MainPage = ({ movie, setLoading, setError, setMovie, getMovieReqest, q, setShowDetail, setDetailRequest, setActivateModal, toggleFav, toggleWatch, favList, watchList }) => {
 
-    
-    
     useEffect(() => {
         setLoading(true); //ждём
         setError(null); //обнуление ошибки
@@ -26,7 +24,6 @@ const MainPage = ({ movie, setLoading, setError, setMovie, getMovieReqest, q, se
                     className='card-container' >
 
                     <ItemsBox
-
                         result={result}
 
                         ShowDetail={ShowDetail}

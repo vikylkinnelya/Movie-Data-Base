@@ -9,13 +9,13 @@ const FavPage = ({ setShowDetail, setDetailRequest, setActivateModal, toggleFav,
     const DetailRequest = setDetailRequest
     const ActivateModal = setActivateModal
 
-
     return (
         <>
             { data !== null && data.length > 0 && data.map((result) => ( /* перебор обьекта даты */
-                <div className='card-container' >
+                <div className='card-container' 
+                key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+                >
                     <ItemsBox
-                        key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
                         result={result}
 
                         ShowDetail={ShowDetail}

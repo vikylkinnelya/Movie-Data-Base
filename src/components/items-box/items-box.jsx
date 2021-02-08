@@ -17,8 +17,7 @@ const ItemsBox = ({ result, isActive, isWatch, toggleFav, toggleWatch, ShowDetai
 
     return (
         <>
-            <div className='overlay'
-                >
+            <div className='overlay' >
                 <Button
                     className={classNameFav}
                     type="primary"

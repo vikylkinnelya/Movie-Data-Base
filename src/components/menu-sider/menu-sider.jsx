@@ -17,12 +17,13 @@ const MenuSider = () => {
             <Menu
                 defaultSelectedKeys={['1']}
                 mode="inline"
+                theme="dark"
             >
                 <Menu.Item
                     key="1"
                     className="customclass"
                     icon={<DatabaseOutlined />} >
-                    movie data base
+                    movie data base`
                     <Link to='/main' />
                 </Menu.Item>
 
@@ -30,7 +31,7 @@ const MenuSider = () => {
                     key="2"
                     className="customclass"
                     icon={<VideoCameraOutlined />}>
-                    film
+                    movies
                     <Link to='/films' />
                 </Menu.Item>
 
@@ -38,8 +39,8 @@ const MenuSider = () => {
                     key="3"
                     className="customclass"
                     icon={<VideoCameraOutlined />}>
-                    series
-                    <Link to='/series' />
+                    serials
+                    <Link to='/serials' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -54,7 +55,7 @@ const MenuSider = () => {
                     key="5"
                     className="customclass"
                     icon={<EyeOutlined />}>
-                    watch later
+                    watchlist
                     <Link to='/to-watch' />
                 </Menu.Item>
 

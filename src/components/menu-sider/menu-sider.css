@@ -2,7 +2,7 @@
     background: #212121;
 }
 
-.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
+.ant-menu.ant-menu-dark.ant-menu-root {
     height: '100vh';
     color: #D6D9DC;
     background: #212121;
@@ -10,6 +10,7 @@
     padding-left: 20px;
     border-right: 0px;
     font-size: 26px;
+    word-wrap: break-word;
 }
 
 .ant-layout-sider-trigger {

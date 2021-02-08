@@ -114,7 +114,7 @@ function App() {
                   /> */}
                 <Switch>
                   
-                  <Route patch='/main' >
+                  <Route path='/main' >
                     <MainPage
                       movie={movie}  //передаем обьект с данными на уровень ниже
                       setLoading={setLoading}
@@ -134,7 +134,7 @@ function App() {
                       watchList={watchList}
                     />
                   </Route>
-                  <Route patch='/favorites'>
+                  <Route path='/favorites'>
                     <FavPage
                       setShowDetail={setShowDetail}
                       setDetailRequest={setDetailRequest}
@@ -147,7 +147,7 @@ function App() {
                       watchList={watchList}
                     />
                   </Route>
-                  <Route patch='/to-watch'>
+                  <Route path='/to-watch'>
                     <WatchPage
                       setShowDetail={setShowDetail}
                       setDetailRequest={setDetailRequest}
@@ -159,10 +159,10 @@ function App() {
                       favList={favList}
                       watchList={watchList} />
                   </Route>
-                  <Route patch='/films'>
+                  <Route path='/films'>
                     <FilmPage />
                   </Route>
-                  <Route patch='/series'>
+                  <Route path='/serials'>
                     <SeriesPage />
                   </Route>
                 </Switch>
