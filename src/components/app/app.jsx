@@ -144,24 +144,17 @@ function App() {
                   </Route>
                   <Route path='/to-watch'>
                     <WatchPage
+                      setShowDetail={setShowDetail}
+                      setDetailRequest={setDetailRequest}
+                      setActivateModal={setActivateModal}
+
+                      toggleFav={toggleFav}
+                      toggleWatch={toggleWatch}
+
+                      favList={favList}
                       watchList={watchList}
-                    >
-                      <ItemsBox
-                        ShowDetail={setShowDetail}
-                        DetailRequest={setDetailRequest}
-                        ActivateModal={setActivateModal}
+                    />
 
-                        toggleFav={toggleFav}
-                        toggleWatch={toggleWatch}
-
-                        favList={favList}
-
-                        isActive={false}
-                        isWatch={false}
-
-                      />
-
-                    </WatchPage>
                   </Route>
                   <Route path='/films'>
                     <FilmPage />

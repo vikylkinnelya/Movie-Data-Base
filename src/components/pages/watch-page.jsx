@@ -5,10 +5,10 @@ import { withRouter } from 'react-router-dom'
 const WatchPage = ({ setShowDetail, setDetailRequest, setActivateModal, toggleFav, toggleWatch, favList, watchList }) => {
 
     const data = watchList;
-    /* const ShowDetail = setShowDetail
+    const ShowDetail = setShowDetail
     const DetailRequest = setDetailRequest
     const ActivateModal = setActivateModal
- */
+ 
     return (
         <>
             { data !== null && data.length > 0 && data.map((result) => ( /* перебор обьекта даты */
@@ -16,15 +16,14 @@ const WatchPage = ({ setShowDetail, setDetailRequest, setActivateModal, toggleFa
                 key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
                 >
                     <ItemsBox
-                        key={`watch-${result.imdbID}`} //присв ключ обьекту из списка в соотв с его номером в базе 
                         result={result}
 
-                        /* ShowDetail={ShowDetail}
+                        ShowDetail={ShowDetail}
                         DetailRequest={DetailRequest}
                         ActivateModal={ActivateModal}
 
                         toggleFav={toggleFav}
-                        toggleWatch={toggleWatch} */
+                        toggleWatch={toggleWatch} 
 
                         isActive={favList.includes(result)}
                         isWatch={watchList.includes(result)}

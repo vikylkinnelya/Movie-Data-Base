@@ -8,8 +8,27 @@ const { Meta } = Card;
 const ItemsBox = ({ result, isActive, isWatch, toggleFav, toggleWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type, imdbID }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
+
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
         DetailRequest(true); //запрос к серверу за деталями фильма
+
+        //взять функцию гем муви реквест и модернизировать ее, 
+        //чтобы множно было использовать в любом участке кода
+        //кью заменить на question 
+        //и в app вызывать q а здесь вызывать с imdbID
+        
+        /* DetailRequest(false);
+        ShowDetail(response); */
+
+        // app setmovie
+        // itemsbox setdetail 
+        //изменить названия на нормальные названия но это не точно 
+        //добавить спиннер если нету для ожидания ответа 
+        //возможно записывать в обьект лайков только imdbid а потом для получения делать запрос к серверу чтобы не есть много памяти
+        //тогда эта функция которую я напишу будет более юзабельна 
+
+        //так же нужно пдумать над структурой и добавить функцию для быстрого переиспользования кода
+
     }
 
     const classNameFav = isActive ? 'overlay like active' : 'overlay like'
