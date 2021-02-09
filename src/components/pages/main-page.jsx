@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import ItemsBox from '../items-box/items-box';
 import { withRouter } from 'react-router-dom'
 
-const MainPage = ({ movie, setShowDetail, setDetailRequest, setActivateModal, toggleFav, toggleWatch, favList, watchList }) => {
+const MainPage = ({ movie, getDataRequest, setShowDetail, setDetailRequest, setActivateModal, toggleFav, toggleWatch, favList, watchList }) => {
     const data = movie;
     const ShowDetail = setShowDetail
     const DetailRequest = setDetailRequest
     const ActivateModal = setActivateModal
+    const GetData = getDataRequest
 
     return (
         <>
@@ -17,7 +18,7 @@ const MainPage = ({ movie, setShowDetail, setDetailRequest, setActivateModal, to
 
                     <ItemsBox
                         result={result}
-
+                        GetData={getDataRequest}
                         ShowDetail={ShowDetail}
                         DetailRequest={DetailRequest}
                         ActivateModal={ActivateModal}

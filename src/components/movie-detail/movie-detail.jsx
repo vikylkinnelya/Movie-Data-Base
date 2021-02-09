@@ -1,11 +1,7 @@
 import React from 'react';
 
-import {
-    Row,
-    Col,
-    Typography,
-    Tag
-} from 'antd';
+import { Row, Col, Typography, Tag } from 'antd';
+import './movie-detail.css'
 
 const TextTitle = Typography.Title;
 

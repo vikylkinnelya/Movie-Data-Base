@@ -2,12 +2,13 @@ a {
     color: #FFD500;
 }
 
-.ant-btn .ant-btn-circle .ant-btn-icon-only .ant-btn-background-ghost {
+
+/* .ant-btn .ant-btn-circle .ant-btn-icon-only .ant-btn-background-ghost {
     background-color: #FFD500;
     color: #FFD500;
-}
+} */
 
-.ant-layout .ant-layout-has-sider .Layout {
+.ant-layout.ant-layout-has-sider.Layout {
     min-height: 100vh;
 }
 
@@ -16,13 +17,5 @@ a {
 }
 
 .ant-layout-content {
-    padding: 20px 20px;
-}
-
-.ant-modal {
-    width: 90%
-}
-
-.Layout {
-    min-height: 100vh;
+    padding: 20px 0px;
 }

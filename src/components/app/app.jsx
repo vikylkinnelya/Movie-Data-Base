@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
-import ItemsBox from '../items-box';
+//import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
 import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
@@ -55,7 +55,7 @@ function App() {
     setWatch(newWatchList)
   }
 
-  const getMovieReqest = async (q) => { //запрос на сервер
+  /* const getMovieReqest = async (q) => { //запрос на сервер
     const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
 
     const response = await fetch(url); //запрос к серверу
@@ -68,13 +68,35 @@ function App() {
       setMovie(responseJson.Search) //записать в обьект с данными полученный ответ
     }
     setLoading(false);
-  };
+  }; */
+
+  const getDataRequest = (searchParam, questionParam, setState) => { //гибкий запрос на сервер
+
+    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&apikey=${API_KEY}`)
+      .then(resp => resp)
+      .then(resp => resp.json())
+      .then(response => {
+        if (response.Response === 'False') { //если нет ответа
+          setError(response.Error) //записать в обьект ошибки ошибку
+        } else {
+          searchParam === 's' ?
+          setState(response.Search) : //если поиск по названию 
+          setState(response) //если поиск по imdbId
+        }
+        setLoading(false);
+        setDetailRequest(false);
+      }).catch(({ message }) => { //в случае неудачи словить ошибку
+        setError(message); //и записать ее в стейт
+        setLoading(false);
+      })
+  }
 
   useEffect(() => {
     setLoading(true); //ждём
-    setError(null); //обнуление ошибки
-    setMovie(null); //обнуление обьекта данных
-    getMovieReqest(q);
+    setError(null); //обнуление ошибки перед новым запросом
+    setMovie(null); //обнуление обьекта данных перед новым запросом
+    //getMovieReqest(q)
+    getDataRequest('s', q, setMovie); //запрос на сервер со своими параметрами
   }, [q]); //ищем черещ getmovie с параметрами q 
 
 
@@ -112,12 +134,13 @@ function App() {
                     ToggleFav={toggleFav}
                     ToggleWatch={toggleWatch}
                   /> */}
+                  
                 <Switch>
 
                   <Route path='/main' >
                     <MainPage
                       movie={movie}  //передаем обьект с данными на уровень ниже
-
+                      getDataRequest={getDataRequest}
                       setShowDetail={setShowDetail}
                       setDetailRequest={setDetailRequest}
                       setActivateModal={setActivateModal}
@@ -170,7 +193,7 @@ function App() {
                 title='Detail'
                 centered
                 visible={activateModal}
-                onCancel={() => setActivateModal(false)}
+                onCancel={() => { setActivateModal(false); setShowDetail(null) }}
                 footer={null}
               >
                 {detailRequest === false ? /* если получен ответ от сервера с деталями */
