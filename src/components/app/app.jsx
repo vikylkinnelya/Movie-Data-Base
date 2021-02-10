@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
-//import ItemsBox from '../items-box';
+import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
-import FavPage from '../pages/fav-page';
+/* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
-import WatchPage from '../pages/watch-page';
+import WatchPage from '../pages/watch-page'; */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Layout, Row, Modal, Alert, } from 'antd';
+import { Layout, Row, Modal, Alert, Pagination } from 'antd';
 import 'antd/dist/antd.css'
 import './app.css';
 
@@ -80,8 +80,8 @@ function App() {
           setError(response.Error) //записать в обьект ошибки ошибку
         } else {
           searchParam === 's' ?
-          setState(response.Search) : //если поиск по названию 
-          setState(response) //если поиск по imdbId
+            setState(response.Search) : //если поиск по названию 
+            setState(response) //если поиск по imdbId
         }
         setLoading(false);
         setDetailRequest(false);
@@ -91,6 +91,26 @@ function App() {
       })
   }
 
+  const RenderItemBox = ({ state }) => {
+    return (state !== null && state.length > 0 && state.map((result) => (
+      <ItemsBox
+        isActive={favList.includes(result)}
+        isWatch={watchList.includes(result)}
+
+        ToggleFav={toggleFav}
+        ToggleWatch={toggleWatch}
+
+        GetData={getDataRequest}
+        ShowDetail={setShowDetail}
+        DetailRequest={setDetailRequest}
+        ActivateModal={setActivateModal}
+
+        key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+        result={result}
+        {...result}
+      />
+    )))
+  }
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки перед новым запросом
@@ -98,6 +118,8 @@ function App() {
     //getMovieReqest(q)
     getDataRequest('s', q, setMovie); //запрос на сервер со своими параметрами
   }, [q]); //ищем черещ getmovie с параметрами q 
+
+
 
 
   return (
@@ -118,77 +140,47 @@ function App() {
             <Content>
               <Row justify='center'>
                 {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+
                 {error !== null &&
                   <div style={{ margin: '20px 0' }}>
                     <Alert message={error} type='error' />
                   </div>
                 }
-
-                {/* <ItemsBox
-                    data={movie} //передаем обьект с данными на уровень ниже
-
-                    ShowDetail={setShowDetail}
-                    DetailRequest={setDetailRequest}
-                    ActivateModal={setActivateModal}
-
-                    ToggleFav={toggleFav}
-                    ToggleWatch={toggleWatch}
-                  /> */}
-                  
                 <Switch>
-
                   <Route path='/main' >
-                    <MainPage
-                      movie={movie}  //передаем обьект с данными на уровень ниже
-                      getDataRequest={getDataRequest}
-                      setShowDetail={setShowDetail}
-                      setDetailRequest={setDetailRequest}
-                      setActivateModal={setActivateModal}
-
-                      toggleFav={toggleFav}
-                      toggleWatch={toggleWatch}
-
-                      favList={favList}
-                      watchList={watchList}
-                    />
+                    <RenderItemBox state={movie} />
+                    {/* <MainPage /> */}
                   </Route>
                   <Route path='/favorites'>
-                    <FavPage
-                      setShowDetail={setShowDetail}
-                      setDetailRequest={setDetailRequest}
-                      setActivateModal={setActivateModal}
-
-                      toggleFav={toggleFav}
-                      toggleWatch={toggleWatch}
-
-                      favList={favList}
-                      watchList={watchList}
-                    />
+                    <RenderItemBox state={favList} />
+                    {/* <FavPage /> */}
                   </Route>
                   <Route path='/to-watch'>
-                    <WatchPage
-                      setShowDetail={setShowDetail}
-                      setDetailRequest={setDetailRequest}
-                      setActivateModal={setActivateModal}
-
-                      toggleFav={toggleFav}
-                      toggleWatch={toggleWatch}
-
-                      favList={favList}
-                      watchList={watchList}
-                    />
-
+                    <RenderItemBox state={watchList} />
+                    {/* <WatchPage /> */}
                   </Route>
                   <Route path='/films'>
-                    <FilmPage />
+                    <RenderItemBox state={movie} />
+                    {/* <FilmPage /> */}
                   </Route>
                   <Route path='/serials'>
-                    <SeriesPage />
+                    <RenderItemBox state={movie} />
+                    {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
               </Row>
-
-
+              
+              <Pagination
+                current={1}
+                defaultCurrent={1}
+                defaultPageSize={10}
+                total={100} //length для fav watch , а что для остальных?
+                //hideOnSinglePage={true} //спрятать если страница одна
+                showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
+                //pageSizeOptions={[10,20,30]}
+                //onChange = {function(current, size)}
+                />
+              
               <Modal
                 title='Detail'
                 centered
