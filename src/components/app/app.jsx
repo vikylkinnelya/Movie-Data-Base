@@ -169,10 +169,12 @@ function App() {
                   </Route>
                 </Switch>
               </Row>
-              
+
+              <Row>
               <Pagination
-                current={1}
+                //current={1}
                 defaultCurrent={1}
+                pageSize={10}
                 defaultPageSize={10}
                 total={100} //length для fav watch , а что для остальных?
                 //hideOnSinglePage={true} //спрятать если страница одна
@@ -180,7 +182,7 @@ function App() {
                 //pageSizeOptions={[10,20,30]}
                 //onChange = {function(current, size)}
                 />
-              
+              </Row>
               <Modal
                 title='Detail'
                 centered

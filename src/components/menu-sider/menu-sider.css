@@ -10,20 +10,23 @@
     padding-left: 20px;
     border-right: 0px;
     font-size: 26px;
-    word-wrap: break-word;
 }
 
 .ant-layout-sider-trigger {
-    background-color: #c0a001;
+    background-color: #ffc400;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .ant-menu-item.customclass.ant-menu-item-selected {
     background-color: #FFD500;
     color: #212121;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 5px;
 }
 
-.ant-menu-item {
-    margin-top: 10px;
+.ant-menu-item.customclass {
+    word-wrap: break-word;
 }
 
 .anticon.anticon-database,
