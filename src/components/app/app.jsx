@@ -34,6 +34,9 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
 
+  const [totalResults, setTotalResults] = useState(null);
+
+
   const toggleFav = (item) => {
     let newFavList
     if (favList.includes(item)) {
@@ -55,24 +58,9 @@ function App() {
     setWatch(newWatchList)
   }
 
-  /* const getMovieReqest = async (q) => { //запрос на сервер
-    const url = `http://www.omdbapi.com/?s=${q}&apikey=${API_KEY}`
+  const getDataRequest = (searchParam, questionParam, setState, currPage = 1, type = '', year = '') => { //гибкий запрос на сервер
 
-    const response = await fetch(url); //запрос к серверу
-    const responseJson = await response.json();
-
-    if (responseJson.Response === 'False') { //если нет ответа
-      setError(response.Error) //записать в обьект ошибки ошибку
-    }
-    if (responseJson.Search) {
-      setMovie(responseJson.Search) //записать в обьект с данными полученный ответ
-    }
-    setLoading(false);
-  }; */
-
-  const getDataRequest = (searchParam, questionParam, setState) => { //гибкий запрос на сервер
-
-    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&apikey=${API_KEY}`)
+    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type}&year=${year}&apikey=${API_KEY}`)
       .then(resp => resp)
       .then(resp => resp.json())
       .then(response => {
@@ -82,6 +70,7 @@ function App() {
           searchParam === 's' ?
             setState(response.Search) : //если поиск по названию 
             setState(response) //если поиск по imdbId
+            setTotalResults(response.totalResults)
         }
         setLoading(false);
         setDetailRequest(false);
@@ -89,6 +78,8 @@ function App() {
         setError(message); //и записать ее в стейт
         setLoading(false);
       })
+
+      
   }
 
   const RenderItemBox = ({ state }) => {
@@ -111,6 +102,27 @@ function App() {
       />
     )))
   }
+
+  //как узнать сколько страниц будет по данному запросу
+  //создаем счётчик
+  //делаем запрос к серверу с теми самыми же параметрами, записываем ответ в стейт
+  //далаем еще раз запрос к серверу для следующей страницы
+  //если ответ тот же -- стоп
+  //если ответ другой, перезаписываем стейт, увеличиваем счётчик
+
+
+  //рекурсивная функция 
+
+
+  const onPageChange = (page) => {
+    getDataRequest('s', q, setMovie, page)
+  }
+
+  /* const checkTotalMovies = (searchParam) => {
+
+  
+  } */
+
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки перед новым запросом
@@ -169,18 +181,16 @@ function App() {
                   </Route>
                 </Switch>
               </Row>
-
               <Row>
-              <Pagination
-                //current={1}
-                defaultCurrent={1}
-                pageSize={10}
-                defaultPageSize={10}
-                total={100} //length для fav watch , а что для остальных?
-                //hideOnSinglePage={true} //спрятать если страница одна
-                showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
-                //pageSizeOptions={[10,20,30]}
-                //onChange = {function(current, size)}
+
+                <Pagination
+                  pageSize={10}
+                  defaultPageSize={10}
+                  total={totalResults} //length для fav watch , а что для остальных?
+                  //hideOnSinglePage={true} //спрятать если страница одна
+                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
+                  //pageSizeOptions={[10,20,30]}
+                  onChange={onPageChange}
                 />
               </Row>
               <Modal
