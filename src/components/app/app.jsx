@@ -45,32 +45,9 @@ function App() {
     }
     if (!state.includes(item)) {
       newList = [...state, item]; //новый список сост из старых эл и нового выбранного
-    }
-    //РЕШИТЬ ЭТОТ ВОПРОС 
-    state === 'setFav' ? setFav(newList) : setWatch(newList) //перезаписываем обьект списка избранных
+    } 
+    state === favList ? setFav(newList) : setWatch(newList) //перезаписываем обьект списка избранных
   }
-
-  /* const toggleFav = (item) => {
-    let newFavList
-    if (favList.includes(item)) {
-      newFavList = favList.filter(fav => fav.imdbID !== item.imdbID) //в новый список попадают все кроме выбранного на удаление
-    }
-    if (!favList.includes(item)) {
-      newFavList = [...favList, item]; //новый список сост из старых эл и нового выбранного
-    }
-    setFav(newFavList) //перезаписываем обьект списка избранных
-  }
-
-  const toggleWatch = (item) => {
-    let newWatchList
-    if (watchList.includes(item)) {
-      newWatchList = watchList.filter(watch => watch.imdbID !== item.imdbID)
-    }
-    if (!watchList.includes(item)) {
-      newWatchList = [...watchList, item];
-    }
-    setWatch(newWatchList)
-  } */
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
@@ -104,9 +81,6 @@ function App() {
         favList={favList}
         watchList={watchList}
 
-        /* ToggleFav={toggleFav}
-        ToggleWatch={toggleWatch} */
-
         GetData={getDataRequest}
         ShowDetail={setShowDetail}
         DetailRequest={setDetailRequest}
@@ -119,26 +93,10 @@ function App() {
     )))
   }
 
-  //как узнать сколько страниц будет по данному запросу
-  //создаем счётчик
-  //делаем запрос к серверу с теми самыми же параметрами, записываем ответ в стейт
-  //далаем еще раз запрос к серверу для следующей страницы
-  //если ответ тот же -- стоп
-  //если ответ другой, перезаписываем стейт, увеличиваем счётчик
-
-
-  //рекурсивная функция 
-
-
   const onPageChange = (page) => {
     getDataRequest('s', q, setMovie, page)
     setCurrPage(page)
   }
-
-  /* const checkTotalMovies = (searchParam) => {
-
-  
-  } */
 
   useEffect(() => {
     setLoading(true); //ждём
@@ -147,8 +105,6 @@ function App() {
     //getMovieReqest(q)
     getDataRequest('s', q, setMovie); //запрос на сервер со своими параметрами
   }, [q]); //ищем черещ getmovie с параметрами q 
-
-
 
 
   return (
@@ -202,11 +158,9 @@ function App() {
               <Row>
                 <Pagination
                   current={currPage}
-
                   total={totalResults} //length для fav watch , а что для остальных?
                   hideOnSinglePage={true} //спрятать если страница одна
                   showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
-                  //pageSizeOptions={[10,20,30]}
                   onChange={onPageChange}
                 />
               </Row>

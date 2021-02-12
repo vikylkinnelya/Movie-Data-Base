@@ -5,7 +5,7 @@ import './items-box.css'
 
 const { Meta } = Card;
 
-const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWatch, ToggleItem, ToggleFav, ToggleWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
+const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWatch, ToggleItem, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -16,7 +16,6 @@ const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWat
     //тогда эта функция которую я напишу будет более юзабельна 
 
     //посылается запрос на сервер и отображается первая страница
-    //при желании другой страницы в функцию передается параметр ввиде числа страницы, стейт обновляется 
 
     return (
         <div className='card-container'>
