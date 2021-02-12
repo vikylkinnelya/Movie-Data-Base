@@ -31,7 +31,7 @@ a {
 }
 
 .ant-pagination>.ant-pagination-item {
-    width: 35px;
+    min-width: 35px;
     height: 45px;
     line-height: 45px;
 }

@@ -5,7 +5,7 @@ import './items-box.css'
 
 const { Meta } = Card;
 
-const ItemsBox = ({ result, GetData, imdbID, isActive, isWatch, ToggleFav, ToggleWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
+const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWatch, ToggleItem, ToggleFav, ToggleWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
 
     const itemClickHandler = () => { //обработчик события клика. при клике на карточку
         ActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -26,7 +26,7 @@ const ItemsBox = ({ result, GetData, imdbID, isActive, isWatch, ToggleFav, Toggl
                     type="primary"
                     shape='circle'
                     icon={<HeartOutlined />}
-                    onClick={() => ToggleFav(result)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
+                    onClick={() => ToggleItem(result, favList)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
                 >
                 </Button>
                 <Button
@@ -34,7 +34,7 @@ const ItemsBox = ({ result, GetData, imdbID, isActive, isWatch, ToggleFav, Toggl
                     type="primary"
                     shape='circle'
                     icon={<FolderViewOutlined />}
-                    onClick={() => ToggleWatch(result)}
+                    onClick={(e) => ToggleItem(result, watchList, e)}
                 >
                 </Button>
             </div>

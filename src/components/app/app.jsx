@@ -34,10 +34,23 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
 
+  const [currPage, setCurrPage] = useState(1)
   const [totalResults, setTotalResults] = useState(null);
 
 
-  const toggleFav = (item) => {
+  const toggleItem = (item, state) => {
+    let newList
+    if (state.includes(item)) {
+      newList = state.filter(elem => elem.imdbID !== item.imdbID) //в новый список попадают все кроме выбранного на удаление
+    }
+    if (!state.includes(item)) {
+      newList = [...state, item]; //новый список сост из старых эл и нового выбранного
+    }
+    //РЕШИТЬ ЭТОТ ВОПРОС 
+    state === 'setFav' ? setFav(newList) : setWatch(newList) //перезаписываем обьект списка избранных
+  }
+
+  /* const toggleFav = (item) => {
     let newFavList
     if (favList.includes(item)) {
       newFavList = favList.filter(fav => fav.imdbID !== item.imdbID) //в новый список попадают все кроме выбранного на удаление
@@ -47,6 +60,7 @@ function App() {
     }
     setFav(newFavList) //перезаписываем обьект списка избранных
   }
+
   const toggleWatch = (item) => {
     let newWatchList
     if (watchList.includes(item)) {
@@ -56,9 +70,9 @@ function App() {
       newWatchList = [...watchList, item];
     }
     setWatch(newWatchList)
-  }
+  } */
 
-  const getDataRequest = (searchParam, questionParam, setState, currPage = 1, type = '', year = '') => { //гибкий запрос на сервер
+  const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
     fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type}&year=${year}&apikey=${API_KEY}`)
       .then(resp => resp)
@@ -70,26 +84,28 @@ function App() {
           searchParam === 's' ?
             setState(response.Search) : //если поиск по названию 
             setState(response) //если поиск по imdbId
-            setTotalResults(response.totalResults)
+          setTotalResults(response.totalResults)
         }
         setLoading(false);
-        setDetailRequest(false);
+        setDetailRequest(false); //для модалки
       }).catch(({ message }) => { //в случае неудачи словить ошибку
         setError(message); //и записать ее в стейт
         setLoading(false);
       })
-
-      
   }
 
   const RenderItemBox = ({ state }) => {
     return (state !== null && state.length > 0 && state.map((result) => (
       <ItemsBox
-        isActive={favList.includes(result)}
+        isActive={favList.includes(result)} //активность кнопки
         isWatch={watchList.includes(result)}
 
-        ToggleFav={toggleFav}
-        ToggleWatch={toggleWatch}
+        ToggleItem={toggleItem} //добавить или удалить из стейтов
+        favList={favList}
+        watchList={watchList}
+
+        /* ToggleFav={toggleFav}
+        ToggleWatch={toggleWatch} */
 
         GetData={getDataRequest}
         ShowDetail={setShowDetail}
@@ -116,6 +132,7 @@ function App() {
 
   const onPageChange = (page) => {
     getDataRequest('s', q, setMovie, page)
+    setCurrPage(page)
   }
 
   /* const checkTotalMovies = (searchParam) => {
@@ -181,13 +198,13 @@ function App() {
                   </Route>
                 </Switch>
               </Row>
-              <Row>
 
+              <Row>
                 <Pagination
-                  pageSize={10}
-                  defaultPageSize={10}
+                  current={currPage}
+
                   total={totalResults} //length для fav watch , а что для остальных?
-                  //hideOnSinglePage={true} //спрятать если страница одна
+                  hideOnSinglePage={true} //спрятать если страница одна
                   showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
                   //pageSizeOptions={[10,20,30]}
                   onChange={onPageChange}
