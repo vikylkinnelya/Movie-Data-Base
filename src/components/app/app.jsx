@@ -81,7 +81,7 @@ function App() {
         favList={favList}
         watchList={watchList}
 
-        GetData={getDataRequest}
+        GetData={getDataRequest} //запрос данных с сервера
         ShowDetail={setShowDetail}
         DetailRequest={setDetailRequest}
         ActivateModal={setActivateModal}
@@ -100,11 +100,13 @@ function App() {
 
   useEffect(() => {
     setLoading(true); //ждём
+    setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setError(null); //обнуление ошибки перед новым запросом
     setMovie(null); //обнуление обьекта данных перед новым запросом
     //getMovieReqest(q)
     getDataRequest('s', q, setMovie); //запрос на сервер со своими параметрами
-  }, [q]); //ищем черещ getmovie с параметрами q 
+  }, [q]); //ищем черещ getmovie с параметрами q
+  //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
 
   return (
@@ -131,6 +133,7 @@ function App() {
                     <Alert message={error} type='error' />
                   </div>
                 }
+                
                 <Switch>
                   <Route path='/main' >
                     <RenderItemBox state={movie} />
@@ -153,17 +156,20 @@ function App() {
                     {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
+              
+              
               </Row>
 
               <Row>
                 <Pagination
-                  current={currPage}
-                  total={totalResults} //length для fav watch , а что для остальных?
+                  current={currPage} //берем из стейта, кот обновл
+                  total={totalResults} //length для fav watch 
                   hideOnSinglePage={true} //спрятать если страница одна
                   showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
                   onChange={onPageChange}
                 />
               </Row>
+
               <Modal
                 title='Detail'
                 centered

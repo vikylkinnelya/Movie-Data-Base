@@ -3,11 +3,11 @@
 }
 
 .ant-menu.ant-menu-dark.ant-menu-root {
-    height: '100vh';
+    height: 100vh;
     color: #D6D9DC;
     background: #212121;
     padding-top: 60px;
-    padding-left: 20px;
+    padding-left: 10px;
     border-right: 0px;
     font-size: 26px;
 }
@@ -25,13 +25,10 @@
     border-top-left-radius: 5px;
 }
 
-.ant-menu-item.customclass {
-    word-wrap: break-word;
-}
-
 .anticon.anticon-database,
 .anticon.anticon-video-camera,
 .anticon.anticon-heart,
 .anticon.anticon-eye {
     font-size: 20px;
+    height: fit-content;
 }
