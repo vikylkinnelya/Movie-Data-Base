@@ -45,7 +45,7 @@ function App() {
     }
     if (!state.includes(item)) {
       newList = [...state, item]; //новый список сост из старых эл и нового выбранного
-    } 
+    }
     state === favList ? setFav(newList) : setWatch(newList) //перезаписываем обьект списка избранных
   }
 
@@ -74,13 +74,13 @@ function App() {
   const RenderItemBox = ({ state }) => {
     return (state !== null && state.length > 0 && state.map((result) => (
       <ItemsBox
-        isActive={favList.includes(result)} //активность кнопки
-        isWatch={watchList.includes(result)}
-
         ToggleItem={toggleItem} //добавить или удалить из стейтов
         favList={favList}
         watchList={watchList}
-
+        
+        isActive={favList.includes(result)} //активность кнопки
+        isWatch={watchList.includes(result)}
+        
         GetData={getDataRequest} //запрос данных с сервера
         ShowDetail={setShowDetail}
         DetailRequest={setDetailRequest}
@@ -133,10 +133,10 @@ function App() {
                     <Alert message={error} type='error' />
                   </div>
                 }
-                
+
                 <Switch>
-                  <Route path='/main' >
-                    <RenderItemBox state={movie} />
+                  <Route path='/main/:q/:page' >
+                    <RenderItemBox state={movie}/>
                     {/* <MainPage /> */}
                   </Route>
                   <Route path='/favorites'>
@@ -156,8 +156,6 @@ function App() {
                     {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
-              
-              
               </Row>
 
               <Row>
