@@ -32,7 +32,9 @@ function App() {
   const [favList, setFav] = useState([]); //список избранных
   const [watchList, setWatch] = useState([]); //список к просмотру
 
-  const [collapsed, setCollapsed] = useState(false); //отобр меню развернут или свернут
+  const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут
+  const [collapsedSearch, setCollapsedSearch] = useState(false); //отобр меню развернут или свернут
+
 
   const [currPage, setCurrPage] = useState(1)
   const [totalResults, setTotalResults] = useState(null);
@@ -45,7 +47,7 @@ function App() {
     }
     if (!state.includes(item)) {
       newList = [...state, item]; //новый список сост из старых эл и нового выбранного
-    } 
+    }
     state === favList ? setFav(newList) : setWatch(newList) //перезаписываем обьект списка избранных
   }
 
@@ -115,14 +117,21 @@ function App() {
         <Layout className='Layout'>
           <Sider /* боковая панель */
             collapsible /* сворачивающаяся */
-            onCollapse={() => setCollapsed(!collapsed)}
+            onCollapse={() => setCollapsedMenu(!collapsedMenu)}
           >
             <MenuSider />
           </Sider>
           <Layout className='layout'>
             <Header>
               <SearchBox
-                searchHandler={setQuery} /> {/* поиск по введенным параметрам кот сохр в обьект */}
+                searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
+                collapsible /* сворачивающаяся */
+                collapsedSearch={collapsedSearch}
+                toggleCollapsedSearch={setCollapsedSearch}
+                onCollapse={() => setCollapsedSearch(!collapsedSearch)}
+                GetData={getDataRequest} //запрос данных с сервера
+
+              />
             </Header>
             <Content>
               <Row justify='center'>
@@ -133,7 +142,7 @@ function App() {
                     <Alert message={error} type='error' />
                   </div>
                 }
-                
+
                 <Switch>
                   <Route path='/main' >
                     <RenderItemBox state={movie} />
@@ -156,8 +165,8 @@ function App() {
                     {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
-              
-              
+
+
               </Row>
 
               <Row>
