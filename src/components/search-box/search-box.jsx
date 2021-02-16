@@ -39,7 +39,7 @@ const SearchBox = ({ searchHandler, collapsedSearch, toggleCollapsedSearch }) =>
     }
 
     return (
-        <Row marginTop='150px' justify='center'>
+        <Row style = {{ justifyContent:'center'}}>
             <Col span={15} >
                 <Search style={{ marginTop: 12 }}
                     placeholder="enter movie, series"

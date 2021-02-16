@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Card, Tag, Button } from 'antd';
-import { HeartOutlined, FolderViewOutlined } from '@ant-design/icons'
+import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/icons'
 import './items-box.css'
 
 const { Meta } = Card;
@@ -19,24 +19,6 @@ const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWat
 
     return (
         <div className='card-container'>
-            <div className='overlay' >
-                <Button
-                    className={isActive ? 'overlay like active' : 'overlay like'}
-                    type="primary"
-                    shape='circle'
-                    icon={<HeartOutlined />}
-                    onClick={() => ToggleItem(result, favList)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
-                >
-                </Button>
-                <Button
-                    className={isWatch ? 'overlay watch active' : 'overlay watch'}
-                    type="primary"
-                    shape='circle'
-                    icon={<FolderViewOutlined />}
-                    onClick={(e) => ToggleItem(result, watchList, e)}
-                >
-                </Button>
-            </div>
             <Card /* карточка  с фото */
                 cover={
                     <img
@@ -50,6 +32,7 @@ const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWat
                 <Meta /* краткая информация */
                     title={Title}
                     description={false}
+                    onClick={() => itemClickHandler()}
                 />
                 <Row className='gutter-row'>
                     <Col>
@@ -57,6 +40,23 @@ const ItemsBox = ({ result, favList, watchList, GetData, imdbID, isActive, isWat
                             <Tag color='magenta'>{Type}</Tag> :
                             <Tag color='green'>{Type}</Tag>}
                     </Col>
+                </Row>
+                <Row className='overlay' >
+                    <Col className={isWatch ? 'overlay watch active' : 'overlay watch'}>
+                        <Button
+                            shape='circle'
+                            icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
+                            onClick={() => ToggleItem(result, watchList)}
+                        />
+                    </Col>
+                    <Col className={isActive ? 'overlay like active' : 'overlay like'}>
+                        <Button
+                            shape='circle'
+                            icon={isActive ? <HeartFilled /> : <HeartOutlined />}
+                            onClick={() => ToggleItem(result, favList)} //при клике на кнопку вызывается переданная сверху функция добавления данного обьекта в обьект с избранными
+                        />
+                    </Col>
+
                 </Row>
             </Card>
         </div>

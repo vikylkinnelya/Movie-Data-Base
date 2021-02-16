@@ -76,13 +76,13 @@ function App() {
   const RenderItemBox = ({ state }) => {
     return (state !== null && state.length > 0 && state.map((result) => (
       <ItemsBox
-        isActive={favList.includes(result)} //активность кнопки
-        isWatch={watchList.includes(result)}
-
         ToggleItem={toggleItem} //добавить или удалить из стейтов
         favList={favList}
         watchList={watchList}
-
+        
+        isActive={favList.includes(result)} //активность кнопки
+        isWatch={watchList.includes(result)}
+        
         GetData={getDataRequest} //запрос данных с сервера
         ShowDetail={setShowDetail}
         DetailRequest={setDetailRequest}
@@ -144,8 +144,8 @@ function App() {
                 }
 
                 <Switch>
-                  <Route path='/main' >
-                    <RenderItemBox state={movie} />
+                  <Route path='/main/:q/:page' >
+                    <RenderItemBox state={movie}/>
                     {/* <MainPage /> */}
                   </Route>
                   <Route path='/favorites'>
@@ -165,8 +165,11 @@ function App() {
                     {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e95e40dc2c957536de62b24abcf3f5a5d64f9fe1
               </Row>
 
               <Row>
