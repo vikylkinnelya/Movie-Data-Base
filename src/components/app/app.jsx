@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, browserHistory } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
@@ -9,7 +11,7 @@ import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
 import WatchPage from '../pages/watch-page'; */
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import { Layout, Row, Modal, Alert, Pagination } from 'antd';
 import 'antd/dist/antd.css'
 import './app.css';
@@ -144,7 +146,7 @@ function App() {
                 }
 
                 <Switch>
-                  <Route path='/main/:q/:page' >
+                  <Route path='/main'>
                     <RenderItemBox state={movie}/>
                     {/* <MainPage /> */}
                   </Route>
@@ -165,11 +167,6 @@ function App() {
                     {/* <SeriesPage /> */}
                   </Route>
                 </Switch>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e95e40dc2c957536de62b24abcf3f5a5d64f9fe1
               </Row>
 
               <Row>
