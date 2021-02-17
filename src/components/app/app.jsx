@@ -124,7 +124,7 @@ function App() {
             <MenuSider />
           </Sider>
           <Layout className='layout'>
-            <Header>
+            <Header className='header'>
               <SearchBox
                 searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
                 collapsible /* сворачивающаяся */

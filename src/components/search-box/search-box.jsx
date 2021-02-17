@@ -24,17 +24,23 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
     const FilterMenu = () => {
         return (
             <div className='filter-menu'>
-
-                <Checkbox.Group
-                    options={filterOptions}
-                    value={checkedList}
-                    onChange={onChange}
-                />
-                <Slider
-                    range={{ draggableTrack: true }}
-                    defaultValue={[1970, 2021]}
-                />
-
+                
+                    <Checkbox.Group
+                        options={filterOptions}
+                        value={checkedList}
+                        onChange={onChange}
+                    />
+                
+                    <Slider
+                    className='slider'
+                        range={{ draggableTrack: true }}
+                        tooltipVisible={true} //подсказка сверху о выбранном числе 
+                        defaultValue={[1970, 2021]}
+                        min={1970}
+                        max={2021}
+                        onAfterChange={value => console.log(value)}
+                    />
+                
 
             </div>
 
@@ -47,7 +53,7 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
 
     return (
         <>
-            <Row style={{ justifyContent: 'center' }}>
+            <Row className='search-row'>
                 <Col span={15} >
                     <Search style={{ marginTop: 12 }}
                         placeholder="enter movie, series"
@@ -67,10 +73,11 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
                     />
                 </Col>
             </Row>
-            <Row>
+            
                 <FilterMenu />
+            
 
-            </Row>
+
         </>
     )
 }
