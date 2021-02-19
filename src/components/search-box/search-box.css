@@ -11,14 +11,17 @@
 }
 
 .filter-menu{
-    background:#ffed90;
+    background:#FFD500;
     display: flex;
     position: relative;
     justify-content: center;
     margin-left: 15%;
     margin-right: 15%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
 }
 
-.ant-slider.slider{
+ .ant-slider.slider{
     min-width: 30%;
 }

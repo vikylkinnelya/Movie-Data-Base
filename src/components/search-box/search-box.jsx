@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
     Row, Col, Input,
     Menu,
-    Button, Checkbox, Divider, Slider,
+    Button, Checkbox, Divider, Slider, InputNumber
 } from 'antd';
 
 import './search-box.css'
@@ -15,13 +15,17 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
     const filterOptions = ['movie', 'series'];
     const defaultCheckedList = ['movie', 'series'];
 
+    const [activateFilter, setActivateFilter] = useState(false)
     const [checkedList, setCheckedList] = useState(defaultCheckedList);
+    const [inputValue, setInputValue] = useState([1970, 2021])
 
     const onChange = list => {
         setCheckedList(list);
     };
 
     const FilterMenu = () => {
+
+
         return (
             <div className='filter-menu'>
                 
@@ -31,19 +35,38 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
                         onChange={onChange}
                     />
                 
-                    <Slider
-                    className='slider'
-                        range={{ draggableTrack: true }}
-                        tooltipVisible={true} //подсказка сверху о выбранном числе 
-                        defaultValue={[1970, 2021]}
-                        min={1970}
-                        max={2021}
-                        onAfterChange={value => console.log(value)}
-                    />
                 
 
-            </div>
+                    <Slider
+                        className='slider'
+                        range={{ draggableTrack: true }}
+                        
+                        defaultValue={[inputValue[0], inputValue[1]]}
+                        min={1970}
+                        max={2021}
+                        
+                        onAfterChange={value => setInputValue(value)}
+                        tooltipPlacement="bottom"
+                    />
 
+                    <Col span={4}>
+                        <InputNumber
+                            style={{ margin: '0 16px' }}
+                            value={inputValue[0]}
+                            onChange={(value) => setInputValue(value)}
+                        />
+                        <InputNumber
+                            style={{ margin: '0 16px' }}
+                            value={inputValue[1]}
+                            onChange={(value) => setInputValue(value)}
+                        />
+                    </Col>
+                
+
+
+
+
+            </div>
         )
     }
 
@@ -64,7 +87,7 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
 
                 <Col>
                     <Button
-                        /* onClick={() => FilterMenuItem()} */
+                        onClick={() => setActivateFilter(!activateFilter)}
                         className='filter-menu-btn'
                         style={{ background: 'none', border: '0px', marginTop: 15 }}
                         icon={<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#212121" className="bi bi-filter" viewBox="0 0 16 16">
@@ -73,9 +96,10 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
                     />
                 </Col>
             </Row>
-            
-                <FilterMenu />
-            
+
+            {activateFilter ? <FilterMenu /> : null}
+
+
 
 
         </>
