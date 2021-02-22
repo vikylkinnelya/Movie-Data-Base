@@ -6,13 +6,9 @@ import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/
 import './items-box.css'
 const { Meta } = Card;
 
-const ItemsBox = ({ result, GetData, imdbID, isActive, isWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
+const ItemsBox = ({ result, GetData, ClickHandler, imdbID, isActive, isWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
 
-    const itemClickHandler = () => { //обработчик события клика. при клике на карточку
-        ActivateModal(true); //показать модалку. эл импортируется из другого компонента
-        DetailRequest(true); //обновить стейт с состоянием запроса к серверу
-        GetData('i', imdbID, ShowDetail) //запрос к серверу за деталями фильма
-    }
+    
 
     return (
         <MyContext.Consumer>
@@ -25,11 +21,11 @@ const ItemsBox = ({ result, GetData, imdbID, isActive, isWatch, ShowDetail, Deta
                                 src={Poster === 'N/A' ?
                                     'https://placehold.it/198x264&text=Image+Not+Found' :
                                     Poster}
-                                onClick={() => itemClickHandler()} />} >
+                                onClick={() => ClickHandler()} />} >
                             <Meta
                                 title={Title}
                                 description={false}
-                                onClick={() => itemClickHandler()} />
+                                onClick={() => ClickHandler()} />
                             <Row className='gutter-row'>
                                 <Col>
                                     {Type === 'movie' ?

@@ -4,7 +4,7 @@
     transition: transform 0.5s;
 }
 
-.card-container:hover {
+.card-container:hover, .card-container:active{
     transform: scale(1.1);
 }
 

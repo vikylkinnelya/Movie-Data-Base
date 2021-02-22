@@ -86,6 +86,8 @@ function App() {
         isActive={favList.includes(result)} //активность кнопки
         isWatch={watchList.includes(result)}
 
+        ClickHandler = {() => itemClickHandler(result)}
+
         GetData={getDataRequest} //запрос данных с сервера
 
         ShowDetail={setShowDetail}
@@ -99,9 +101,24 @@ function App() {
     )))
   }
 
+  const itemClickHandler = (item) => { //обработчик события клика. при клике на карточку
+    setActivateModal(true); //показать модалку. эл импортируется из другого компонента
+    setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
+    getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue) //запрос к серверу за деталями фильма
+}
+
   const onPageChange = (page) => {
     getDataRequest('s', q, setMovie, page, genreList, yearValue)
     setCurrPage(page)
+  }
+
+  const pseudoRandomMovies = () => {
+
+    const themes = ['love', 'hate', 'live', 'death', 'earth', 'moon', 'war', 'rage']
+    const randomTheme = themes[Math.floor(Math.random() * themes.length - 0)]
+
+    getDataRequest('s', randomTheme, setMovie, currPage )
+
   }
 
   useEffect(() => {
@@ -176,7 +193,7 @@ function App() {
                 </Row>
 
                 <Modal
-                  title='Detail'
+                  title='Details'
                   centered
                   visible={activateModal}
                   onCancel={() => { setActivateModal(false); setShowDetail(null) }}
