@@ -1,27 +1,25 @@
 .ant-layout-header.header{
     height: auto;
-    padding: 0px 0px 0px 0px;
-    background:#f0f2f5
+    padding: 0px;
+    background:none;
 }
 
 .ant-row.search-row{
     background: #FFD500;
-    padding: 0px 50px 0px 50px;
+    width: 100%;
     justify-content: center;
+    
 }
 
-.filter-menu{
-    background:#FFD500;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    margin-left: 15%;
-    margin-right: 15%;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-
+.ant-col.search{
+    width: 50vw;
+    top:10px;
 }
 
- .ant-slider.slider{
-    min-width: 30%;
+.filter-menu-btn{
+    top: 9px;
 }
+
+
+
+

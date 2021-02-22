@@ -64,7 +64,7 @@
 }
 
 .ant-card.ant-card-bordered {
-    max-width: 200px
+    width: 200px
 }
 
 .ant-card-cover * {

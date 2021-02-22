@@ -1,4 +1,4 @@
-import React, { useEffect, useState, browserHistory } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SearchBox from '../search-box';
@@ -6,6 +6,7 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
+
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
@@ -14,20 +15,21 @@ import WatchPage from '../pages/watch-page'; */
 
 import MyContext from '../../servises/Context';
 
-import { Layout, Row, Modal, Alert, Pagination } from 'antd';
+import { Layout, Row, Modal, Alert, Pagination, Empty  } from 'antd';
 import 'antd/dist/antd.css'
 import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const API_KEY = 'eb9d8a81'; 
+//const API_KEY = 'eb9d8a81';
+const API_KEY = 'a6a004a3'
 
 function App() {
 
   const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null); //будет обновляться только при ошибке
   const [loading, setLoading] = useState(false); //обект ожидания
-  const [q, setQuery] = useState('love'); //хранит искомые параметры запроса 
+  const [q, setQuery] = useState('lover'); //хранит искомые параметры запроса 
 
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
@@ -37,22 +39,28 @@ function App() {
   const [watchList, setWatch] = useState([]); //список к просмотру
 
   const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут
-  const [collapsedSearch, setCollapsedSearch] = useState(false); //отобр меню развернут или свернут
 
-  const [currPage, setCurrPage] = useState(1)
-  const [totalResults, setTotalResults] = useState(null);
+  const [currPage, setCurrPage] = useState(1) //текущая страница в pagination
+  const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
+
+  const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
+  const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
   const data = {
     movie: movie,
     favList: favList,
     watchList: watchList,
+    genreList: genreList,
+    yearValue: yearValue,
     setFav: setFav,
     setWatch: setWatch,
+    setGenreList: setGenreList,
+    setYearValue: setYearValue
   }
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
-    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type}&year=${year}&apikey=${API_KEY}`)
+    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
       .then(resp => resp)
       .then(resp => resp.json())
       .then(response => {
@@ -75,9 +83,6 @@ function App() {
   const RenderItemBox = ({ state }) => {
     return (state !== null && state.length > 0 && state.map((result) => (
       <ItemsBox
-        /* setFav={setFav}
-        setWatch={setWatch} */
-
         isActive={favList.includes(result)} //активность кнопки
         isWatch={watchList.includes(result)}
 
@@ -95,7 +100,7 @@ function App() {
   }
 
   const onPageChange = (page) => {
-    getDataRequest('s', q, setMovie, page)
+    getDataRequest('s', q, setMovie, page, genreList, yearValue)
     setCurrPage(page)
   }
 
@@ -104,9 +109,8 @@ function App() {
     setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setError(null); //обнуление ошибки перед новым запросом
     setMovie(null); //обнуление обьекта данных перед новым запросом
-    //getMovieReqest(q)
-    getDataRequest('s', q, setMovie); //запрос на сервер со своими параметрами
-  }, [q]); //ищем черещ getmovie с параметрами q
+    getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
+  }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
 
@@ -121,16 +125,12 @@ function App() {
               onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
               <MenuSider />
             </Sider>
-            
+
             <Layout className='layout'>
               <Header className='header'>
 
                 <SearchBox
                   searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
-                  collapsible /* сворачивающаяся */
-                  collapsedSearch={collapsedSearch}
-                  toggleCollapsedSearch={setCollapsedSearch}
-                  onCollapse={() => setCollapsedSearch(!collapsedSearch)}
                   GetData={getDataRequest} //запрос данных с сервера
                 />
 
@@ -141,8 +141,8 @@ function App() {
                   {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
 
                   {error !== null &&
-                    <div style={{ margin: '20px 0' }}>
-                      <Alert message={error} type='error' />
+                    <div className='error-row' style={{ margin: '20px 0'}}>
+                      <Empty description={error} type='error' />
                     </div>
                   }
 
