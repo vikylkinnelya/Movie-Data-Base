@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import ItemsBox from '../items-box';
 import MovieDetail from '../movie-detail';
-
+import MyContext from '../../servises/Context';
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
 import WatchPage from '../pages/watch-page'; */
-
-import MyContext from '../../servises/Context';
-
-import { Layout, Row, Modal, Alert, Pagination, Empty  } from 'antd';
-import 'antd/dist/antd.css'
+import { Layout, Row, Modal, Pagination, Empty } from 'antd';
 import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
-
 //const API_KEY = 'eb9d8a81';
 const API_KEY = 'a6a004a3'
 
@@ -52,6 +46,8 @@ function App() {
     watchList: watchList,
     genreList: genreList,
     yearValue: yearValue,
+    currPage: currPage,
+    totalResults: totalResults,
     setFav: setFav,
     setWatch: setWatch,
     setGenreList: setGenreList,
@@ -68,9 +64,8 @@ function App() {
           setError(response.Error) //записать в обьект ошибки ошибку
         } else {
           searchParam === 's' ?
-            setState(response.Search) : //если поиск по названию 
-            setState(response) //если поиск по imdbId
-          setTotalResults(response.totalResults)
+            setState(response.Search) || setTotalResults(response.totalResults) //если поиск по названию 
+            : setState(response) //если поиск по imdbId
         }
         setLoading(false);
         setDetailRequest(false); //для модалки
@@ -86,7 +81,7 @@ function App() {
         isActive={favList.includes(result)} //активность кнопки
         isWatch={watchList.includes(result)}
 
-        ClickHandler = {() => itemClickHandler(result)}
+        ClickHandler={() => filmClickHandler(result)}
 
         GetData={getDataRequest} //запрос данных с сервера
 
@@ -101,11 +96,11 @@ function App() {
     )))
   }
 
-  const itemClickHandler = (item) => { //обработчик события клика. при клике на карточку
+  const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
     setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
     getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue) //запрос к серверу за деталями фильма
-}
+  }
 
   const onPageChange = (page) => {
     getDataRequest('s', q, setMovie, page, genreList, yearValue)
@@ -114,11 +109,10 @@ function App() {
 
   const pseudoRandomMovies = () => {
 
-    const themes = ['love', 'hate', 'live', 'death', 'earth', 'moon', 'war', 'rage']
-    const randomTheme = themes[Math.floor(Math.random() * themes.length - 0)]
-
-    getDataRequest('s', randomTheme, setMovie, currPage )
-
+    const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)]
+    const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
+    getDataRequest('s', randomTheme, setMovie, randomPage)
   }
 
   useEffect(() => {
@@ -127,6 +121,7 @@ function App() {
     setError(null); //обнуление ошибки перед новым запросом
     setMovie(null); //обнуление обьекта данных перед новым запросом
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
+    pseudoRandomMovies()
   }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
@@ -158,7 +153,7 @@ function App() {
                   {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
 
                   {error !== null &&
-                    <div className='error-row' style={{ margin: '20px 0'}}>
+                    <div className='error-row' style={{ margin: '20px 0' }}>
                       <Empty description={error} type='error' />
                     </div>
                   }
