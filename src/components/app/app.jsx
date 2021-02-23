@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
@@ -65,7 +66,11 @@ function App() {
         } else {
           searchParam === 's' ?
             setState(response.Search) || setTotalResults(response.totalResults) //если поиск по названию 
-            : setState(response) //если поиск по imdbId
+            : setState(response) //если поиск по imdbId 
+          /* setState === 'setMovie' ?
+            setState(response.Search) && setTotalResults(response.totalResults)
+            : setState(response)  || setTotalResults(this.state)
+ */
         }
         setLoading(false);
         setDetailRequest(false); //для модалки
@@ -76,6 +81,7 @@ function App() {
   }
 
   const RenderItemBox = ({ state }) => {
+    
     return (state !== null && state.length > 0 && state.map((result) => (
       <ItemsBox
         isActive={favList.includes(result)} //активность кнопки
@@ -93,6 +99,8 @@ function App() {
         result={result}
         {...result}
       />
+
+      
     )))
   }
 
@@ -108,11 +116,10 @@ function App() {
   }
 
   const pseudoRandomMovies = () => {
-
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
     const randomTheme = themes[Math.floor(Math.random() * themes.length)]
     const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
-    getDataRequest('s', randomTheme, setMovie, randomPage)
+    getDataRequest('s', randomTheme, setMovie, randomPage, genreList, yearValue)
   }
 
   useEffect(() => {
