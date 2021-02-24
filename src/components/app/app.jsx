@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router} from 'react-router-dom';
+//import { useHistory } from "react-router-dom";
+import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
-import ItemsBox from '../items-box';
+import FilmsContainer from '../films-container';
+//import FilmCard from '../film-card';
 import MovieDetail from '../movie-detail';
-import MyContext from '../../servises/Context';
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
@@ -43,21 +44,28 @@ function App() {
 
   const data = {
     movie: movie,
+
     favList: favList,
     watchList: watchList,
+
     genreList: genreList,
     yearValue: yearValue,
     currPage: currPage,
     totalResults: totalResults,
+
     setFav: setFav,
     setWatch: setWatch,
     setGenreList: setGenreList,
-    setYearValue: setYearValue
+    setYearValue: setYearValue,
+
+    setActivateModal: setActivateModal,
+    setShowDetail: setShowDetail,
+    setDetailRequest: setDetailRequest,
   }
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
-    fetch(`http://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
+    fetch(`https://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
       .then(resp => resp)
       .then(resp => resp.json())
       .then(response => {
@@ -80,35 +88,9 @@ function App() {
       })
   }
 
-  const RenderItemBox = ({ state }) => {
-    
-    return (state !== null && state.length > 0 && state.map((result) => (
-      <ItemsBox
-        isActive={favList.includes(result)} //активность кнопки
-        isWatch={watchList.includes(result)}
 
-        ClickHandler={() => filmClickHandler(result)}
 
-        GetData={getDataRequest} //запрос данных с сервера
 
-        ShowDetail={setShowDetail}
-        DetailRequest={setDetailRequest}
-        ActivateModal={setActivateModal}
-
-        key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
-        result={result}
-        {...result}
-      />
-
-      
-    )))
-  }
-
-  const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
-    setActivateModal(true); //показать модалку. эл импортируется из другого компонента
-    setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
-    getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue) //запрос к серверу за деталями фильма
-  }
 
   const onPageChange = (page) => {
     getDataRequest('s', q, setMovie, page, genreList, yearValue)
@@ -157,6 +139,7 @@ function App() {
 
               <Content>
                 <Row justify='center'>
+
                   {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
 
                   {error !== null &&
@@ -165,23 +148,11 @@ function App() {
                     </div>
                   }
 
-                  <Switch>
-                    <Route path='/main'>
-                      <RenderItemBox state={movie} />
-                    </Route>
-                    <Route path='/favorites'>
-                      <RenderItemBox state={favList} />
-                    </Route>
-                    <Route path='/to-watch'>
-                      <RenderItemBox state={watchList} />
-                    </Route>
-                    <Route path='/films'>
-                      <RenderItemBox state={movie} />
-                    </Route>
-                    <Route path='/serials'>
-                      <RenderItemBox state={movie} />
-                    </Route>
-                  </Switch>
+                  <FilmsContainer
+                    dataRequest={getDataRequest}
+                  />
+
+
                 </Row>
 
                 <Row>
@@ -211,9 +182,8 @@ function App() {
               </Content>
               <Footer>
                 footer
-        </Footer>
+              </Footer>
             </Layout>
-
           </Layout>
         </div >
       </MyContext.Provider>

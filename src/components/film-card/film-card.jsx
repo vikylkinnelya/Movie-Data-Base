@@ -3,16 +3,14 @@ import { Row, Col, Card, Tag, Button } from 'antd';
 import toggleItem from '../../servises/toggleItem';
 import MyContext from '../../servises/Context'
 import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/icons'
-import './items-box.css'
+import './film-card.css'
 const { Meta } = Card;
 
-const ItemsBox = ({ result, GetData, ClickHandler, imdbID, isActive, isWatch, ShowDetail, DetailRequest, ActivateModal, Title, Poster, Type }) => {
-
-    
-
+const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type }) => {
     return (
         <MyContext.Consumer>
-            {value => {
+            {data => {
+                const {watchList, setWatch, favList, setFav} = data
                 return (
                     <div className='card-container'>
                         <Card
@@ -38,23 +36,22 @@ const ItemsBox = ({ result, GetData, ClickHandler, imdbID, isActive, isWatch, Sh
                                     <Button
                                         shape='circle'
                                         icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
-                                        onClick={() => toggleItem(result, value.watchList, value.setWatch)} />
+                                        onClick={() => toggleItem(result, watchList, setWatch)} />
                                 </Col>
                                 <Col className={isActive ? 'overlay like active' : 'overlay like'}>
                                     <Button
                                         shape='circle'
                                         icon={isActive ? <HeartFilled /> : <HeartOutlined />}
-                                        onClick={() => toggleItem(result, value.favList, value.setFav)} />
+                                        onClick={() => toggleItem(result, favList, setFav)} />
                                 </Col>
                             </Row>
                         </Card>
                     </div>
                 )
             }}
-
         </MyContext.Consumer>
     )
 }
 
-export default ItemsBox;
+export default FilmCard;
 
