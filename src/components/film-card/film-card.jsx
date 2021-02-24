@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Route, Switch, useParams } from 'react-router-dom';
 import { Row, Col, Card, Tag, Button } from 'antd';
 import toggleItem from '../../servises/toggleItem';
 import MyContext from '../../servises/Context'
@@ -7,6 +8,7 @@ import './film-card.css'
 const { Meta } = Card;
 
 const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type }) => {
+    
     return (
         <MyContext.Consumer>
             {data => {

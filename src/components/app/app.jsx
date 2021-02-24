@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -8,6 +8,7 @@ import Loader from '../loader';
 import FilmsContainer from '../films-container';
 //import FilmCard from '../film-card';
 import MovieDetail from '../movie-detail';
+import PaginationRow from '../pagination'
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
@@ -42,26 +43,8 @@ function App() {
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
-  const data = {
-    movie: movie,
+  const data = { movie, favList, watchList, genreList, yearValue, currPage, totalResults, setFav, setWatch, setGenreList, setYearValue, setActivateModal, setShowDetail, setDetailRequest }
 
-    favList: favList,
-    watchList: watchList,
-
-    genreList: genreList,
-    yearValue: yearValue,
-    currPage: currPage,
-    totalResults: totalResults,
-
-    setFav: setFav,
-    setWatch: setWatch,
-    setGenreList: setGenreList,
-    setYearValue: setYearValue,
-
-    setActivateModal: setActivateModal,
-    setShowDetail: setShowDetail,
-    setDetailRequest: setDetailRequest,
-  }
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
@@ -75,10 +58,6 @@ function App() {
           searchParam === 's' ?
             setState(response.Search) || setTotalResults(response.totalResults) //если поиск по названию 
             : setState(response) //если поиск по imdbId 
-          /* setState === 'setMovie' ?
-            setState(response.Search) && setTotalResults(response.totalResults)
-            : setState(response)  || setTotalResults(this.state)
- */
         }
         setLoading(false);
         setDetailRequest(false); //для модалки
@@ -86,15 +65,6 @@ function App() {
         setError(message); //и записать ее в стейт
         setLoading(false);
       })
-  }
-
-
-
-
-
-  const onPageChange = (page) => {
-    getDataRequest('s', q, setMovie, page, genreList, yearValue)
-    setCurrPage(page)
   }
 
   const pseudoRandomMovies = () => {
@@ -118,7 +88,6 @@ function App() {
   return (
     <Router>
       <MyContext.Provider value={data}>
-
         <div className='App'>
           <Layout className='Layout'>
             <Sider /* боковая панель */
@@ -128,13 +97,12 @@ function App() {
             </Sider>
 
             <Layout className='layout'>
-              <Header className='header'>
 
+              <Header className='header'>
                 <SearchBox
                   searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
                   GetData={getDataRequest} //запрос данных с сервера
                 />
-
               </Header>
 
               <Content>
@@ -156,12 +124,8 @@ function App() {
                 </Row>
 
                 <Row>
-                  <Pagination
-                    current={currPage} //берем из стейта, кот обновл
-                    total={totalResults} //length для fav watch 
-                    hideOnSinglePage={true} //спрятать если страница одна
-                    showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
-                    onChange={onPageChange}
+                  <PaginationRow
+                    dataRequest={getDataRequest}
                   />
                 </Row>
 

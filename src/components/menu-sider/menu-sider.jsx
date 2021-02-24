@@ -7,12 +7,6 @@ import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
 const MenuSider = () => {
 
-    let history = useHistory();
-
-    function handleClick(path) {
-        history.push( `/${path}`);
-      }
-
     return (
         <>
             <Menu
@@ -24,9 +18,7 @@ const MenuSider = () => {
                     className="customclass"
                     icon={<DatabaseOutlined />} >
                     the movie database`
-                    <NavLink to='/main' 
-                        onClick={() => handleClick('main')} //для возврата назад в истории
-                    />
+                    <NavLink to='/main' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -36,9 +28,7 @@ const MenuSider = () => {
                         <path d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z" />
                     </svg>}>
                     movies
-                    <NavLink to='/films'
-                        onClick={() => handleClick('films')}
-                        />
+                    <NavLink to='/films' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -50,9 +40,7 @@ const MenuSider = () => {
                         <path d="M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM7 3a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                     </svg>}>
                     serials
-                    <NavLink to='/serials'
-                        onClick={() => handleClick('serials')}
-                        />
+                    <NavLink to='/serials' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -60,9 +48,7 @@ const MenuSider = () => {
                     className="customclass"
                     icon={<HeartOutlined />}>
                     liked
-                    <NavLink to='/favorites'
-                        onClick={() => handleClick('favorites')}
-                        />
+                    <NavLink to='/favorites' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -70,9 +56,7 @@ const MenuSider = () => {
                     className="customclass"
                     icon={<EyeOutlined />}>
                     watchlist
-                    <NavLink to='/to-watch' 
-                        onClick={() => handleClick('to-watch')}
-                        />
+                    <NavLink to='/to-watch' />
                 </Menu.Item>
 
             </Menu>

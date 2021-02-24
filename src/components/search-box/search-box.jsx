@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Input, Button } from 'antd';
 import { Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import FilterMenu from '../filter-menu/filter-menu'
 import './search-box.css'
 
@@ -35,18 +34,9 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
                                 <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
                             </svg>}
                         />
-
                     </Dropdown>
-
-
-
                 </Col>
             </Row>
-
-
-
-            {/* {activateFilter ? <FilterMenu /> : null}
- */}
         </>
     )
 }

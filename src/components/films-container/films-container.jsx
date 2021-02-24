@@ -1,13 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Route, Switch, useParams } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
+import PaginationRow from '../pagination'
 
 const FilmsContainer = ({ dataRequest }) => {
+
+    
+
     return (
         <MyContext.Consumer>
             { data => {
-                const { setActivateModal, setDetailRequest, setShowDetail, movie, favList, watchList, genreList, yearValue, currPage} = data
+                const { setActivateModal, setDetailRequest, setShowDetail, movie, favList, watchList, genreList, yearValue, currPage, } = data
 
                 const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
                     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -49,9 +53,6 @@ const FilmsContainer = ({ dataRequest }) => {
                                 <RenderFilmCard state={movie} />
                             </Route>
                         </Switch>
-                    
-                    
-                    
                     </>
                 )
             }}
