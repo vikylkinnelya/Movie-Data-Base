@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -8,13 +8,12 @@ import Loader from '../loader';
 import FilmsContainer from '../films-container';
 //import FilmCard from '../film-card';
 import MovieDetail from '../movie-detail';
-import PaginationRow from '../pagination'
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
 import WatchPage from '../pages/watch-page'; */
-import { Layout, Row, Modal, Pagination, Empty } from 'antd';
+import { Layout, Row, Modal, Empty } from 'antd';
 import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -43,7 +42,7 @@ function App() {
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
-  const data = { movie, favList, watchList, genreList, yearValue, currPage, totalResults, setFav, setWatch, setGenreList, setYearValue, setActivateModal, setShowDetail, setDetailRequest }
+  const data = { movie, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
 
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
@@ -74,13 +73,18 @@ function App() {
     getDataRequest('s', randomTheme, setMovie, randomPage, genreList, yearValue)
   }
 
+  /* const onPageChange = (page) => {
+    getDataRequest('s', q, setMovie, page, genreList, yearValue)
+    setCurrPage(page)
+  } */
+
   useEffect(() => {
     setLoading(true); //ждём
     setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setError(null); //обнуление ошибки перед новым запросом
     setMovie(null); //обнуление обьекта данных перед новым запросом
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
-    pseudoRandomMovies()
+    //pseudoRandomMovies()
   }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
@@ -123,11 +127,7 @@ function App() {
 
                 </Row>
 
-                <Row>
-                  <PaginationRow
-                    dataRequest={getDataRequest}
-                  />
-                </Row>
+                
 
                 <Modal
                   title='Details'
