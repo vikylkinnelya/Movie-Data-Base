@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+//import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -42,9 +42,6 @@ function App() {
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
-  const data = { movie, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
-
-
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
     fetch(`https://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
@@ -54,104 +51,101 @@ function App() {
         if (response.Response === 'False') { //если нет ответа
           setError(response.Error) //записать в обьект ошибки ошибку
         } else {
-          searchParam === 's' ?
-            setState(response.Search) || setTotalResults(response.totalResults) //если поиск по названию 
-            : setState(response) //если поиск по imdbId 
+          if (searchParam === 's') {
+            setState(response.Search)
+            setTotalResults(response.totalResults)
+          }
+          if (searchParam === 'i') {
+            setState(response)
+          }
         }
-        setLoading(false);
+        setLoading(false)
         setDetailRequest(false); //для модалки
-      }).catch(({ message }) => { //в случае неудачи словить ошибку
-        setError(message); //и записать ее в стейт
+      }).catch(({ message }) => {
         setLoading(false);
+        setError(message);
       })
   }
 
-  const pseudoRandomMovies = () => {
+  /* const doFirstRequest = (genre = ['movie', 'series']) => {
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
     const randomTheme = themes[Math.floor(Math.random() * themes.length)]
     const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
-    getDataRequest('s', randomTheme, setMovie, randomPage, genreList, yearValue)
-  }
+    return getDataRequest('s', randomTheme, setMovie, randomPage, genre, yearValue)
+    console.log(movie.split(10))
+    setMovie(movie)
+} */
 
-  /* const onPageChange = (page) => {
-    getDataRequest('s', q, setMovie, page, genreList, yearValue)
-    setCurrPage(page)
-  } */
+  const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
 
   useEffect(() => {
     setLoading(true); //ждём
-    setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setError(null); //обнуление ошибки перед новым запросом
+    setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setMovie(null); //обнуление обьекта данных перед новым запросом
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
+    //doFirstRequest()
     //pseudoRandomMovies()
   }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
 
   return (
-    <Router>
-      <MyContext.Provider value={data}>
-        <div className='App'>
-          <Layout className='Layout'>
-            <Sider /* боковая панель */
-              collapsible /* сворачивающаяся */
-              onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
-              <MenuSider />
-            </Sider>
+    <MyContext.Provider value={data}>
+      <div className='App'>
+        <Layout className='Layout'>
 
-            <Layout className='layout'>
+          <Sider /* боковая панель */
+            collapsible /* сворачивающаяся */
+            onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
+            <MenuSider />
+          </Sider>
 
-              <Header className='header'>
-                <SearchBox
-                  searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
-                  GetData={getDataRequest} //запрос данных с сервера
-                />
-              </Header>
+          <Layout className='layout'>
 
-              <Content>
-                <Row justify='center'>
+            <Header className='header'>
+              <SearchBox
+                searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
+                GetData={getDataRequest} //запрос данных с сервера
+              />
+            </Header>
 
-                  {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+            <Content>
 
-                  {error !== null &&
-                    <div className='error-row' style={{ margin: '20px 0' }}>
-                      <Empty description={error} type='error' />
-                    </div>
-                  }
+              {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
 
-                  <FilmsContainer
-                    dataRequest={getDataRequest}
-                  />
+              {error !== null &&
+                <div className='error-row' style={{ margin: '20px 0' }}>
+                  <Empty description={error} type='error' />
+                </div>
+              }
+
+              <FilmsContainer />
 
 
-                </Row>
-
-                
-
-                <Modal
-                  title='Details'
-                  centered
-                  visible={activateModal}
-                  onCancel={() => { setActivateModal(false); setShowDetail(null) }}
-                  footer={null}
-                >
-                  {detailRequest === false ? /* если получен ответ от сервера с деталями */
-                    (<MovieDetail {...detail} />) : /* показать детали */
-                    (<Loader />)
-                  }
-                </Modal>
+              <Modal
+                title='Details'
+                centered
+                visible={activateModal}
+                onCancel={() => { setActivateModal(false); setShowDetail(null) }}
+                footer={null}
+              >
+                {detailRequest === false ? /* если получен ответ от сервера с деталями */
+                  (<MovieDetail {...detail} />) : /* показать детали */
+                  (<Loader />)
+                }
+              </Modal>
 
 
-              </Content>
-              <Footer>
-                footer
+            </Content>
+            <Footer>
+              footer
               </Footer>
-            </Layout>
           </Layout>
-        </div >
-      </MyContext.Provider>
-    </Router>
+        </Layout>
+      </div >
+    </MyContext.Provider>
+
   )
 }
 

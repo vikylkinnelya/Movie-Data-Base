@@ -1,0 +1,17 @@
+.ant-pagination {
+    margin: 20px auto 20px auto;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.ant-pagination>.ant-pagination-item {
+    min-width: 35px;
+    height: 45px;
+    line-height: 45px;
+}
+
+.cards-row{
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}

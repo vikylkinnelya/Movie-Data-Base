@@ -2,6 +2,7 @@
     position: relative;
     z-Index: 1;
     transition: transform 0.5s;
+    margin: 15px 5px 20px 0;
 }
 
 .card-container:hover, .card-container:active{
@@ -52,30 +53,15 @@
     margin-left: 1px;
 }
 
-
-/* .overlay.watch:hover,
-.overlay.like:hover {
-    color: #FFD500;
-} */
-
-.ant-row.ant-row-center .card-container {
-    margin: 15px;
-    display: flex;
-}
-
 .ant-card.ant-card-bordered {
-    width: 200px
+    width: 190px
 }
 
 .ant-card-cover * {
-    height: 290px
+    height: 280px
 }
 
-.ant-card-meta {
-    padding: 0px
-}
-
-.ant-row .gutter-row {
+.ant-row .gutter-row { /* между тегом и названием */
     margin-top: 5px
 }
 
