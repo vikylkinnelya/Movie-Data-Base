@@ -12,6 +12,6 @@
 
 .cards-row{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-content: space-around;
 }

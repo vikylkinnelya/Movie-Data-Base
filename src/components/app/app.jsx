@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-//import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation, useRouteMatch} from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -78,6 +78,13 @@ function App() {
 
   const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
 
+  let location = useLocation();
+  let match = useRouteMatch()
+
+  console.log(location)
+  console.log(match)
+
+
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки перед новым запросом
@@ -86,8 +93,9 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
-  }, [q, currPage, genreList, yearValue]);
+  }, [q, currPage, genreList, yearValue, location]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
+
 
 
   return (
@@ -98,7 +106,7 @@ function App() {
           <Sider /* боковая панель */
             collapsible /* сворачивающаяся */
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
-            <MenuSider />
+            <MenuSider  page = {currPage}/>
           </Sider>
 
           <Layout className='layout'>
@@ -120,7 +128,9 @@ function App() {
                 </div>
               }
 
-              <FilmsContainer />
+              <FilmsContainer 
+                currPage = {currPage}
+              />
 
 
               <Modal

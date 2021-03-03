@@ -2,7 +2,7 @@
     position: relative;
     z-Index: 1;
     transition: transform 0.5s;
-    margin: 15px 5px 20px 0;
+    margin: 10px 15px 10px 15px;
 }
 
 .card-container:hover, .card-container:active{

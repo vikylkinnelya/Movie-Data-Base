@@ -1,5 +1,5 @@
 import React from 'react';
-//import { BrowserRouter as Route, Switch, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter as Route, Switch, useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
 import { Row, Pagination } from 'antd';
@@ -7,7 +7,7 @@ import './render-film-card.css'
 
 
 const RenderFilmCard = ({ state }) => {
-
+    
     //let location = useLocation().pathname.slice(1);
 
     return (
@@ -50,8 +50,7 @@ const RenderFilmCard = ({ state }) => {
                         </Row>
                     </>
                 )
-            }
-            }
+            }}
         </MyContext.Consumer>
     )
 

@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
 
-const FilmsContainer = () => {
+const FilmsContainer = ({currPage}) => {
+
     return (
         <MyContext.Consumer>
             { data => {
@@ -15,17 +16,7 @@ const FilmsContainer = () => {
                     const randomTheme = themes[Math.floor(Math.random() * themes.length)]
                     const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
                     return getDataRequest('s', randomTheme, setMovie, randomPage, genre, yearValue)
-                    
                 }
-
-                //doFirstRequest()
-                /* const pseudoRandomMovies = () => {
-                    
-                    
-                    
-                } */
-
-
 
                 return (
                     <>
@@ -33,16 +24,14 @@ const FilmsContainer = () => {
                             <Route path='/main'>
                                 <RenderFilmCard state={movie} />
                             </Route>
-                            <Route path='/favorites'>
+                            <Route path='/favorites/:page'>
                                 <RenderFilmCard state={favList} />
                             </Route>
                             <Route path='/to-watch'>
                                 <RenderFilmCard state={watchList} />
                             </Route>
                             <Route path='/films'>
-                                <RenderFilmCard
-                                    state={movie}
-                                />
+                                <RenderFilmCard state={movie} />
                             </Route>
                             <Route path='/serials'>
                                 <RenderFilmCard
