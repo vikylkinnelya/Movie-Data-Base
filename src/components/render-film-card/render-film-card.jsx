@@ -7,8 +7,6 @@ import './render-film-card.css'
 
 
 const RenderFilmCard = ({ state }) => {
-    
-    //let location = useLocation().pathname.slice(1);
 
     return (
         <MyContext.Consumer>
@@ -40,12 +38,14 @@ const RenderFilmCard = ({ state }) => {
                         </Row>
                         <Row>
                             <Pagination
+                                defaultCurrent = {currPage}
                                 current={currPage} //берем из стейта, кот обновл
                                 total={state === movie ? totalResults : state.length}
                                 hideOnSinglePage={true} //спрятать если страница одна
                                 showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
                                 pageSize={10}
                                 onChange={page => setCurrPage(page)}
+                                
                             />
                         </Row>
                     </>

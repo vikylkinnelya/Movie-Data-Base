@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useLocation, useRouteMatch} from 'react-router-dom';
+import { BrowserRouter as Router, useLocation, useRouteMatch, useParams } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -34,13 +34,14 @@ function App() {
   const [favList, setFav] = useState([]); //список избранных
   const [watchList, setWatch] = useState([]); //список к просмотру
 
-  const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут
+  const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут8
 
   const [currPage, setCurrPage] = useState(1) //текущая страница в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
+
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
@@ -78,12 +79,6 @@ function App() {
 
   const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
 
-  let location = useLocation();
-  let match = useRouteMatch()
-
-  console.log(location)
-  console.log(match)
-
 
   useEffect(() => {
     setLoading(true); //ждём
@@ -93,10 +88,16 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
-  }, [q, currPage, genreList, yearValue, location]);
+  }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
+  let {params} = useParams();
 
+  let match = useRouteMatch()
+
+  
+  console.log(match)
+  console.log(params)
 
   return (
     <MyContext.Provider value={data}>
@@ -106,7 +107,7 @@ function App() {
           <Sider /* боковая панель */
             collapsible /* сворачивающаяся */
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
-            <MenuSider  page = {currPage}/>
+            <MenuSider page={currPage} />
           </Sider>
 
           <Layout className='layout'>
@@ -128,9 +129,7 @@ function App() {
                 </div>
               }
 
-              <FilmsContainer 
-                currPage = {currPage}
-              />
+              <FilmsContainer page={currPage} />
 
 
               <Modal

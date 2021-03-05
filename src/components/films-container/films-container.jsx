@@ -1,9 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
 
-const FilmsContainer = ({currPage}) => {
+const FilmsContainer = ({page}) => {
+
+    //let location = useLocation();
+    
+
+  
 
     return (
         <MyContext.Consumer>
@@ -21,24 +26,22 @@ const FilmsContainer = ({currPage}) => {
                 return (
                     <>
                         <Switch>
-                            <Route path='/main'>
+                            <Route path='/main/:page'>
                                 <RenderFilmCard state={movie} />
                             </Route>
                             <Route path='/favorites/:page'>
                                 <RenderFilmCard state={favList} />
                             </Route>
-                            <Route path='/to-watch'>
+                            <Route path='/to-watch/:page'>
                                 <RenderFilmCard state={watchList} />
                             </Route>
-                            <Route path='/films'>
+                            <Route path='/films/:page'>
                                 <RenderFilmCard state={movie} />
                             </Route>
-                            <Route path='/serials'>
-                                <RenderFilmCard
-                                    state={movie}
-                                />
+                            <Route path='/serials/:page'>
+                                <RenderFilmCard state={movie} />
                             </Route>
-                            <Redirect from='/' to='/main' />
+                            <Redirect from='/' to='/main/:page' />
                         </Switch>
                     </>
                 )

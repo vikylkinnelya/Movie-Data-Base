@@ -1,8 +1,7 @@
 import React from 'react';
-import { Menu } from 'antd';
-import { NavLink, withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom"; import 'antd/dist/antd.css'
+import { NavLink, withRouter } from "react-router-dom"; 
 import './menu-sider.css'
+import { Menu } from 'antd';
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
 const MenuSider = ({ page }) => {
@@ -56,7 +55,7 @@ const MenuSider = ({ page }) => {
                     className="customclass"
                     icon={<EyeOutlined />}>
                     watchlist
-                    <NavLink to='/to-watch' />
+                    <NavLink to={`/to-watch/${page}`} />
                 </Menu.Item>
 
             </Menu>
