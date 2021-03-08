@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useLocation, useRouteMatch, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation, useRouteMatch, useParams, useHistory, withRouter } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
@@ -13,7 +13,7 @@ import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
 import WatchPage from '../pages/watch-page'; */
-import { Layout, Row, Modal, Empty } from 'antd';
+import { Layout, Row, Modal, Empty, Pagination } from 'antd';
 import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -21,6 +21,10 @@ const { Header, Content, Footer, Sider } = Layout;
 const API_KEY = 'a6a004a3'
 
 function App() {
+
+  const history = useHistory()
+  let location = useLocation().pathname.split('/')[1];
+  let urlPage = useLocation().pathname.split('/')[2];
 
   const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null); //будет обновляться только при ошибке
@@ -36,12 +40,11 @@ function App() {
 
   const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут8
 
-  const [currPage, setCurrPage] = useState(1) //текущая страница в pagination
+  const [currPage, setCurrPage] = useState(urlPage) //текущая страница в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
-
 
   const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
@@ -79,7 +82,6 @@ function App() {
 
   const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
 
-
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки перед новым запросом
@@ -88,16 +90,26 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
-  }, [q, currPage, genreList, yearValue]);
+  }, [q, currPage, genreList, yearValue,]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
 
-  let {params} = useParams();
 
-  let match = useRouteMatch()
+  const onPageChange = (page) => { //при изменении стр в pagination
+    setCurrPage(page) //уст текущая стр в зав-ти от выбранной
+    history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
+  }
 
-  
-  console.log(match)
-  console.log(params)
+  const defTotalRes = () => {
+    if (location === 'favorites') {
+      return favList.length
+    }
+    else if (location === 'to-watch') {
+      return watchList.length
+    } 
+    else {
+      return totalResults
+    }
+  }
 
   return (
     <MyContext.Provider value={data}>
@@ -107,7 +119,12 @@ function App() {
           <Sider /* боковая панель */
             collapsible /* сворачивающаяся */
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
-            <MenuSider page={currPage} />
+            <MenuSider
+              page={currPage}
+              setPage = {setCurrPage}
+              loc = {location}
+              onChange = {onPageChange}
+            />
           </Sider>
 
           <Layout className='layout'>
@@ -129,7 +146,20 @@ function App() {
                 </div>
               }
 
-              <FilmsContainer page={currPage} />
+              <FilmsContainer />
+
+              <Row>
+                <Pagination
+                  current={currPage} //берем из стейта, кот обновл
+                  defaultCurrent={currPage}
+                  total={defTotalRes()}
+                  onChange={page => onPageChange(page)}
+                  //total={state === movie ? totalResults : state.length}
+                  hideOnSinglePage={true} //спрятать если страница одна
+                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
+                  pageSize={10}
+                />
+              </Row>
 
 
               <Modal
@@ -158,6 +188,6 @@ function App() {
   )
 }
 
-export default App;
+export default withRouter (App);
 
 

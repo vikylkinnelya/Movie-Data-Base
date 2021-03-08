@@ -3,12 +3,7 @@ import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLoc
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
 
-const FilmsContainer = ({page}) => {
-
-    //let location = useLocation();
-    
-
-  
+const FilmsContainer = () => {
 
     return (
         <MyContext.Consumer>
@@ -16,12 +11,12 @@ const FilmsContainer = ({page}) => {
 
                 const { movie, favList, watchList, getDataRequest, setMovie, yearValue } = data
 
-                const doFirstRequest = (genre = ['movie', 'series']) => {
+                /* const doFirstRequest = (genre = ['movie', 'series']) => {
                     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
                     const randomTheme = themes[Math.floor(Math.random() * themes.length)]
                     const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
                     return getDataRequest('s', randomTheme, setMovie, randomPage, genre, yearValue)
-                }
+                } */
 
                 return (
                     <>
@@ -41,7 +36,7 @@ const FilmsContainer = ({page}) => {
                             <Route path='/serials/:page'>
                                 <RenderFilmCard state={movie} />
                             </Route>
-                            <Redirect from='/' to='/main/:page' />
+                            <Redirect from='/' to='/main/1' />
                         </Switch>
                     </>
                 )

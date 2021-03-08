@@ -1,19 +1,32 @@
 import React from 'react';
-import { NavLink, withRouter } from "react-router-dom"; 
+import { NavLink, withRouter } from "react-router-dom";
+import { BrowserRouter as Route, Switch, useParams, useLocation, useHistory, generatePath, useRouteMatch } from 'react-router-dom';
 import './menu-sider.css'
 import { Menu } from 'antd';
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
-const MenuSider = ({ page }) => {
+const MenuSider = ({ page, setPage, loc }) => {
+
+    let location = useLocation().pathname.split('/')[1];
+    const history = useHistory();
+
+    const onChange = () => {
+        setPage(1)
+        //history.push(`/${location}`)
+        console.log(location)
+    } 
 
     return (
         <>
             <Menu
-                defaultSelectedKeys={'1'}
+                defaultSelectedKeys='main'
+                selectedKeys = {loc}
                 mode="inline"
-                theme="dark" >
+                theme="dark"
+                onSelect={() => setPage(1)}
+            >
                 <Menu.Item
-                    key="1"
+                    key="main"
                     className="customclass"
                     icon={<DatabaseOutlined />} >
                     the movie database`
@@ -21,7 +34,7 @@ const MenuSider = ({ page }) => {
                 </Menu.Item>
 
                 <Menu.Item
-                    key="2"
+                    key="films"
                     className="customclass"
                     icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-film" viewBox="0 0 16 16">
                         <path d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z" />
@@ -31,7 +44,7 @@ const MenuSider = ({ page }) => {
                 </Menu.Item>
 
                 <Menu.Item
-                    key="3"
+                    key="serials"
                     className="customclass"
                     icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-camera-reels" viewBox="0 0 16 16">
                         <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" />
@@ -43,7 +56,7 @@ const MenuSider = ({ page }) => {
                 </Menu.Item>
 
                 <Menu.Item
-                    key="4"
+                    key="favorites"
                     className="customclass"
                     icon={<HeartOutlined />}>
                     liked
@@ -51,7 +64,7 @@ const MenuSider = ({ page }) => {
                 </Menu.Item>
 
                 <Menu.Item
-                    key="5"
+                    key="to-watch"
                     className="customclass"
                     icon={<EyeOutlined />}>
                     watchlist
@@ -63,4 +76,4 @@ const MenuSider = ({ page }) => {
     )
 }
 
-export default withRouter(MenuSider);
+export default MenuSider;
