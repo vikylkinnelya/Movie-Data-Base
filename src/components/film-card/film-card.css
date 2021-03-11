@@ -68,3 +68,7 @@
 .ant-card.ant-card-bordered>.ant-card-body {
     padding: 20px;
 }
+
+.ant-card-body{
+    filter: blur(3px);  
+}

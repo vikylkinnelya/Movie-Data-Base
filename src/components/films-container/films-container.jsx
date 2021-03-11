@@ -36,8 +36,6 @@ const FilmsContainer = () => {
                 </Route>
                 <Redirect from='/' to='/main/1' />
             </Switch>
-
-            
         </>
     )
 }

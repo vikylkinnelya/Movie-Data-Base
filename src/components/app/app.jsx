@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, useLocation, useRouteMatch, useParams, useHistory, withRouter } from 'react-router-dom';
-//import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import FilmsContainer from '../films-container';
-//import FilmCard from '../film-card';
 import MovieDetail from '../movie-detail';
+import getDataRequest from '../../servises/getDataRequest'
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
 import SeriesPage from '../pages/series-page';
 import WatchPage from '../pages/watch-page'; */
 import { Layout, Row, Modal, Empty, Pagination } from 'antd';
+
 import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 //const API_KEY = 'eb9d8a81';
-const API_KEY = 'a6a004a3'
+//const API_KEY = 'a6a004a3'
 
 function App() {
 
@@ -46,30 +46,7 @@ function App() {
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
-  const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '') => { //гибкий запрос на сервер
 
-    fetch(`https://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
-      .then(resp => resp)
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.Response === 'False') { //если нет ответа
-          setError(response.Error) //записать в обьект ошибки ошибку
-        } else {
-          if (searchParam === 's') {
-            setState(response.Search)
-            setTotalResults(response.totalResults)
-          }
-          if (searchParam === 'i') {
-            setState(response)
-          }
-        }
-        setLoading(false)
-        setDetailRequest(false); //для модалки
-      }).catch(({ message }) => {
-        setLoading(false);
-        setError(message);
-      })
-  }
 
   /* const doFirstRequest = (genre = ['movie', 'series']) => {
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
@@ -80,14 +57,14 @@ function App() {
     setMovie(movie)
 } */
 
-  const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest }
+  const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
 
   useEffect(() => {
     setLoading(true); //ждём
     setError(null); //обнуление ошибки перед новым запросом
     setTotalResults(null); //обнуление кол-ва фильмов от сервера
     setMovie(null); //обнуление обьекта данных перед новым запросом
-    getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
+    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
   }, [q, currPage, genreList, yearValue]);
@@ -116,15 +93,13 @@ function App() {
       <div className='App'>
         <Layout className='Layout'>
 
-          <Sider /* боковая панель */
-            collapsible /* сворачивающаяся */
+          <Sider collapsible
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
             <MenuSider
               page={currPage}
               setPage={setCurrPage}
               loc={location}
-              onChange={onPageChange}
-            />
+              onChange={onPageChange} />
           </Sider>
 
           <Layout className='layout'>
@@ -155,22 +130,20 @@ function App() {
                 onCancel={() => { setActivateModal(false); setShowDetail(null) }}
                 footer={null}
               >
-                {detailRequest === false ? /* если получен ответ от сервера с деталями */
-                  (<MovieDetail {...detail} />) : /* показать детали */
-                  (<Loader />)
+                {detailRequest === false ?
+                  (<MovieDetail {...detail} />) : (<Loader />)
                 }
               </Modal>
 
 
               <Row>
                 <Pagination
-                  current={parseInt(currPage) || parseInt(urlPage)} //берем из стейта, кот обновл
-                  //defaultCurrent={1}
+                  current={parseInt(currPage) || parseInt(urlPage)}
                   total={defTotalRes()}
                   onChange={page => onPageChange(page)}
                   //total={state === movie ? totalResults : state.length}
-                  hideOnSinglePage={true} //спрятать если страница одна
-                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
+                  hideOnSinglePage={true}
+                  showSizeChanger={false}
                   pageSize={10}
                 />
               </Row>
