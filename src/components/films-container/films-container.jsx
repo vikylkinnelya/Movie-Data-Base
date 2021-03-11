@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
+//import { Layout, Row, Modal, Empty, Pagination } from 'antd';
+
 
 const FilmsContainer = () => {
 
-    const { movie, favList, watchList, currPage, getDataRequest, setMovie, yearValue } = useContext(MyContext)
+    const { movie, favList, watchList} = useContext(MyContext)
 
     /* const doFirstRequest = (genre = ['movie', 'series']) => {
                         const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
@@ -35,18 +37,7 @@ const FilmsContainer = () => {
                 <Redirect from='/' to='/main/1' />
             </Switch>
 
-            <Row>
-                <Pagination
-                  current={currPage} //берем из стейта, кот обновл
-                  defaultCurrent={1}
-                  total={defTotalRes()}
-                  onChange={page => onPageChange(page)}
-                  //total={state === movie ? totalResults : state.length}
-                  hideOnSinglePage={true} //спрятать если страница одна
-                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
-                  pageSize={10}
-                />
-              </Row>
+            
         </>
     )
 }

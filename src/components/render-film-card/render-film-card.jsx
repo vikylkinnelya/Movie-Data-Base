@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Route, Switch, useParams, useLocation, useHistory, generatePath, useRouteMatch } from 'react-router-dom';
 
 import MyContext from '../../servises/Context';
@@ -8,14 +8,16 @@ import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
 
-    const { getDataRequest, setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
-    
+    const { getDataRequest, q, setLoading, setError, setTotalResults, setMovie, setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
+
     const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
         setActivateModal(true); //показать модалку. эл импортируется из другого компонента
         setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue) //запрос к серверу за деталями фильма
     }
-    
+
+
+
     return (
         <>
             <Row className='cards-row'>

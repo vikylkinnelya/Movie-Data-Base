@@ -40,7 +40,7 @@ function App() {
 
   const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут8
 
-  const [currPage, setCurrPage] = useState(urlPage) //текущая страница в pagination
+  const [currPage, setCurrPage] = useState(1 && urlPage) //текущая страница в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
@@ -110,6 +110,7 @@ function App() {
     }
   }
 
+
   return (
     <MyContext.Provider value={data}>
       <div className='App'>
@@ -142,12 +143,9 @@ function App() {
                 </div>
               }
 
-              <FilmsContainer 
-              onChange = {onPageChange}
-              onTotal = {defTotalRes}
-              />
+              <FilmsContainer />
 
-              
+
 
 
               <Modal
@@ -163,6 +161,19 @@ function App() {
                 }
               </Modal>
 
+
+              <Row>
+                <Pagination
+                  current={parseInt(currPage) || parseInt(urlPage)} //берем из стейта, кот обновл
+                  //defaultCurrent={1}
+                  total={defTotalRes()}
+                  onChange={page => onPageChange(page)}
+                  //total={state === movie ? totalResults : state.length}
+                  hideOnSinglePage={true} //спрятать если страница одна
+                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
+                  pageSize={10}
+                />
+              </Row>
 
             </Content>
             <Footer>

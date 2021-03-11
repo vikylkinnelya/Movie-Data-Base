@@ -23,14 +23,14 @@ const MenuSider = ({ page, setPage, loc }) => {
                 selectedKeys = {loc}
                 mode="inline"
                 theme="dark"
-                onSelect={() => setPage(1)}
+                onClick={() => setPage(1)}
             >
                 <Menu.Item
                     key="main"
                     className="customclass"
                     icon={<DatabaseOutlined />} >
                     the movie database`
-                    <NavLink to={`/main/${page}`} />
+                    <NavLink to={`/main/1`} />
                 </Menu.Item>
 
                 <Menu.Item
@@ -40,7 +40,7 @@ const MenuSider = ({ page, setPage, loc }) => {
                         <path d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z" />
                     </svg>}>
                     movies
-                    <NavLink to={`/films/${page}`} />
+                    <NavLink to={`/films/1`} />
                 </Menu.Item>
 
                 <Menu.Item
@@ -52,7 +52,7 @@ const MenuSider = ({ page, setPage, loc }) => {
                         <path d="M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM7 3a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                     </svg>}>
                     serials
-                    <NavLink to={`/serials/${page}`} />
+                    <NavLink to={`/serials/1`} />
                 </Menu.Item>
 
                 <Menu.Item
@@ -60,7 +60,7 @@ const MenuSider = ({ page, setPage, loc }) => {
                     className="customclass"
                     icon={<HeartOutlined />}>
                     liked
-                    <NavLink to={`/favorites/${page}`} />
+                    <NavLink to={`/favorites/1`} />
                 </Menu.Item>
 
                 <Menu.Item
@@ -68,7 +68,7 @@ const MenuSider = ({ page, setPage, loc }) => {
                     className="customclass"
                     icon={<EyeOutlined />}>
                     watchlist
-                    <NavLink to={`/to-watch/${page}`} />
+                    <NavLink to={`/to-watch/1`} />
                 </Menu.Item>
 
             </Menu>
