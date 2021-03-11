@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, useLocation, useRouteMatch, useParams, useHistory, withRouter } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 import MyContext from '../../servises/Context';
@@ -29,7 +29,7 @@ function App() {
   const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null); //будет обновляться только при ошибке
   const [loading, setLoading] = useState(false); //обект ожидания
-  const [q, setQuery] = useState('lover'); //хранит искомые параметры запроса 
+  const [q, setQuery] = useState('sun'); //хранит искомые параметры запроса 
 
   const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
@@ -90,9 +90,8 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
-  }, [q, currPage, genreList, yearValue,]);
+  }, [q, currPage, genreList, yearValue]);
   //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
-
 
   const onPageChange = (page) => { //при изменении стр в pagination
     setCurrPage(page) //уст текущая стр в зав-ти от выбранной
@@ -105,7 +104,7 @@ function App() {
     }
     else if (location === 'to-watch') {
       return watchList.length
-    } 
+    }
     else {
       return totalResults
     }
@@ -121,24 +120,21 @@ function App() {
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
             <MenuSider
               page={currPage}
-              setPage = {setCurrPage}
-              loc = {location}
-              onChange = {onPageChange}
+              setPage={setCurrPage}
+              loc={location}
+              onChange={onPageChange}
             />
           </Sider>
 
           <Layout className='layout'>
 
             <Header className='header'>
-              <SearchBox
-                searchHandler={setQuery} /* поиск по введенным параметрам кот сохр в обьект */
-                GetData={getDataRequest} //запрос данных с сервера
-              />
+              <SearchBox searchHandler={setQuery} />
             </Header>
 
             <Content>
 
-              {loading && <Loader />} {/* ожидание из стейта и иконка загрузки */}
+              {loading && <Loader />}
 
               {error !== null &&
                 <div className='error-row' style={{ margin: '20px 0' }}>
@@ -146,20 +142,12 @@ function App() {
                 </div>
               }
 
-              <FilmsContainer />
+              <FilmsContainer 
+              onChange = {onPageChange}
+              onTotal = {defTotalRes}
+              />
 
-              <Row>
-                <Pagination
-                  current={currPage} //берем из стейта, кот обновл
-                  defaultCurrent={currPage}
-                  total={defTotalRes()}
-                  onChange={page => onPageChange(page)}
-                  //total={state === movie ? totalResults : state.length}
-                  hideOnSinglePage={true} //спрятать если страница одна
-                  showSizeChanger={false} //выбор кол-ва отображаемых элементов на странице
-                  pageSize={10}
-                />
-              </Row>
+              
 
 
               <Modal
@@ -188,6 +176,6 @@ function App() {
   )
 }
 
-export default withRouter (App);
+export default withRouter(App);
 
 
