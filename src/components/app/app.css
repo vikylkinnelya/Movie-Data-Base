@@ -1,5 +1,6 @@
 a {
     color: #FFD500;
+    width: auto;
 }
 
 * {
@@ -24,10 +25,21 @@ a {
     padding: 20px 20px 20px 20px;
 }
 
-.error-row>.ant-empty *{
+.error-row>.ant-empty * {
     height: 200%;
     font-size: 20px;
     justify-content: center;
 }
 
+.ant-modal-content{
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(4.0px);
+    -webkit-backdrop-filter: blur(2.0px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
+.ant-modal-header{
+    background: none
+}

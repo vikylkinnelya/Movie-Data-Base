@@ -2,10 +2,11 @@
     position: relative;
     z-Index: 1;
     transition: transform 0.5s;
-    margin: 10px 15px 10px 15px;
+    margin: 15px 15px 15px 15px;
 }
 
-.card-container:hover, .card-container:active{
+.card-container:hover,
+.card-container:active {
     transform: scale(1.1);
 }
 
@@ -58,10 +59,11 @@
 }
 
 .ant-card-cover * {
-    height: 280px
+    height: 280px;
 }
 
-.ant-row .gutter-row { /* между тегом и названием */
+.ant-row .gutter-row {
+    /* между тегом и названием */
     margin-top: 5px
 }
 
@@ -69,6 +71,17 @@
     padding: 20px;
 }
 
-.ant-card-body{
-    filter: blur(3px);  
+
+.ant-card.ant-card-bordered {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+.ant-card-cover img  {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }

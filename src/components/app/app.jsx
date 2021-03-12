@@ -46,7 +46,17 @@ function App() {
   const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
 
-
+  const defLocation = (location) => {
+    if (location === 'main') {
+      setGenreList(['movie', 'series'])
+    }
+    else if (location === 'films') {
+      setGenreList(['movie'])
+    }
+    else if (location === 'serials') {
+      setGenreList(['serials'])
+    }
+  }
 
   /* const doFirstRequest = (genre = ['movie', 'series']) => {
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
@@ -60,10 +70,10 @@ function App() {
   const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
 
   useEffect(() => {
-    setLoading(true); //ждём
-    setError(null); //обнуление ошибки перед новым запросом
-    setTotalResults(null); //обнуление кол-ва фильмов от сервера
-    setMovie(null); //обнуление обьекта данных перед новым запросом
+    setLoading(true);
+    setError(null);
+    setTotalResults(null);
+    setMovie(null);
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest); //запрос на сервер со своими параметрами
     //doFirstRequest()
     //pseudoRandomMovies()
@@ -98,8 +108,8 @@ function App() {
             <MenuSider
               page={currPage}
               setPage={setCurrPage}
-              loc={location}
-              onChange={onPageChange} />
+              setGenre={setGenreList}
+              loc={location} />
           </Sider>
 
           <Layout className='layout'>
@@ -122,18 +132,18 @@ function App() {
 
 
 
-
-              <Modal
-                title='Details'
-                centered
-                visible={activateModal}
-                onCancel={() => { setActivateModal(false); setShowDetail(null) }}
-                footer={null}
-              >
-                {detailRequest === false ?
-                  (<MovieDetail {...detail} />) : (<Loader />)
-                }
-              </Modal>
+              <div className='modal-detail' >
+                <Modal
+                  title='Details'
+                  centered
+                  visible={activateModal}
+                  onCancel={() => { setActivateModal(false); setShowDetail(null) }}
+                  footer={null}
+                >
+                  {detailRequest === false ?
+                    (<MovieDetail {...detail} />) : (<Loader />)
+                  }
+                </Modal></div>
 
 
               <Row>

@@ -13,21 +13,18 @@
 }
 
 .ant-layout-sider-trigger {
-    background-color: #ffc400;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background: #FFD500 !important;
 }
 
 .ant-menu-item.customclass.ant-menu-item-selected {
     background-color: #FFD500;
-    color: #212121;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 5px;
 }
 
-.anticon.anticon-database,
-.anticon.anticon-video-camera,
-.anticon.anticon-heart,
-.anticon.anticon-eye {
-    font-size: 20px;
+.ant-menu-item .ant-menu-item-icon,
+.ant-menu-submenu-title .ant-menu-item-icon,
+.ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+    font-size: 20px !important;
 }
