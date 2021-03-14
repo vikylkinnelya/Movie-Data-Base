@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
+import getDataRequest from '../../servises/getDataRequest'
 //import { Layout, Row, Modal, Empty, Pagination } from 'antd';
 
 
 const FilmsContainer = () => {
 
-    const { movie, favList, watchList} = useContext(MyContext)
+    let { movie, favList, watchList} = useContext(MyContext)
+
+    
 
     /* const doFirstRequest = (genre = ['movie', 'series']) => {
                         const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']

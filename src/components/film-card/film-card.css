@@ -38,6 +38,10 @@
     color: #212121;
 }
 
+.ant-btn:focus{
+    color: #212121;
+}
+
 .overlay>.like,
 .overlay>.watch {
     opacity: 0.2;
@@ -46,6 +50,8 @@
 .overlay.like.active,
 .overlay.watch.active {
     opacity: 0.9;
+    color: #212121;
+
 }
 
 .anticon.anticon-heart,
@@ -71,12 +77,10 @@
     padding: 20px;
 }
 
-
 .ant-card.ant-card-bordered {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-
 }
 
 .ant-card-cover img  {

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, useLocation, useRouteMatch, useParams, useHistory, withRouter } from 'react-router-dom';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useLocation, useHistory, withRouter } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
@@ -7,6 +7,8 @@ import Loader from '../loader';
 import FilmsContainer from '../films-container';
 import MovieDetail from '../movie-detail';
 import getDataRequest from '../../servises/getDataRequest'
+import defTotalRes from '../../servises/defTotalRes'
+import defGenres from '../../servises/defGenres'
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
@@ -26,38 +28,6 @@ function App() {
   let location = useLocation().pathname.split('/')[1];
   let urlPage = useLocation().pathname.split('/')[2];
 
-  const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
-  const [error, setError] = useState(null); //будет обновляться только при ошибке
-  const [loading, setLoading] = useState(false); //обект ожидания
-  const [q, setQuery] = useState('sun'); //хранит искомые параметры запроса 
-
-  const [activateModal, setActivateModal] = useState(false); //помогает закрыть модал компонент
-  const [detail, setShowDetail] = useState(false); //собирает детали фильма
-  const [detailRequest, setDetailRequest] = useState(false); //отображение загрузчика
-
-  const [favList, setFav] = useState([]); //список избранных
-  const [watchList, setWatch] = useState([]); //список к просмотру
-
-  const [collapsedMenu, setCollapsedMenu] = useState(false); //отобр меню развернут или свернут8
-
-  const [currPage, setCurrPage] = useState(1 && urlPage) //текущая страница в pagination
-  const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
-
-  const [genreList, setGenreList] = useState(['movie', 'series']); //отмеченные чекбоксы в filter menu
-  const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
-
-  const defLocation = (location) => {
-    if (location === 'main') {
-      setGenreList(['movie', 'series'])
-    }
-    else if (location === 'films') {
-      setGenreList(['movie'])
-    }
-    else if (location === 'serials') {
-      setGenreList(['serials'])
-    }
-  }
-
   /* const doFirstRequest = (genre = ['movie', 'series']) => {
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
     const randomTheme = themes[Math.floor(Math.random() * themes.length)]
@@ -67,35 +37,55 @@ function App() {
     setMovie(movie)
 } */
 
+  const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [q, setQuery] = useState(() => {
+    const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
+    return themes[Math.floor(Math.random() * themes.length)]
+  });
+
+  const [activateModal, setActivateModal] = useState(false);
+  const [detail, setShowDetail] = useState(false); //собирает детали фильма
+  const [detailRequest, setDetailRequest] = useState(false); //получен ответ от сервера или нет
+
+  const [favList, setFav] = useState([]);
+  const [watchList, setWatch] = useState([]);
+
+  const [collapsedMenu, setCollapsedMenu] = useState(false);
+
+  const [currPage, setCurrPage] = useState(1 && urlPage) //стр в pagination
+  const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
+
+  const [genreList, setGenreList] = useState(() => {
+    return defGenres(location)
+  }); //отмеч  в filter menu
+
+  const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
+
+
+  const getData = useCallback(() => {
+    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
+  }, [q, currPage, genreList, yearValue])
+
   const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
 
   useEffect(() => {
     setLoading(true);
     setError(null);
-    setTotalResults(null);
-    setMovie(null);
-    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest); //запрос на сервер со своими параметрами
-    //doFirstRequest()
-    //pseudoRandomMovies()
-  }, [q, currPage, genreList, yearValue]);
-  //в кач-ве второго параметра может быть только примитивный обьект. при его изменении будет происходить ререндеринг
+    setMovie(null)
+    setTotalResults(null)
+    getData()
+  }, [getData]);
+  //в кач-ве второго параметра может быть только примитивный обьект
+  //при его изменении будет происходить ререндеринг
 
   const onPageChange = (page) => { //при изменении стр в pagination
     setCurrPage(page) //уст текущая стр в зав-ти от выбранной
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
 
-  const defTotalRes = () => {
-    if (location === 'favorites') {
-      return favList.length
-    }
-    else if (location === 'to-watch') {
-      return watchList.length
-    }
-    else {
-      return totalResults
-    }
-  }
+
 
 
   return (
@@ -106,7 +96,6 @@ function App() {
           <Sider collapsible
             onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
             <MenuSider
-              page={currPage}
               setPage={setCurrPage}
               setGenre={setGenreList}
               loc={location} />
@@ -131,7 +120,6 @@ function App() {
               <FilmsContainer />
 
 
-
               <div className='modal-detail' >
                 <Modal
                   title='Details'
@@ -149,9 +137,8 @@ function App() {
               <Row>
                 <Pagination
                   current={parseInt(currPage) || parseInt(urlPage)}
-                  total={defTotalRes()}
+                  total={defTotalRes(location, favList, watchList, totalResults)}
                   onChange={page => onPageChange(page)}
-                  //total={state === movie ? totalResults : state.length}
                   hideOnSinglePage={true}
                   showSizeChanger={false}
                   pageSize={10}

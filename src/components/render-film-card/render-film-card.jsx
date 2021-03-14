@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from 'react';
 //import { BrowserRouter as Route, Switch, useParams, useLocation, useHistory, generatePath, useRouteMatch } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
+import getDataRequest from '../../servises/getDataRequest'
+
 import { Row } from 'antd';
 import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
 
-    const { getDataRequest, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
+    const { setLoading, setError, setTotalResults,setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
 
     const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
         setActivateModal(true); //показать модалку. эл импортируется из другого компонента
