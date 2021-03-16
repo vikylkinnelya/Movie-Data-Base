@@ -9,7 +9,7 @@ import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
 
-    const { setLoading, setError, setTotalResults,setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
+    const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
 
     const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
         setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -17,23 +17,29 @@ const RenderFilmCard = ({ state }) => {
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
     }
 
-    
+    let uniqueID = []
 
     return (
         <>
             <Row className='cards-row'>
-                {state !== null && state.length > 0 && state.map((result) => (
-                    <FilmCard
-                        isActive={favList.includes(result)} //активность кнопки
-                        isWatch={watchList.includes(result)}
+                {state !== null && state.length > 0 && state.map((result) => {
 
-                        ClickHandler={() => filmClickHandler(result)}
+                    if (!uniqueID.includes(result.imdbID)) {
+                        uniqueID.push(result.imdbID)
+                        return (
+                            <FilmCard
+                                isActive={favList.includes(result)} //активность кнопки
+                                isWatch={watchList.includes(result)}
 
-                        key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
-                        result={result}
-                        {...result}
-                    />
-                ))}
+                                ClickHandler={() => filmClickHandler(result)}
+
+                                key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+                                result={result}
+                                {...result}
+                            />
+                        )
+                    }
+                })}
             </Row>
         </>
     )

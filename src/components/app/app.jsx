@@ -83,10 +83,6 @@ function App() {
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
 
-  movie !== null && movie.length > 0 && movie.forEach(element => {
-    console.log(movie.find(element))
-});
-
   return (
     <MyContext.Provider value={data}>
       <div className='App'>
