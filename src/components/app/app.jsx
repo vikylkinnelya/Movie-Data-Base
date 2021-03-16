@@ -6,9 +6,10 @@ import MenuSider from '../menu-sider';
 import Loader from '../loader';
 import FilmsContainer from '../films-container';
 import MovieDetail from '../movie-detail';
-import getDataRequest from '../../servises/getDataRequest'
-import defTotalRes from '../../servises/defTotalRes'
-import defGenres from '../../servises/defGenres'
+import getDataRequest from '../../servises/getDataRequest';
+import getFromLocalStorage from '../../servises/getFromLocalStorage';
+import defTotalRes from '../../servises/defTotalRes';
+import defGenres from '../../servises/defGenres';
 /* import FavPage from '../pages/fav-page';
 import FilmPage from '../pages/film-page';
 import MainPage from '../pages/main-page';
@@ -37,7 +38,7 @@ function App() {
     setMovie(movie)
 } */
 
-  const [movie, setMovie] = useState(null); //будет хранить обьект ответа от сервера
+  const [movie, setMovie] = useState(new Set()); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [q, setQuery] = useState(() => {
@@ -49,20 +50,17 @@ function App() {
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
   const [detailRequest, setDetailRequest] = useState(false); //получен ответ от сервера или нет
 
-  const [favList, setFav] = useState([]);
-  const [watchList, setWatch] = useState([]);
+  const [favList, setFav] = useState(() => { return getFromLocalStorage('favList') });
+  const [watchList, setWatch] = useState(() => { return getFromLocalStorage('watchList') });
 
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
   const [currPage, setCurrPage] = useState(1 && urlPage) //стр в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
-  const [genreList, setGenreList] = useState(() => {
-    return defGenres(location)
-  }); //отмеч  в filter menu
+  const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //отмеч  в filter menu
 
   const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
-
 
   const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
@@ -76,7 +74,7 @@ function App() {
     setMovie(null)
     setTotalResults(null)
     getData()
-  }, [getData]);
+  }, [getData, watchList]);
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
 
@@ -85,8 +83,9 @@ function App() {
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
 
-
-
+  movie !== null && movie.length > 0 && movie.forEach(element => {
+    console.log(movie.find(element))
+});
 
   return (
     <MyContext.Provider value={data}>

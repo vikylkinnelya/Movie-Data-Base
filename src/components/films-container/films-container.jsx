@@ -10,8 +10,6 @@ const FilmsContainer = () => {
 
     let { movie, favList, watchList} = useContext(MyContext)
 
-    
-
     /* const doFirstRequest = (genre = ['movie', 'series']) => {
                         const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
                         const randomTheme = themes[Math.floor(Math.random() * themes.length)]

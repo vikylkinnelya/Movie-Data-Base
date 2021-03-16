@@ -37,13 +37,13 @@ const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type
                         <Button
                             shape='circle'
                             icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
-                            onClick={() => toggleItem(result, watchList, setWatch)} />
+                            onClick={() => toggleItem(result, watchList, setWatch, 'watchList')} />
                     </Col>
                     <Col className={isActive ? 'overlay like active' : 'overlay like'}>
                         <Button
                             shape='circle'
                             icon={isActive ? <HeartFilled /> : <HeartOutlined />}
-                            onClick={() => toggleItem(result, favList, setFav)} />
+                            onClick={() => toggleItem(result, favList, setFav, 'favList')} />
                     </Col>
                 </Row>
             </Card>

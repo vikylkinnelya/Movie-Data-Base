@@ -17,6 +17,8 @@ const RenderFilmCard = ({ state }) => {
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
     }
 
+    
+
     return (
         <>
             <Row className='cards-row'>
