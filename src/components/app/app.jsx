@@ -74,7 +74,7 @@ function App() {
     setMovie(null)
     setTotalResults(null)
     getData()
-  }, [getData, watchList]);
+  }, [getData]);
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
 

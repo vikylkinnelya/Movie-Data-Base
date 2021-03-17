@@ -3,12 +3,12 @@ import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLoc
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
 import getDataRequest from '../../servises/getDataRequest'
-//import { Layout, Row, Modal, Empty, Pagination } from 'antd';
+import { Layout, Row, Modal, Empty, Pagination } from 'antd';
 
 
 const FilmsContainer = () => {
 
-    let { movie, favList, watchList} = useContext(MyContext)
+    let { movie, favList, watchList } = useContext(MyContext)
 
     /* const doFirstRequest = (genre = ['movie', 'series']) => {
                         const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']

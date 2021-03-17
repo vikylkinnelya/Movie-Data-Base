@@ -4,7 +4,7 @@ import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
 import getDataRequest from '../../servises/getDataRequest'
 
-import { Row } from 'antd';
+import { Row, List } from 'antd';
 import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
@@ -20,6 +20,10 @@ const RenderFilmCard = ({ state }) => {
     let uniqueID = []
 
     return (
+        
+
+
+        
         <>
             <Row className='cards-row'>
                 {state !== null && state.length > 0 && state.map((result) => {
