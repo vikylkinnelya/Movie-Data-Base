@@ -10,6 +10,8 @@ const { Meta } = Card;
 const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type }) => {
 
     const { watchList, setWatch, favList, setFav } = useContext(MyContext)
+    
+    console.log(isActive, 'active')
 
     return (
 

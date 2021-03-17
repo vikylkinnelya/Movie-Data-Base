@@ -4,7 +4,7 @@ import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
 import getDataRequest from '../../servises/getDataRequest'
 
-import { Row, List } from 'antd';
+import { Row } from 'antd';
 import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
@@ -17,23 +17,24 @@ const RenderFilmCard = ({ state }) => {
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
     }
 
+    const defActive = (type, elem) => {
+        return type.includes(elem)
+    }
+
     let uniqueID = []
 
     return (
-        
-
-
-        
         <>
             <Row className='cards-row'>
                 {state !== null && state.length > 0 && state.map((result) => {
-
+                    
                     if (!uniqueID.includes(result.imdbID)) {
                         uniqueID.push(result.imdbID)
+                        
                         return (
                             <FilmCard
-                                isActive={favList.includes(result)} //активность кнопки
-                                isWatch={watchList.includes(result)}
+                                isActive={defActive(favList, result)}
+                                isWatch={() => defActive(watchList, result)}
 
                                 ClickHandler={() => filmClickHandler(result)}
 
