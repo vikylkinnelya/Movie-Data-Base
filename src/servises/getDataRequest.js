@@ -1,4 +1,4 @@
-const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '', setError, setTotalResults, setLoading, setDetailRequest) => { //гибкий запрос на сервер
+const getDataRequest = (searchParam, questionParam, setState, currPage, type = '', year = '', setError, setTotalResults, setLoading, setDetailRequest, state) => { //гибкий запрос на сервер
 
   const API_KEY = 'a6a004a3'
 
@@ -14,7 +14,9 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
           setTotalResults(response.totalResults)
         }
         if (searchParam === 'i') {
-          setState(response)
+          let list
+          list = [...state, response]
+          setState(list)
         }
       }
       setLoading(false)
