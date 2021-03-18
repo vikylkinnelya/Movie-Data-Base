@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 //import { BrowserRouter as Route, Switch, useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import { Row, Col, Card, Tag, Button } from 'antd';
 import toggleItem from '../../servises/toggleItem';
@@ -7,11 +7,10 @@ import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/
 import './film-card.css'
 const { Meta } = Card;
 
-const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type }) => {
+const FilmCard = ({ result, isWatch, isFav, ClickHandler, Title, Poster, Type }) => {
 
-    const { watchList, setWatch, favList, setFav } = useContext(MyContext)
-    
-    console.log(isActive, 'active')
+    const { watchList, setWatch, favList, setFav, favId, setFavId, watchId, setWatchId } = useContext(MyContext)
+
 
     return (
 
@@ -39,13 +38,13 @@ const FilmCard = ({ result, ClickHandler, isActive, isWatch, Title, Poster, Type
                         <Button
                             shape='circle'
                             icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
-                            onClick={() => toggleItem(result, watchList, setWatch, 'watchList')} />
+                            onClick={() =>  toggleItem(result, watchId, setWatchId, 'watchList')} />
                     </Col>
-                    <Col className={isActive ? 'overlay like active' : 'overlay like'}>
+                    <Col className={isFav ? 'overlay like active' : 'overlay like'}>
                         <Button
                             shape='circle'
-                            icon={isActive ? <HeartFilled /> : <HeartOutlined />}
-                            onClick={() => toggleItem(result, favList, setFav, 'favList')} />
+                            icon={isFav ? <HeartFilled /> : <HeartOutlined />}
+                            onClick={() => toggleItem(result, favId, setFavId, 'favList')} />
                     </Col>
                 </Row>
             </Card>

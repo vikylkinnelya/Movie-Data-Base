@@ -1,24 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Route, Switch, Redirect, withRouter, useParams, useLocation, useRouteMatch } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
-import getDataRequest from '../../servises/getDataRequest'
-import { Layout, Row, Modal, Empty, Pagination } from 'antd';
+import { Row } from 'antd';
 
 
 const FilmsContainer = () => {
 
     let { movie, favList, watchList } = useContext(MyContext)
 
-    /* const doFirstRequest = (genre = ['movie', 'series']) => {
-                        const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
-                        const randomTheme = themes[Math.floor(Math.random() * themes.length)]
-                        const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
-                        return getDataRequest('s', randomTheme, setMovie, randomPage, genre, yearValue)
-                    } */
     return (
 
-        <>
+        <Row className='cards-row' >
             <Switch>
                 <Route path='/main/:page'>
                     <RenderFilmCard state={movie} />
@@ -37,7 +30,7 @@ const FilmsContainer = () => {
                 </Route>
                 <Redirect from='/' to='/main/1' />
             </Switch>
-        </>
+        </Row>
     )
 }
 

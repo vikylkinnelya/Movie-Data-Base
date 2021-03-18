@@ -1,15 +1,23 @@
-const toggleItem = (item, state, setState, name) => {
-    let newList
-    if (state.includes(item)) {
-      newList = state.filter(elem => elem.imdbID !== item.imdbID)
-      localStorage.removeItem(name + '_' + item.imdbID)
-      //в новый список попадают все кроме выбранного на удаление
-    }
-    if (!state.includes(item)) {
-      newList = [...state, item]; //новый список сост из старых эл и нового выбранного
-      localStorage.setItem(name + '_' + item.imdbID, JSON.stringify(item))
-    }
-    setState(newList) //перезаписываем обьект списка избранных
+const toggleItem = (item, stateId, setStateId, name) => {
+
+  let newIdList
+
+  if (!stateId.includes(item.imdbID)) {
+
+    newIdList = [...stateId, item.imdbID];
+
+    localStorage.setItem(name + '_' + item.imdbID, item.imdbID)
+  }
+
+  if (stateId.includes(item.imdbID)) {
+
+    newIdList = stateId.filter(elem => elem !== item.imdbID)
+
+    localStorage.removeItem(name + '_' + item.imdbID)
+    //в новый список попадают все кроме выбранного на удаление
+  }
+
+  setStateId(newIdList)
 }
 
 export default toggleItem;

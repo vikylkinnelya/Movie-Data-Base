@@ -50,8 +50,12 @@ function App() {
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
   const [detailRequest, setDetailRequest] = useState(false); //получен ответ от сервера или нет
 
-  const [favList, setFav] = useState(() => { return getFromLocalStorage('favList') });
-  const [watchList, setWatch] = useState(() => { return getFromLocalStorage('watchList') });
+  const [favList, setFav] = useState([]);
+  const [favId, setFavId] = useState(() => { return getFromLocalStorage('favList') })
+
+  const [watchList, setWatch] = useState([]);
+  const [watchId, setWatchId] = useState(() => { return getFromLocalStorage('watchList') })
+
 
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
@@ -66,7 +70,7 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
   }, [q, currPage, genreList, yearValue])
 
-  const data = { movie, getDataRequest, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
+  const data = { movie, getDataRequest, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
 
   useEffect(() => {
     setLoading(true);

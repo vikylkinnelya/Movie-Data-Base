@@ -9,7 +9,7 @@ import './render-film-card.css'
 
 const RenderFilmCard = ({ state }) => {
 
-    const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, watchList, genreList, yearValue, currPage } = useContext(MyContext)
+    const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, favId ,watchList, watchId, genreList, yearValue, currPage } = useContext(MyContext)
 
     const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
         setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -17,36 +17,36 @@ const RenderFilmCard = ({ state }) => {
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
     }
 
-    const defActive = (type, elem) => {
-        return type.includes(elem)
-    }
-
     let uniqueID = []
 
     return (
+
         <>
-            <Row className='cards-row'>
-                {state !== null && state.length > 0 && state.map((result) => {
-                    
-                    if (!uniqueID.includes(result.imdbID)) {
-                        uniqueID.push(result.imdbID)
-                        
-                        return (
-                            <FilmCard
-                                isActive={defActive(favList, result)}
-                                isWatch={() => defActive(watchList, result)}
+            {state !== null && state.length > 0 && state.map((result) => {
 
-                                ClickHandler={() => filmClickHandler(result)}
+                console.log(favId.includes(result.imdbID))
 
-                                key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
-                                result={result}
-                                {...result}
-                            />
-                        )
-                    }
-                })}
-            </Row>
+                if (!uniqueID.includes(result.imdbID)) {
+                    uniqueID.push(result.imdbID)
+
+                    return (
+
+                        <FilmCard
+                            isFav={favId.includes(result.imdbID)}
+                            isWatch={watchId.includes(result.imdbID)}
+
+                            ClickHandler={() => filmClickHandler(result)}
+
+                            key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+                            result={result}
+                            {...result}
+                        />
+
+                    )
+                }
+            })}
         </>
+
     )
 }
 
