@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
 import { Menu } from 'antd';
+import MyContext from '../../servises/Context';
+import getDataRequest from '../../servises/getDataRequest';
 import './menu-sider.css'
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
 const MenuSider = ({ setPage, setGenre, loc }) => {
+
+    //renderIdCard(favId, favList, setFav)
 
     return (
         <>
@@ -54,7 +58,8 @@ const MenuSider = ({ setPage, setGenre, loc }) => {
                 <Menu.Item
                     key="favorites"
                     className="customclass"
-                    icon={<HeartOutlined />}>
+                    icon={<HeartOutlined />}
+                >
                     <NavLink to={`/favorites/1`} />
                     liked
                 </Menu.Item>

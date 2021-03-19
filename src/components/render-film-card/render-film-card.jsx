@@ -3,13 +3,12 @@ import React, { useContext, useEffect } from 'react';
 import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
 import getDataRequest from '../../servises/getDataRequest'
-
 import { Row } from 'antd';
 import './render-film-card.css'
 
-const RenderFilmCard = ({ state }) => {
+const RenderFilmCard = ({ state, setIdRenderState }) => {
 
-    const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, favId ,watchList, watchId, genreList, yearValue, currPage } = useContext(MyContext)
+    const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, favId, watchList, watchId, genreList, yearValue, currPage } = useContext(MyContext)
 
     const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
         setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -23,8 +22,6 @@ const RenderFilmCard = ({ state }) => {
 
         <>
             {state !== null && state.length > 0 && state.map((result) => {
-
-                console.log(favId.includes(result.imdbID))
 
                 if (!uniqueID.includes(result.imdbID)) {
                     uniqueID.push(result.imdbID)
@@ -41,12 +38,10 @@ const RenderFilmCard = ({ state }) => {
                             result={result}
                             {...result}
                         />
-
                     )
                 }
             })}
         </>
-
     )
 }
 
