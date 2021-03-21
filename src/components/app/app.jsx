@@ -1,7 +1,5 @@
-import 'antd/dist/antd.css'
 import './app.css';
 import { Layout, Row, Modal, Empty, Pagination } from 'antd';
-
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory, withRouter } from 'react-router-dom';
 import MyContext from '../../servises/Context';
@@ -47,7 +45,7 @@ function App() {
 
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
-  const [currPage, setCurrPage] = useState(1 && urlPage) //стр в pagination
+  const [currPage, setCurrPage] = useState(urlPage || 1) //стр в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
   const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //отмеч  в filter menu
@@ -57,7 +55,7 @@ function App() {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
   }, [q, currPage, genreList, yearValue])
 
-  const data = { movie, setMovie, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, loading, setLoading }
+  const data = { movie, setMovie, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, loading, setLoading, history }
 
   useEffect(() => {
     setLoading(true);
@@ -76,68 +74,67 @@ function App() {
 
   return (
     <MyContext.Provider value={data}>
-      <div className='App'>
-        <Layout className='Layout'>
+      <Layout>
 
-          <Sider collapsible
-            onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
-            <MenuSider
-              setPage={setCurrPage}
-              setGenre={setGenreList}
-              loc={location} />
-          </Sider>
+        <Sider
+          breakpoint="lg"
+          collapsible={true}
+          onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
 
-          <Layout className='layout'>
+          <MenuSider
+            setPage={setCurrPage}
+            setGenre={setGenreList}
+            loc={location} />
+        </Sider>
 
-            <Header className='header'>
-              <SearchBox searchHandler={setQuery} />
-            </Header>
+        <Layout className='layout'>
 
-            <Content>
+          <Header className='header'>
+            <SearchBox searchHandler={setQuery} />
+          </Header>
 
-              {loading && <Loader />}
+          <Content>
 
-              {error !== null &&
-                <div className='error-row' style={{ margin: '20px 0' }}>
-                  <Empty description={error} type='error' />
-                </div>
-              }
+            {error !== null &&
+              <div className='error-row' style={{ margin: '20px 0' }}>
+                <Empty description={error} type='error' />
+              </div>
+            }
 
-              <FilmsContainer />
-
-
-              <div className='modal-detail' >
-                <Modal
-                  title='Details'
-                  centered
-                  visible={activateModal}
-                  onCancel={() => { setActivateModal(false); setShowDetail(null) }}
-                  footer={null}
-                >
-                  {detailRequest === false ?
-                    (<MovieDetail {...detail} />) : (<Loader />)
-                  }
-                </Modal></div>
+            <FilmsContainer />
 
 
-              <Row>
-                <Pagination
-                  current={parseInt(currPage) || parseInt(urlPage)}
-                  total={defTotalRes(location, favList, watchList, totalResults)}
-                  onChange={page => onPageChange(page)}
-                  hideOnSinglePage={true}
-                  showSizeChanger={false}
-                  pageSize={10}
-                />
-              </Row>
+            {/* <div className='modal-detail' >
+              <Modal
+                title='Details'
+                centered
+                visible={activateModal}
+                onCancel={() => { setActivateModal(false); setShowDetail(null) }}
+                footer={null}
+              >
+                {detailRequest === false ?
+                  (<MovieDetail {...detail} />) : (<Loader />)
+                }
+              </Modal></div> */}
 
-            </Content>
-            <Footer>
-              footer
+
+            <Row>
+              <Pagination
+                current={parseInt(currPage) || parseInt(urlPage)}
+                total={defTotalRes(location, favList, watchList, totalResults)}
+                onChange={page => onPageChange(page)}
+                hideOnSinglePage={true}
+                showSizeChanger={false}
+                pageSize={10}
+              />
+            </Row>
+
+          </Content>
+          <Footer>
+            footer
               </Footer>
-          </Layout>
         </Layout>
-      </div >
+      </Layout>
     </MyContext.Provider>
 
   )

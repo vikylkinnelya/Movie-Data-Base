@@ -21,6 +21,7 @@ const FilmCard = ({ result, isWatch, isFav, ClickHandler, Title, Poster, Type })
                     'https://placehold.it/198x264&text=Image+Not+Found' :
                     Poster}
                 onClick={() => ClickHandler()} />}
+
             actions={[
                 <>
                     {Type === 'movie' ?

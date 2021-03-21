@@ -10,7 +10,7 @@ const MenuSider = ({ setPage, setGenre, loc }) => {
     return (
         <>
             <Menu
-                defaultSelectedKeys='main'
+    
                 selectedKeys={loc}
                 mode="inline"
                 theme="dark"

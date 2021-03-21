@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom';
+import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
 import Loader from '../loader';
@@ -9,14 +10,17 @@ import { Row } from 'antd';
 
 const FilmsContainer = () => {
 
-    let { movie, favList, watchList, loading } = useContext(MyContext)
+    let { movie, favList, watchList, loading, history } = useContext(MyContext)
 
     return (
 
         <Row className='cards-row' >
             <Switch>
+                <Route exact path='/'>
+                    <StartingPage history = {history}/>
+                </Route>
                 <Route path='/main/:page'>
-                    {loading? <Loader/> : <RenderFilmCard state={movie} />}
+                    {loading ? <Loader /> : <RenderFilmCard state={movie} />}
                 </Route>
                 <Route path='/favorites/:page'>
                     <RenderFilmCard state={favList} />
@@ -30,7 +34,6 @@ const FilmsContainer = () => {
                 <Route path='/serials/:page'>
                     <RenderFilmCard state={movie} />
                 </Route>
-                <Redirect from='/' to='/main/1' />
             </Switch>
         </Row>
     )
