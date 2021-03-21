@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-//import { BrowserRouter as Route, Switch, useParams, useLocation, useHistory, generatePath, useRouteMatch } from 'react-router-dom';
+import './render-film-card.css'
+import React, { useContext } from 'react';
 import MyContext from '../../servises/Context';
 import FilmCard from '../film-card/'
 import getDataRequest from '../../servises/getDataRequest'
-import { Row } from 'antd';
-import './render-film-card.css'
 
 const RenderFilmCard = ({ state, setIdRenderState }) => {
 
@@ -15,6 +13,26 @@ const RenderFilmCard = ({ state, setIdRenderState }) => {
         setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
         getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
     }
+
+    const getIdRequest = (questionParam) => { //гибкий запрос на сервер
+
+        const API_KEY = 'a6a004a3'
+    
+        fetch(`https://www.omdbapi.com/?i=${questionParam}&apikey=${API_KEY}`)
+          .then(resp => resp.json())
+          .then(response => {
+            if (response.Response === 'False') { //если нет ответа
+              setError(response.Error) //записать в обьект ошибки ошибку
+              throw new Error(response.statusText)
+            } else {
+              //setTermState(response)
+            }
+            setLoading(false)
+          }).catch(({ message }) => {
+            setLoading(false);
+            setError(message);
+          })
+      }
 
     let uniqueID = []
 

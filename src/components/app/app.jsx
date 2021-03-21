@@ -1,23 +1,19 @@
+import 'antd/dist/antd.css'
+import './app.css';
+import { Layout, Row, Modal, Empty, Pagination } from 'antd';
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory, withRouter } from 'react-router-dom';
 import MyContext from '../../servises/Context';
+import Loader from '../loader';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
-import Loader from '../loader';
 import FilmsContainer from '../films-container';
-import MovieDetail from '../movie-detail';
 import getDataRequest from '../../servises/getDataRequest';
-import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import defTotalRes from '../../servises/defTotalRes';
+import getFromLocalStorage from '../../servises/getFromLocalStorage';
+import MovieDetail from '../movie-detail';
 import defGenres from '../../servises/defGenres';
-/* import FavPage from '../pages/fav-page';
-import FilmPage from '../pages/film-page';
-import MainPage from '../pages/main-page';
-import SeriesPage from '../pages/series-page';
-import WatchPage from '../pages/watch-page'; */
-import { Layout, Row, Modal, Empty, Pagination } from 'antd';
-
-import './app.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 //const API_KEY = 'eb9d8a81';
@@ -29,22 +25,15 @@ function App() {
   let location = useLocation().pathname.split('/')[1];
   let urlPage = useLocation().pathname.split('/')[2];
 
-  /* const doFirstRequest = (genre = ['movie', 'series']) => {
-    const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)]
-    const randomPage = Math.floor(Math.random() * (9 - 1) + 1)
-    return getDataRequest('s', randomTheme, setMovie, randomPage, genre, yearValue)
-    console.log(movie.split(10))
-    setMovie(movie)
-} */
-
   const [movie, setMovie] = useState(new Set()); //будет хранить обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [q, setQuery] = useState(() => {
+  const [q, setQuery] = useState('lover');
+
+  const randomMovie = () => {
     const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
     return themes[Math.floor(Math.random() * themes.length)]
-  });
+  }
 
   const [activateModal, setActivateModal] = useState(false);
   const [detail, setShowDetail] = useState(false); //собирает детали фильма
@@ -56,21 +45,19 @@ function App() {
   const [watchList, setWatch] = useState([]);
   const [watchId, setWatchId] = useState(() => { return getFromLocalStorage('watchList') })
 
-
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
   const [currPage, setCurrPage] = useState(1 && urlPage) //стр в pagination
   const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
 
   const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //отмеч  в filter menu
-
-  const [yearValue, setYearValue] = useState(null) //выбранные года в filter menu
+  const [yearValue, setYearValue] = useState(null)
 
   const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
   }, [q, currPage, genreList, yearValue])
 
-  const data = { movie, getDataRequest, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, setLoading }
+  const data = { movie, setMovie, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, loading, setLoading }
 
   useEffect(() => {
     setLoading(true);
@@ -83,7 +70,7 @@ function App() {
   //при его изменении будет происходить ререндеринг
 
   const onPageChange = (page) => { //при изменении стр в pagination
-    setCurrPage(page) //уст текущая стр в зав-ти от выбранной
+    setCurrPage(page)
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
 

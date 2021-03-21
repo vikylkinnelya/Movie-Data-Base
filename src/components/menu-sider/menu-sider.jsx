@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
-import { NavLink } from "react-router-dom";
-import { Menu } from 'antd';
-import MyContext from '../../servises/Context';
-import getDataRequest from '../../servises/getDataRequest';
 import './menu-sider.css'
+import { Menu } from 'antd';
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
-const MenuSider = ({ setPage, setGenre, loc }) => {
+import React from 'react';
+import { NavLink } from "react-router-dom";
 
-    //renderIdCard(favId, favList, setFav)
+const MenuSider = ({ setPage, setGenre, loc }) => {
 
     return (
         <>

@@ -13,12 +13,12 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
           setState(response.Search)
           setTotalResults(response.totalResults)
         }
-        if (searchParam === 'i') {
+        if (searchParam === 'i' && response) {
           setState(response)
         }
       }
       setLoading(false)
-      setDetailRequest(false); //для модалки
+      setDetailRequest(false);
     }).catch(({ message }) => {
       setLoading(false);
       setError(message);

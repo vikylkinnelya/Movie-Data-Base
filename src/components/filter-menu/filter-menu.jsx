@@ -1,7 +1,8 @@
+import './filter-menu.css'
+import { Checkbox, InputNumber, Menu } from 'antd';
+
 import React, { useContext } from 'react';
 import MyContext from '../../servises/Context'
-import { Checkbox, InputNumber, Menu } from 'antd';
-import './filter-menu.css'
 
 const FilterMenu = () => {
 

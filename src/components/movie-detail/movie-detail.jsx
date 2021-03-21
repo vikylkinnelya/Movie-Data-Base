@@ -1,6 +1,6 @@
-import React from 'react';
-import { Row, Col, Typography, Tag } from 'antd';
 import './movie-detail.css'
+import { Row, Col, Typography, Tag } from 'antd';
+import React from 'react';
 
 const TextTitle = Typography.Title;
 
@@ -44,7 +44,6 @@ const MovieDetail = ({ Title, Poster, imdbRating, Rated, Runtime, Genre, Plot })
             </Col>
         </Row>
     )
-
 }
 
 export default MovieDetail;

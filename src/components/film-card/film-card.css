@@ -21,46 +21,32 @@
 }
 
 .overlay {
-    justify-content: flex-end;
-    height: 10px;
-    left: 15px;
     transition: 0.1s ease;
     z-Index: 2;
-    bottom: 3px;
     color: #212121;
+    opacity: 0.5;
 }
 
 .ant-btn {
     border-style: none;
 }
 
-.ant-btn:hover {
-    color: #212121;
-}
-
-.ant-btn:focus{
-    color: #212121;
-}
-
-.overlay>.like,
-.overlay>.watch {
-    opacity: 0.2;
-}
-
+.ant-btn:hover,
+.ant-btn:focus,
 .overlay.like.active,
 .overlay.watch.active {
-    opacity: 0.9;
     color: #212121;
-
+    opacity: 1;
 }
 
 .anticon.anticon-heart,
 .anticon.anticon-eye {
-    font-size: 23px;
-    margin-left: 1px;
+    font-size: 25px;
+
 }
 
-.ant-card.ant-card-bordered {
+.ant-card.ant-card-bordered,
+.ant-card-body {
     width: 190px
 }
 
@@ -68,13 +54,15 @@
     height: 280px;
 }
 
-.ant-row .gutter-row {
-    /* между тегом и названием */
-    margin-top: 5px
+.ant-card.ant-card-bordered>.ant-card-body {
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.ant-card.ant-card-bordered>.ant-card-body {
-    padding: 20px;
+.ant-card-meta-title {
+    white-space: nowrap;
 }
 
 .ant-card.ant-card-bordered {
@@ -83,9 +71,18 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
-.ant-card-cover img  {
+.ant-card-cover img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+.ant-card-actions li {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.ant-tag{
+    margin:0;
 }

@@ -1,9 +1,7 @@
-import React, { useState, useContext } from 'react';
+import './search-box.css';
+import { Row, Col, Input, Button, Dropdown } from 'antd';
+import React, { useState} from 'react';
 import FilterMenu from '../filter-menu/filter-menu'
-import MyContext from '../../servises/Context'
-import { Row, Col, Input, Button } from 'antd';
-import { Dropdown } from 'antd';
-import './search-box.css'
 
 const { Search } = Input;
 
