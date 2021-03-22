@@ -9,8 +9,6 @@ const toggleItem = (item, selector, data, setData) => {
 
   setData(newArr)
 
-
-
   /* let newIdList
 
   if (!stateId.includes(item.imdbID)) {

@@ -25,7 +25,7 @@ a {
     justify-content: center;
 }
 
-.ant-modal-content{
+.ant-modal-content {
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     backdrop-filter: blur(4.0px);
@@ -34,16 +34,20 @@ a {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.ant-modal-header{
+.ant-modal-header {
     background: none
 }
 
-.ant-spin-dot.ant-spin-dot-spin{
+.ant-modal {
+    min-width: 800px;
+}
+
+.ant-spin-dot.ant-spin-dot-spin {
     width: 120px;
     height: 120px;
 }
 
-.ant-spin-dot-item{
+.ant-spin-dot-item {
     width: 50px;
     height: 50px;
 }

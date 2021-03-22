@@ -5,7 +5,7 @@ import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({ searchHandler }) => { //элемент поиска фильмов
+const SearchBox = ({ searchHandler }) => {
 
     const [activateFilter, setActivateFilter] = useState(false)
 
@@ -16,7 +16,7 @@ const SearchBox = ({ searchHandler }) => { //элемент поиска фил�
                     <Search
                         placeholder="enter movie, series"
                         size="large"
-                        onSearch={value => searchHandler(value)} /> {/* передает значение q в стейт */}
+                        onSearch={value => searchHandler(value)} /> {/* q в стейт */}
                 </Col>
                 <Col>
                     <Dropdown

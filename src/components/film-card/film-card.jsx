@@ -9,7 +9,7 @@ import toggleItem from '../../servises/toggleItem';
 
 const { Meta } = Card;
 
-const FilmCard = ({ result, isWatch, isFav, ClickHandler, Title, Poster, Type }) => {
+const FilmCard = ({ result, ClickHandler, Title, Poster, Type }) => {
 
     const { movie, setMovie } = useContext(MyContext)
 

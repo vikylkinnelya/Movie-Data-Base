@@ -77,10 +77,17 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-
+.ant-card-actions{
+    border: none;
+}
 .ant-card-actions li {
     margin-top: 5px;
     margin-bottom: 3px;
+    border-right: 0px;
+}
+
+.ant-card-actions > li:not(:last-child){
+    border-right: 0px;
 }
 
 .ant-tag{

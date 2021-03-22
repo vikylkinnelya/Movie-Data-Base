@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
@@ -10,14 +10,17 @@ import { Row } from 'antd';
 
 const FilmsContainer = () => {
 
-    let { movie, favList, watchList, loading, history } = useContext(MyContext)
+    let { movie, favList, watchList, loading, history, setQuery } = useContext(MyContext)
 
     return (
 
         <Row className='cards-row' >
             <Switch>
                 <Route exact path='/'>
-                    <StartingPage history = {history}/>
+                    <StartingPage
+                        history={history}
+                        setQ= {setQuery}
+                    />
                 </Route>
                 <Route path='/main/:page'>
                     {loading ? <Loader /> : <RenderFilmCard state={movie} />}

@@ -6,7 +6,7 @@ import getDataRequest from '../../servises/getDataRequest'
 
 const RenderFilmCard = ({ state }) => {
 
-  const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favList, favId, watchList, watchId, genreList, yearValue, currPage } = useContext(MyContext)
+  const { setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, favId, watchId, genreList, yearValue, currPage } = useContext(MyContext)
 
   const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -14,7 +14,7 @@ const RenderFilmCard = ({ state }) => {
     getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
   }
 
-  const getIdRequest = (questionParam) => { //гибкий запрос на сервер
+  /* const getIdRequest = (questionParam) => { //гибкий запрос на сервер
 
     const API_KEY = 'a6a004a3'
 
@@ -28,11 +28,12 @@ const RenderFilmCard = ({ state }) => {
           //setTermState(response)
         }
         setLoading(false)
+        setDetailRequest(false);
       }).catch(({ message }) => {
         setLoading(false);
         setError(message);
       })
-  }
+  } */
 
   let uniqueID = []
 

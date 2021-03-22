@@ -23,19 +23,14 @@ function App() {
   let location = useLocation().pathname.split('/')[1];
   let urlPage = useLocation().pathname.split('/')[2];
 
-  const [movie, setMovie] = useState(new Set()); //будет хранить обьект ответа от сервера
+  const [movie, setMovie] = useState(null); //обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [q, setQuery] = useState('lover');
-
-  const randomMovie = () => {
-    const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
-    return themes[Math.floor(Math.random() * themes.length)]
-  }
+  const [q, setQuery] = useState();
 
   const [activateModal, setActivateModal] = useState(false);
-  const [detail, setShowDetail] = useState(false); //собирает детали фильма
-  const [detailRequest, setDetailRequest] = useState(false); //получен ответ от сервера или нет
+  const [detail, setShowDetail] = useState(false); //детали фильма
+  const [detailRequest, setDetailRequest] = useState(false); //ответ от сервера
 
   const [favList, setFav] = useState([]);
   const [favId, setFavId] = useState(() => { return getFromLocalStorage('favList') })
@@ -46,16 +41,16 @@ function App() {
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
   const [currPage, setCurrPage] = useState(urlPage || 1) //стр в pagination
-  const [totalResults, setTotalResults] = useState(null); //общее кол-во ответов от сервера на запрос q
+  const [totalResults, setTotalResults] = useState(null); //кол-во ответов от сервера на  q
 
-  const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //отмеч  в filter menu
+  const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //filter menu
   const [yearValue, setYearValue] = useState(null)
 
   const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
   }, [q, currPage, genreList, yearValue])
 
-  const data = { movie, setMovie, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, setShowDetail, setDetailRequest, setError, loading, setLoading, history }
+  const data = { movie, setMovie, favList, setFav, favId, setFavId, watchList, setWatch, watchId, setWatchId, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, detail, setShowDetail, detailRequest, setDetailRequest, setError, loading, setLoading, setQuery, history }
 
   useEffect(() => {
     setLoading(true);
@@ -104,7 +99,7 @@ function App() {
             <FilmsContainer />
 
 
-            {/* <div className='modal-detail' >
+            <div className='modal-detail' >
               <Modal
                 title='Details'
                 centered
@@ -113,9 +108,9 @@ function App() {
                 footer={null}
               >
                 {detailRequest === false ?
-                  (<MovieDetail {...detail} />) : (<Loader />)
-                }
-              </Modal></div> */}
+                  (<MovieDetail {...detail} />) : (<Loader />)}
+              </Modal>
+            </div>
 
 
             <Row>
@@ -130,9 +125,11 @@ function App() {
             </Row>
 
           </Content>
+
           <Footer>
             footer
               </Footer>
+              
         </Layout>
       </Layout>
     </MyContext.Provider>

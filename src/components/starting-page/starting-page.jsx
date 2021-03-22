@@ -2,13 +2,25 @@ import React from 'react';
 import { Result, Button } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 
-const StartingPage = ({ history }) => {
+
+const StartingPage = ({ history, setQ }) => {
+
+    const onStartClick = () => {
+        history.push('/main/1')
+        setQ(() => randomMovie())
+    }
+
+    const randomMovie = () => {
+        const themes = ['love', 'hate', 'sex', 'live', 'death', 'sad', 'earth', 'moon', 'sun', 'war', 'rage']
+        return themes[Math.floor(Math.random() * themes.length)]
+    }
+
     return (
         <Result
             icon={<SmileOutlined />}
             title="Welcome to the movie database"
             extra={
-                <Button type="primary" onClick={() => { history.push('/main/1') }}>
+                <Button type="primary" onClick={() => onStartClick()}>
                     let's start
                 </Button>
             }
