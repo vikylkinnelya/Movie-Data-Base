@@ -46,13 +46,13 @@ function App() {
   const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //filter menu
   const [yearValue, setYearValue] = useState(null)
 
-  const getData = useCallback(() => {
+  /* const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
-  }, [q, currPage, genreList, yearValue])
+  }, [q, currPage, genreList, yearValue]) */
 
-  const data = { movie, setMovie, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, detail, setShowDetail, detailRequest, setDetailRequest, setError, loading, setLoading, setQuery, history }
+  const data = { movie, setMovie, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, detail, setShowDetail, detailRequest, setDetailRequest, setError, loading, setLoading, q, setQuery, history }
 
-  useEffect(() => {
+  /* useEffect(() => {
     setLoading(true);
     setError(null);
     setMovie(null)
@@ -61,7 +61,7 @@ function App() {
   }, [getData]);
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
-
+ */
   const onPageChange = (page) => { //при изменении стр в pagination
     setCurrPage(page)
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр

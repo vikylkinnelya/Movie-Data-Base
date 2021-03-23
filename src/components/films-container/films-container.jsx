@@ -3,14 +3,13 @@ import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card'
-import Loader from '../loader';
 
 import { Row } from 'antd';
 
 
 const FilmsContainer = () => {
 
-    let { movie, favList, watchList, loading, history, setQuery } = useContext(MyContext)
+    let { movie, favList, watchList, history, setQuery } = useContext(MyContext)
 
     return (
 
@@ -19,11 +18,11 @@ const FilmsContainer = () => {
                 <Route exact path='/'>
                     <StartingPage
                         history={history}
-                        setQ= {setQuery}
+                        setQ={setQuery}
                     />
                 </Route>
                 <Route path='/main/:page'>
-                    {loading ? <Loader /> : <RenderFilmCard state={movie} />}
+                    <RenderFilmCard state={movie} />
                 </Route>
                 <Route path='/favorites/:page'>
                     <RenderFilmCard state={favList} />
