@@ -1,13 +1,19 @@
 const toggleItem = (item, selector, data, setData) => {
 
-  const fav = {...item, fav: !item.fav}
-  const watch= {...item, watch: !item.watch}
+  const fav = { ...item, fav: !item.fav }
+  const watch = { ...item, watch: !item.watch }
 
   const idx = data.findIndex(el => el === item);
   const newItem = selector === 'fav' ? fav : watch
-  const newArr = [...data.slice(0, idx), newItem, ...data.slice(idx+1)]; //склеиваем две част
+  const newArr = [...data.slice(0, idx), newItem, ...data.slice(idx + 1)]; //склеиваем две част
 
   setData(newArr)
+
+  let itemStorageName = selector + '_' + item.imdbID
+
+  localStorage.getItem(itemStorageName) ?
+    localStorage.removeItem(itemStorageName) :
+    localStorage.setItem(selector + '_' + item.imdbID, JSON.stringify(newItem))
 
   /* let newIdList
 

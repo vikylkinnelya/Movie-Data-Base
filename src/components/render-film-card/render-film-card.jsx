@@ -48,8 +48,8 @@ const RenderFilmCard = ({ state }) => {
           return (
 
             <FilmCard
-              isFav={favId.includes(result.imdbID)}
-              isWatch={watchId.includes(result.imdbID)}
+              //isFav={favId.includes(result.imdbID)}
+              //isWatch={watchId.includes(result.imdbID)}
 
               ClickHandler={() => filmClickHandler(result)}
 
