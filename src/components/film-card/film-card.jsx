@@ -9,9 +9,9 @@ import toggleItem from '../../servises/toggleItem';
 
 const { Meta } = Card;
 
-const FilmCard = ({ result, ClickHandler, Title, Poster, Type }) => {
+const FilmCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav }) => {
 
-    const { movie, setMovie } = useContext(MyContext)
+    const { watchList, favList, setWatch, setFav } = useContext(MyContext)
 
     return (
         <Card className='card-container'
@@ -30,16 +30,16 @@ const FilmCard = ({ result, ClickHandler, Title, Poster, Type }) => {
                 </>,
 
                 <Button
-                    className={result.watch ? 'overlay watch active' : 'overlay watch'} key='watch'
+                    className={isWatch ? 'overlay watch active' : 'overlay watch'} key='watch'
                     shape='circle'
-                    icon={result.watch ? <EyeFilled /> : <EyeOutlined />}
-                    onClick={() => toggleItem(result, 'watch', movie, setMovie)} />
+                    icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
+                    onClick={() => toggleItem(result, watchList, setWatch, 'watch')} />
                 ,
                 <Button
-                    className={result.fav ? 'overlay like active' : 'overlay like'} key='fav'
+                    className={isFav ? 'overlay like active' : 'overlay like'} key='fav'
                     shape='circle'
-                    icon={result.fav ? <HeartFilled /> : <HeartOutlined />}
-                    onClick={() => toggleItem(result, 'fav', movie, setMovie)} />
+                    icon={isFav? <HeartFilled /> : <HeartOutlined />}
+                    onClick={() => toggleItem(result, favList, setFav,'fav')} />
             ]}
         >
             <Meta

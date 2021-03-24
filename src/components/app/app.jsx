@@ -26,7 +26,7 @@ function App() {
   const [movie, setMovie] = useState(null); //обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [q, setQuery] = useState();
+  const [q, setQuery] = useState('');
 
   const [activateModal, setActivateModal] = useState(false);
   const [detail, setShowDetail] = useState(false); //детали фильма
@@ -101,7 +101,7 @@ function App() {
 
             <div className='modal-detail' >
               <Modal
-                title='Details'
+                title={detail.Title}
                 centered
                 visible={activateModal}
                 onCancel={() => { setActivateModal(false); setShowDetail(null) }}

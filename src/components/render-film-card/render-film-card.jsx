@@ -7,7 +7,7 @@ import Loader from '../loader';
 
 const RenderFilmCard = ({ state }) => {
 
-  const { loading, q, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage } = useContext(MyContext)
+  const { favList, watchList, loading, q, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage } = useContext(MyContext)
 
   const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
@@ -22,7 +22,6 @@ const RenderFilmCard = ({ state }) => {
   }, [getData]);
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
-
 
   const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -66,8 +65,8 @@ const RenderFilmCard = ({ state }) => {
           return (
 
             <FilmCard
-              //isFav={favId.includes(result.imdbID)}
-              //isWatch={watchId.includes(result.imdbID)}
+              isFav={favList.includes(result) || localStorage.getItem('fav_' + result.imdbID) }
+              isWatch={watchList.includes(result) || localStorage.getItem('watch_' + result.imdbID)}
 
               ClickHandler={() => filmClickHandler(result)}
               key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
