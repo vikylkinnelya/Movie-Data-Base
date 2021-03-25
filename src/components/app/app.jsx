@@ -77,6 +77,7 @@ function App() {
           onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
 
           <MenuSider
+            collapsedMenu = {collapsedMenu}
             setPage={setCurrPage}
             setGenre={setGenreList}
             loc={location} />
