@@ -7,6 +7,7 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
     .then(response => {
       if (response.Response === 'False') { //если нет ответа
         setError(response.Error) //записать в обьект ошибки ошибку
+        console.log(response.Error)
         throw new Error(response.statusText)
       } else {
         if (searchParam === 's') {
@@ -17,11 +18,12 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
           setState(response)
         }
       }
+      
       setLoading(false)
       setDetailRequest(false);
-    }).catch(({ message }) => {
+    }).catch(( {message} ) => {
       setLoading(false);
-      setError(message);
+      //setError(message);
     })
 }
 
