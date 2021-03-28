@@ -2,8 +2,9 @@
     position: relative;
     z-Index: 1;
     transition: transform 0.5s;
-    margin: 15px 15px 15px 15px;
+    margin: 15px 12px 15px 12px;
 }
+
 
 .card-container:hover,
 .card-container:active {
@@ -20,34 +21,34 @@
     opacity: 1;
 }
 
-.overlay {
-    transition: 0.1s ease;
-    z-Index: 2;
-    color: #212121;
-    opacity: 0.5;
-}
-
-.ant-btn {
+.ant-btn.overlay{
     border-style: none;
+    background: none;
 }
 
 .ant-btn:hover,
 .ant-btn:focus,
 .overlay.like.active,
 .overlay.watch.active {
-    color: #212121;
+    color: #FFD500;
     opacity: 1;
+    background: none;
 }
 
 .anticon.anticon-heart,
 .anticon.anticon-eye {
     font-size: 25px;
-
 }
 
 .ant-card.ant-card-bordered,
-.ant-card-body {
-    width: 190px
+.ant-card-body, .ant-card-cover > img {
+    width: 190px;
+    background: #515151;
+    border: none;
+}
+
+.ant-card-meta-title {
+    color:#c5c5c5;
 }
 
 .ant-card-cover * {
@@ -55,41 +56,43 @@
 }
 
 .ant-card.ant-card-bordered>.ant-card-body {
-    padding-top: 20px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 15px 10px 10px 10px;
 }
 
 .ant-card-meta-title {
     white-space: nowrap;
 }
 
-.ant-card.ant-card-bordered {
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+.ant-card.ant-card-bordered.card-container {
+    box-shadow: 0 5px 32px 0 rgba(255, 255, 255, 0.15);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .ant-card-cover img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
-.ant-card-actions{
+
+.ant-card-actions {
     border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #515151;
 }
+
 .ant-card-actions li {
     margin-top: 5px;
     margin-bottom: 3px;
     border-right: 0px;
 }
 
-.ant-card-actions > li:not(:last-child){
+.ant-card-actions>li:not(:last-child) {
     border-right: 0px;
 }
 
-.ant-tag{
-    margin:0;
+.ant-tag {
+    margin: 0;
 }

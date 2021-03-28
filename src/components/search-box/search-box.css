@@ -1,27 +1,64 @@
-.ant-layout-header.header{
+.ant-layout-header.header {
     height: auto;
     padding: 0px;
-    background:none;
+    background: none;
 }
 
-.ant-row.search-row{
-    background: #FFD500;
+.ant-row.search-row {
     width: 100%;
     justify-content: center;
-    
+    border-bottom-left-radius: 10px;
 }
 
-.ant-col.search{
-    width: 50vw;
-    top:10px;
+.ant-col.search {
+    width: 55vw;
+    top: 13px;
+    height: 42px;
 }
 
-.filter-menu-btn{
-    top: 9px;
+.ant-input-wrapper.ant-input-group {
+    box-shadow: 0 8px 10px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.ant-input-group>.ant-input:first-child,
+.ant-input-group-addon:first-child {
+    border-right: none;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.ant-input-search>.ant-input-group>.ant-input-group-addon:last-child .ant-input-search-button {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background: #616161;
+    border-style: none;
+}
+
+.ant-input-search>.ant-input-group>.ant-input-group-addon:last-child {
+    border-radius: 10px;
+    left: -2;
+}
+.anticon.anticon-search{
+    color: whitesmoke
+}
+
+.filter-menu-btn {
+    top: 10px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    border-style: none;
 }
 
 
-.input-number{
-    text-align: center;
+.ant-input-group>.ant-input:first-child,
+.ant-input-group-addon:first-child {
+    color: #FFD500;
+    background: #515151;
 }
 
+.ant-input{
+    border: none;
+    height: 40px;
+}

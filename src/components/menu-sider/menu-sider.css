@@ -1,24 +1,38 @@
 .ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
-    background: #212121;
+    background: none;
+}
+
+.ant-menu.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+    background: #313131;
+    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.15);
 }
 
 .ant-menu.ant-menu-dark.ant-menu-root {
-    height: 100vh;
     color: #D6D9DC;
-    background: #212121;
     padding-left: 5px;
-    border-right: 0px;
     font-size: 26px;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+
+
+}
+
+.ant-menu-item.customclass {
+    padding-left: 15px;
 }
 
 .ant-layout-sider-trigger {
     background: #FFD500 !important;
+    border-radius: 10px;
+    width: max-content;
 }
 
 .ant-menu-item.customclass.ant-menu-item-selected {
     background-color: #FFD500;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 5px;
+    border-radius: 10px;
 }
 
 .ant-menu-item .ant-menu-item-icon,
