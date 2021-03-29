@@ -1,12 +1,14 @@
 .ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
     background: none;
+    
 }
 
 .ant-menu.ant-menu-dark,
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #313131;
-    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.15);
+    background: linear-gradient(60deg, #313131 20%, #414141 100%);
+
 }
 
 .ant-menu.ant-menu-dark.ant-menu-root {
@@ -14,10 +16,11 @@
     padding-left: 5px;
     font-size: 26px;
     border-radius: 10px;
-    padding-top: 15px;
     padding-bottom: 20px;
+}
 
-
+.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline {
+    margin-top: 10px;
 }
 
 .ant-menu-item.customclass {

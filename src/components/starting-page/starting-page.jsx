@@ -1,3 +1,4 @@
+import './starting-page.css'
 import React from 'react';
 import { Result, Button } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
@@ -20,7 +21,10 @@ const StartingPage = ({ history, setQ }) => {
             icon={<SmileOutlined />}
             title="Welcome to the movie database"
             extra={
-                <Button type="primary" onClick={() => onStartClick()}>
+                <Button
+                    className='btn-start-page'
+                    type="primary"
+                    onClick={() => onStartClick()}>
                     let's start
                 </Button>
             }

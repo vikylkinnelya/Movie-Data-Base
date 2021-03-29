@@ -1,3 +1,4 @@
+import './movie-detail.css'
 import { Row, Col, Typography, Tag, Button } from 'antd';
 import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/icons';
 import React from 'react';
@@ -16,16 +17,18 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                     alt={Title}
                 />
             </Col>
-            <Col span={13}>
+            <Col span={13} className='detail-row'>
                 <Row>
-                    <Col span={21}>
-                        <TextTitle
+                    <Col >
+                        <TextTitle span={21}
+                        className='movie-title'
                             level={4}>
                             {Title}
                         </TextTitle>
                     </Col>
                     <Col style={{ textAlign: 'right' }}>
                         <TextTitle
+                        className='movie-rating'
                             level={4}>
                             <span style={{ color: '#41A8F8' }}>
                                 {imdbRating}
@@ -45,7 +48,7 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                     </Col>
                 </Row>
                 <Row>
-                    <Paragraph >{Plot}</Paragraph >
+                    <Paragraph className='movie-detail-paragraph'>{Plot}</Paragraph >
                 </Row>
                 <Row>
                     <Button

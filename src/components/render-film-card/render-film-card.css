@@ -4,15 +4,38 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.ant-pagination>.ant-pagination-item {
+.ant-pagination .ant-pagination-item {
     min-width: 35px;
     height: 45px;
     line-height: 45px;
+    border-radius: 10px;
+    border: none;
+    background: #414141;
 }
 
-.cards-row{
+.ant-pagination .ant-pagination-item-link {
+    border-radius: 10px;
+    background: #414141;
+    border: none;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+    color: #FFD500
+}
+
+
+
+.ant-pagination-item a {
+    color: #d1d1d1;
+}
+
+.ant-pagination-item-active a {
+    color: #FFD500
+}
+
+.cards-row {
     display: flex;
     justify-content: center;
     align-content: space-around;
-    padding: 10px 0 10px 0;
 }

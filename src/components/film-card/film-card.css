@@ -5,7 +5,6 @@
     margin: 15px 12px 15px 12px;
 }
 
-
 .card-container:hover,
 .card-container:active {
     transform: scale(1.1);
@@ -43,12 +42,12 @@
 .ant-card.ant-card-bordered,
 .ant-card-body, .ant-card-cover > img {
     width: 190px;
-    background: #515151;
+    background: none;
     border: none;
 }
 
 .ant-card-meta-title {
-    color:#c5c5c5;
+    color:#d4d4d4;
 }
 
 .ant-card-cover * {
@@ -64,9 +63,9 @@
 }
 
 .ant-card.ant-card-bordered.card-container {
-    box-shadow: 0 5px 32px 0 rgba(255, 255, 255, 0.15);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    background: linear-gradient(60deg, #414141 40%, #616161 100%);
 }
 
 .ant-card-cover img {
@@ -80,7 +79,7 @@
     border: none;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    background: #515151;
+    background: none;
 }
 
 .ant-card-actions li {

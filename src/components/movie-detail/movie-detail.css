@@ -1,0 +1,48 @@
+.ant-modal-content {
+    background: rgba(88, 88, 88, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(7.0px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: whitesmoke;
+}
+
+.ant-modal-header {
+    background: none
+}
+
+.ant-modal {
+    
+}
+
+.ant-modal-close-x {
+    color: #FFD500
+}
+
+.ant-col .movie-tags .ant-tag {
+    margin: 3px;
+    border: none;
+    color: #e7e7e7;
+    background: rgba(119, 119, 119, 0.4);
+}
+
+.ant-result-title,
+.ant-result-subtitle,
+.ant-typography,
+.ant-typography.movie-title {
+    color: whitesmoke;
+}
+
+.ant-typography.movie-detail-paragraph,
+.ant-typography.movie-title {
+    background: rgba(187, 187, 187, 0.1);
+    backdrop-filter: blur(3.0px);
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+.ant-typography.movie-rating{
+    padding: 5px;
+    color: #FFD500
+
+}
