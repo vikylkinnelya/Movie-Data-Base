@@ -7,7 +7,7 @@
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #313131;
-    background: linear-gradient(60deg, #313131 20%, #414141 100%);
+    background: linear-gradient(60deg, #313131 40%, #414141 100%);
 
 }
 

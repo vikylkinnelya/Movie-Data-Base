@@ -12,7 +12,8 @@
 }
 
 .ant-modal {
-    
+    min-width: 800px;
+    max-width: 1000px;
 }
 
 .ant-modal-close-x {

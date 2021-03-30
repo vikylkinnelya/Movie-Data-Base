@@ -120,38 +120,39 @@ function App() {
               <Modal
                 centered
                 visible={activateModal}
+
+                maskStyle={{ backdropFilter: 'blur(2.0px)' }}
                 onCancel={() => { setActivateModal(false); setShowDetail(null) }}
                 footer={null}
-                width={800}
               >
                 {detailRequest === false && detail != null ?
-                  (<MovieDetail
-                    {...detail}
-                    isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
-                    isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
-                  : (<Loader />)}
+                (<MovieDetail
+                  {...detail}
+                  isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
+                  isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
+                : (<Loader />)}
               </Modal>
             </div>
 
 
           </Content>
-          <Row>
-            <Pagination
-              current={parseInt(currPage) || parseInt(urlPage)}
-              total={defTotalRes(location, favList, watchList, totalResults)}
-              onChange={page => onPageChange(page)}
-              hideOnSinglePage={true}
-              showSizeChanger={false}
-              pageSize={10}
-            />
-          </Row>
+        <Row>
+          <Pagination
+            current={parseInt(currPage) || parseInt(urlPage)}
+            total={defTotalRes(location, favList, watchList, totalResults)}
+            onChange={page => onPageChange(page)}
+            hideOnSinglePage={true}
+            showSizeChanger={false}
+            pageSize={10}
+          />
+        </Row>
 
 
-          <Footer>
-            footer
+        <Footer>
+          footer
               </Footer>
 
-        </Layout>
+      </Layout>
       </Layout>
     </MyContext.Provider >
 
