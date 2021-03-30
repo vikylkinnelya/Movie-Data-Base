@@ -20,9 +20,10 @@
     opacity: 1;
 }
 
-.ant-btn.overlay{
+.ant-btn.overlay {
     border-style: none;
     background: none;
+    width: 63.33px;
 }
 
 .ant-btn:hover,
@@ -34,20 +35,25 @@
     background: none;
 }
 
+.overlay > .anticon{
+    margin: 1px 10px 1px 10px;
+}
+
 .anticon.anticon-heart,
 .anticon.anticon-eye {
     font-size: 25px;
 }
 
 .ant-card.ant-card-bordered,
-.ant-card-body, .ant-card-cover > img {
+.ant-card-body,
+.ant-card-cover>img {
     width: 190px;
     background: none;
     border: none;
 }
 
 .ant-card-meta-title {
-    color:#d4d4d4;
+    color: #d4d4d4;
 }
 
 .ant-card-cover * {
@@ -92,6 +98,7 @@
     border-right: 0px;
 }
 
-.ant-tag {
-    margin: 0;
+.tag-type {
+    margin: 5px;
+    background: none;
 }

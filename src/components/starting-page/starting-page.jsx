@@ -20,6 +20,7 @@ const StartingPage = ({ history, setQ }) => {
         <Result
             icon={<SmileOutlined />}
             title="Welcome to the movie database"
+            subTitle={'This app helps you to find the movie you looking for or explore something new by entering a title and/or date. MovieDB will help it quickly rank movies based on criteria film/series. Then you can check more details about film such as short description, genre, durations, actors list, reviews and other things which is useful if there are people who do not watch films yet! Or just click the button and there will be some random films'}
             extra={
                 <Button
                     className='btn-start-page'

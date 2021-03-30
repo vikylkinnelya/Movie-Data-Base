@@ -120,8 +120,7 @@ function App() {
               <Modal
                 centered
                 visible={activateModal}
-
-                maskStyle={{ backdropFilter: 'blur(2.0px)' }}
+                maskStyle={{ backdropFilter: 'blur(1.0px)' }}
                 onCancel={() => { setActivateModal(false); setShowDetail(null) }}
                 footer={null}
               >

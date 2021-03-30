@@ -25,8 +25,8 @@ const FilmCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav })
             actions={[
                 <>
                     {Type === 'movie' ?
-                        <Tag color='magenta'>{Type}</Tag> :
-                        <Tag color='green'>{Type}</Tag>}
+                        <Tag className='tag-type' color='magenta'>{Type}</Tag> :
+                        <Tag className='tag-type' color='green'>{Type}</Tag>}
                 </>,
 
                 <Button
