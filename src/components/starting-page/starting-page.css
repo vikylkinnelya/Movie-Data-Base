@@ -1,4 +1,18 @@
-.btn-start-page{
+.btn-start-page {
     border-radius: 10px;
     color: #212121
+}
+
+.ant-result-subtitle {
+    padding: 32px 20% 32px 20%;
+    font-size: 20px;
+}
+
+.welcome-page {
+    display: flex;
+    color: whitesmoke;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    
 }
