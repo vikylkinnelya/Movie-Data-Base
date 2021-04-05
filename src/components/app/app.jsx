@@ -80,13 +80,19 @@ function App() {
             collapsedMenu={collapsedMenu}
             setPage={setCurrPage}
             setGenre={setGenreList}
-            loc={location} />
+            loc={location}
+            q={q}
+            setQ={setQuery}
+          />
         </Sider>
 
         <Layout className='layout'>
 
           <Header className='header'>
-            <SearchBox searchHandler={setQuery} />
+            <SearchBox
+              q={q}
+              searchHandler={setQuery}
+            />
           </Header>
 
           <Content>
@@ -125,33 +131,33 @@ function App() {
                 footer={null}
               >
                 {detailRequest === false && detail != null ?
-                (<MovieDetail
-                  {...detail}
-                  isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
-                  isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
-                : (<Loader />)}
+                  (<MovieDetail
+                    {...detail}
+                    isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
+                    isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
+                  : (<Loader />)}
               </Modal>
             </div>
 
 
           </Content>
-        <Row>
-          <Pagination
-            current={parseInt(currPage) || parseInt(urlPage)}
-            total={defTotalRes(location, favList, watchList, totalResults)}
-            onChange={page => onPageChange(page)}
-            hideOnSinglePage={true}
-            showSizeChanger={false}
-            pageSize={10}
-          />
-        </Row>
+          <Row>
+            <Pagination
+              current={parseInt(currPage) || parseInt(urlPage)}
+              total={defTotalRes(location, favList, watchList, totalResults)}
+              onChange={page => onPageChange(page)}
+              hideOnSinglePage={true}
+              showSizeChanger={false}
+              pageSize={10}
+            />
+          </Row>
 
 
-        <Footer>
-          footer
+          <Footer>
+            footer
               </Footer>
 
-      </Layout>
+        </Layout>
       </Layout>
     </MyContext.Provider >
 

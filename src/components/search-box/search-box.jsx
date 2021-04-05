@@ -5,7 +5,7 @@ import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({ searchHandler }) => {
+const SearchBox = ({q, searchHandler }) => {
 
     const [activateFilter, setActivateFilter] = useState(false)
 
@@ -14,7 +14,7 @@ const SearchBox = ({ searchHandler }) => {
             <Row className='search-row'>
                 <Col className='search' >
                     <Search
-                        placeholder="enter movie, series"
+                        placeholder={q || "enter title of the movie"}
                         size="large"
                         onSearch={value => searchHandler(value)} /> {/* q в стейт */}
                 </Col>

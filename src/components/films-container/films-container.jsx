@@ -9,7 +9,7 @@ import { Row } from 'antd';
 
 const FilmsContainer = () => {
 
-    let { movie, favList, watchList, history, setQuery } = useContext(MyContext)
+    let { movie, favList, watchList, history, q, setQuery, setGenreList} = useContext(MyContext)
 
     return (
 
@@ -19,6 +19,8 @@ const FilmsContainer = () => {
                     <StartingPage
                         history={history}
                         setQ={setQuery}
+                        setGenre = {setGenreList}
+                        q={q}
                     />
                 </Route>
                 <Route path='/main/:page'>
