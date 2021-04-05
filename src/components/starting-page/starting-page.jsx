@@ -12,7 +12,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
 
     const onStartClick = (loc) => {
         history.push(`/${loc}/1`)
-        setQ(() => randomMovie())
+        //setQ(() => randomMovie())
         setGenre(() => defGenres(loc))
     }
 
