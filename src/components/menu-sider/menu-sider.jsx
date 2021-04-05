@@ -4,7 +4,7 @@ import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
 
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import randomMovie from '../../servises/randomMovie';
+import randomMovie from '../../servises/choseRandomMovie';
 
 const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
 
@@ -56,7 +56,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     icon={<DatabaseOutlined />}
                     onClick={() => setRedirectParam(['movie', 'series'])}
                     >
-                        <NavLink to={`/main/1`} />
+                        <NavLink to={`/main/${q}/1`} />
                     main
                 </Menu.Item>
 
@@ -68,7 +68,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     </svg>}
                     onClick={() => setRedirectParam(['movie'])}
                 >
-                    <NavLink to={`/films/1`} />
+                    <NavLink to={`/films/${q}/1`} />
                     movies
                 </Menu.Item>
 
@@ -82,7 +82,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     </svg>}
                     onClick={() => setRedirectParam(['series'])}
                 >
-                    <NavLink to={`/serials/1`} />
+                    <NavLink to={`/serials/${q}/1`} />
                     serials
                 </Menu.Item>
 

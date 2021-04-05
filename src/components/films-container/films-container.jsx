@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Route, Redirect, Switch } from 'react-router-dom';
 import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
-import RenderFilmCard from '../render-film-card'
+import RenderFilmCard from '../render-film-card';
+import RedirectPage from '../redirect-page';
 
 import { Row } from 'antd';
 
@@ -10,8 +11,6 @@ import { Row } from 'antd';
 const FilmsContainer = () => {
 
     let { movie, favList, watchList, history, q, setQuery, setGenreList } = useContext(MyContext)
-
-    console.log()
 
     return (
 
@@ -27,9 +26,7 @@ const FilmsContainer = () => {
                     />
                 </Route>
 
-                <Redirect exact from='/main' to='/main/1' />
-                
-                <Route path='/main/:page'>
+                <Route path='/main/:q/:page'>
                     <RenderFilmCard state={movie} />
                 </Route>
                 <Route path='/favorites/:page'>
@@ -44,6 +41,15 @@ const FilmsContainer = () => {
                 <Route path='/serials/:page'>
                     <RenderFilmCard state={movie} />
                 </Route>
+
+                <Route exact path='/main'>
+                    <RedirectPage
+                        setQ={setQuery}
+                        loc={'main'}
+                        history={history}
+                    />
+                </Route>
+
 
             </Switch>
         </Row>

@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import { Result, Button, Card, Row, Col, Typography } from 'antd';
 import { SmileOutlined, MoreOutlined, UnorderedListOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
 import defGenres from '../../servises/defGenres';
-import randomMovie from '../../servises/randomMovie';
+import choseRandomMovie from '../../servises/choseRandomMovie';
 
 
 const { Title, Text } = Typography
@@ -12,7 +12,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
 
     const onStartClick = (loc) => {
         history.push(`/${loc}/1`)
-        //setQ(() => randomMovie())
+        setQ(() => choseRandomMovie())
         setGenre(() => defGenres(loc))
     }
 

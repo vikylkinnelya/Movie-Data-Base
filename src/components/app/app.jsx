@@ -12,8 +12,6 @@ import defTotalRes from '../../servises/defTotalRes';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import MovieDetail from '../movie-detail';
 import defGenres from '../../servises/defGenres';
-import randomMovie from '../../servises/randomMovie';
-
 
 const { Header, Content, Footer, Sider } = Layout;
 //const API_KEY = 'eb9d8a81';
@@ -28,7 +26,7 @@ function App() {
   const [movie, setMovie] = useState(null); //обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [q, setQuery] = useState('');
+  const [q, setQuery] = useState();
 
   const [activateModal, setActivateModal] = useState(false);
   const [detail, setShowDetail] = useState(false); //детали фильма
@@ -48,9 +46,9 @@ function App() {
   const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //filter menu
   const [yearValue, setYearValue] = useState(null)
 
-   /* const getData = useCallback(() => {
-    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
-  }, [q, currPage, genreList, yearValue])  */
+  /* const getData = useCallback(() => {
+   getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
+ }, [q, currPage, genreList, yearValue])  */
 
   const data = { movie, setMovie, favList, setFav, watchList, setWatch, genreList, setGenreList, yearValue, setYearValue, currPage, setCurrPage, totalResults, setTotalResults, setActivateModal, detail, setShowDetail, detailRequest, setDetailRequest, setError, loading, setLoading, q, setQuery, history }
 
@@ -63,15 +61,14 @@ function App() {
   }, [getData]); */
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
- 
+
   const onPageChange = (page) => { //при изменении стр в pagination
     setCurrPage(page)
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
 
-   useEffect(() => {
-    q === '' && setQuery(() => randomMovie())
-  }, []) 
+  console.log(q)
+  console.log(error)
 
   return (
     <MyContext.Provider value={data}>
@@ -102,6 +99,8 @@ function App() {
           </Header>
 
           <Content>
+
+            {loading && <Loader />}
 
             {error !== null &&
               <Result
@@ -147,6 +146,7 @@ function App() {
 
 
           </Content>
+
           <Row>
             <Pagination
               current={parseInt(currPage) || parseInt(urlPage)}
