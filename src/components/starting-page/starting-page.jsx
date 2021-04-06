@@ -4,18 +4,22 @@ import { NavLink } from "react-router-dom";
 import { Result, Button, Card, Row, Col, Typography } from 'antd';
 import { SmileOutlined, MoreOutlined, UnorderedListOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
 import onRedirectClick from '../../servises/onRedirectClick'
+import defGenres from '../../servises/defGenres';
+import choseRandomMovie from '../../servises/choseRandomMovie';
 
 
 const { Title, Text } = Typography
 
-const StartingPage = ({ history, setQ, setGenre }) => {
+const StartingPage = ({ history, setQ, setGenre, q }) => {
 
-    /* const onRedirectClick = (loc, setGenre, history, setQ) => {
-        let query = choseRandomMovie()
+    let query = choseRandomMovie()
+
+    const onRedirectClick = (loc, setGenre, history, setQ) => {
+
         setGenre(() => defGenres(loc));
-        history.push(`/${loc}/query=${query}/page=1`)
+        //history.push(`/${loc}/query=${query}/page=1`)
         setQ(query)
-    } */
+    }
 
     return (
 
@@ -25,15 +29,18 @@ const StartingPage = ({ history, setQ, setGenre }) => {
 
                 <Col span={24} className='find-col'>
                     <Row className='find-row'>
+                        <NavLink to={`/main/query=${query}/page=1`}>
                         <Button
                             type="text"
                             onClick={() => onRedirectClick('main', setGenre, history, setQ)}
                             className='btn-find'>
+
                             <Title className='find-title' >
                                 <SearchOutlined />
                         FIND
                         </Title>
                         </Button>
+                        </NavLink>
                     </Row>
                     <Row className='find-detail'>
                         <Col span={12}>

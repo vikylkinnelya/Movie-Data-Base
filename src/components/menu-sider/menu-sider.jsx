@@ -41,9 +41,9 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
 
     return (
         <>
-            <div>
+            <NavLink to={`/start`} >
                 {collapsedMenu ? logo : titleLogo}
-            </div>
+            </NavLink>
             <Menu
                 selectedKeys={loc}
                 mode="inline"
@@ -55,8 +55,8 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     className="customclass"
                     icon={<DatabaseOutlined />}
                     onClick={() => setRedirectParam(['movie', 'series'])}
-                    >
-                        <NavLink to={`/main/query=${q}/page=1`} />
+                >
+                    <NavLink to={`/main/query=${q}/page=1`} />
                     main
                 </Menu.Item>
 

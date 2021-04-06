@@ -4,7 +4,6 @@ import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
 import RenderFilmCard from '../render-film-card';
 import RedirectPage from '../redirect-page';
-
 import { Row } from 'antd';
 
 
@@ -17,10 +16,9 @@ const FilmsContainer = () => {
         <Row className='cards-row' >
             <Switch>
 
+                <Redirect exact from='/' to='/start'/>
 
-                
-
-                <Route exact path='/'>
+                <Route exact path='/start'>
                     <StartingPage
                         history={history}
                         setQ={setQuery}
@@ -45,7 +43,6 @@ const FilmsContainer = () => {
                     <RenderFilmCard state={watchList} />
                 </Route>
 
-
                 <Route path='/'>
                     <RedirectPage
                         setQ={setQuery}
@@ -55,7 +52,6 @@ const FilmsContainer = () => {
                     />
                 </Route>
                 
-
             </Switch>
         </Row>
     )
