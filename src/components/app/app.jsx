@@ -21,12 +21,17 @@ function App() {
 
   const history = useHistory()
   let location = useLocation().pathname.split('/')[1];
-  let urlPage = +useLocation().pathname.split('/')[2];
+
+  let queryStr = useLocation().pathname.split('/')[2]
+  let query = queryStr !== undefined && queryStr.split('=')[1]
+
+  let urlPageStr = useLocation().pathname.split('/')[3]
+  let urlPage = urlPageStr !== undefined && urlPageStr.split('=')[1]
 
   const [movie, setMovie] = useState(null); //обьект ответа от сервера
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [q, setQuery] = useState();
+  const [q, setQuery] = useState(query);
 
   const [activateModal, setActivateModal] = useState(false);
   const [detail, setShowDetail] = useState(false); //детали фильма
@@ -66,9 +71,6 @@ function App() {
     setCurrPage(page)
     history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
   }
-
-  console.log(q)
-  console.log(error)
 
   return (
     <MyContext.Provider value={data}>

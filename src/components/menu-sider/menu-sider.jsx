@@ -56,7 +56,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     icon={<DatabaseOutlined />}
                     onClick={() => setRedirectParam(['movie', 'series'])}
                     >
-                        <NavLink to={`/main/${q}/1`} />
+                        <NavLink to={`/main/query=${q}/page=1`} />
                     main
                 </Menu.Item>
 
@@ -68,7 +68,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     </svg>}
                     onClick={() => setRedirectParam(['movie'])}
                 >
-                    <NavLink to={`/films/${q}/1`} />
+                    <NavLink to={`/films/query=${q}/page=1`} />
                     movies
                 </Menu.Item>
 
@@ -82,7 +82,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     </svg>}
                     onClick={() => setRedirectParam(['series'])}
                 >
-                    <NavLink to={`/serials/${q}/1`} />
+                    <NavLink to={`/serials/query=${q}/page=1`} />
                     serials
                 </Menu.Item>
 
@@ -91,7 +91,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     className="customclass"
                     icon={<HeartOutlined />}
                 >
-                    <NavLink to={`/favorites/1`} />
+                    <NavLink to={`/favorites/page=1`} />
                     liked
                 </Menu.Item>
 
@@ -99,7 +99,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     key="to-watch"
                     className="customclass"
                     icon={<EyeOutlined />}>
-                    <NavLink to={`/to-watch/1`} />
+                    <NavLink to={`/to-watch/page=1`} />
                     watchlist
                 </Menu.Item>
 

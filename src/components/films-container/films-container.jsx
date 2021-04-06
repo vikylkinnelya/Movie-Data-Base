@@ -17,6 +17,9 @@ const FilmsContainer = () => {
         <Row className='cards-row' >
             <Switch>
 
+
+                
+
                 <Route exact path='/'>
                     <StartingPage
                         history={history}
@@ -29,27 +32,29 @@ const FilmsContainer = () => {
                 <Route path='/main/:q/:page'>
                     <RenderFilmCard state={movie} />
                 </Route>
+                <Route path='/films/:q:page'>
+                    <RenderFilmCard state={movie} />
+                </Route>
+                <Route path='/serials/:page'>
+                    <RenderFilmCard state={movie} />
+                </Route>
                 <Route path='/favorites/:page'>
                     <RenderFilmCard state={favList} />
                 </Route>
                 <Route exact path='/to-watch/:page'>
                     <RenderFilmCard state={watchList} />
                 </Route>
-                <Route path='/films/:page'>
-                    <RenderFilmCard state={movie} />
-                </Route>
-                <Route path='/serials/:page'>
-                    <RenderFilmCard state={movie} />
-                </Route>
 
-                <Route exact path='/main'>
+
+                <Route path='/'>
                     <RedirectPage
                         setQ={setQuery}
+                        setGenre={setGenreList}
                         loc={'main'}
                         history={history}
                     />
                 </Route>
-
+                
 
             </Switch>
         </Row>

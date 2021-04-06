@@ -1,20 +1,21 @@
 import './starting-page.css'
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { NavLink } from "react-router-dom";
 import { Result, Button, Card, Row, Col, Typography } from 'antd';
 import { SmileOutlined, MoreOutlined, UnorderedListOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
-import defGenres from '../../servises/defGenres';
-import choseRandomMovie from '../../servises/choseRandomMovie';
+import onRedirectClick from '../../servises/onRedirectClick'
 
 
 const { Title, Text } = Typography
 
-const StartingPage = ({ history, q, setQ, setGenre }) => {
+const StartingPage = ({ history, setQ, setGenre }) => {
 
-    const onStartClick = (loc) => {
-        history.push(`/${loc}/1`)
-        setQ(() => choseRandomMovie())
-        setGenre(() => defGenres(loc))
-    }
+    /* const onRedirectClick = (loc, setGenre, history, setQ) => {
+        let query = choseRandomMovie()
+        setGenre(() => defGenres(loc));
+        history.push(`/${loc}/query=${query}/page=1`)
+        setQ(query)
+    } */
 
     return (
 
@@ -26,7 +27,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
                     <Row className='find-row'>
                         <Button
                             type="text"
-                            onClick={() => onStartClick('main')}
+                            onClick={() => onRedirectClick('main', setGenre, history, setQ)}
                             className='btn-find'>
                             <Title className='find-title' >
                                 <SearchOutlined />
@@ -35,7 +36,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
                         </Button>
                     </Row>
                     <Row className='find-detail'>
-                        <Col span ={12}>
+                        <Col span={12}>
                             <Text >
                                 the movie you are looking for
                             </Text>
@@ -54,7 +55,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
                     <Button
                         type="text"
                         className='btn-film'
-                        onClick={() => onStartClick('films')}>
+                        onClick={() => onRedirectClick('films', setGenre, history, setQ)}>
                         <Title className='film-title' >
                             <svg className='film-icon' width="1em" height="1em" viewBox="0 0 480 480" fill="#FFD500" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
@@ -69,7 +70,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
                 <Col span={12} className='series'>
                     <Button
                         type="text"
-                        onClick={() => onStartClick('serials')}
+                        onClick={() => onRedirectClick('serials')}
                         className='btn-series'>
                         <Title className='series-title'>
                             <svg className='series-icon' xmlns="http://www.w3.org/2000/svg" fill="#FFD500" width="1em" height="1em" viewBox="0 0 512 512">
@@ -94,7 +95,7 @@ const StartingPage = ({ history, q, setQ, setGenre }) => {
                 <Col className='check-row-title' span={24}>
                     <Button
                         type="text"
-                        onClick={() => onStartClick('main')}
+                        onClick={() => onRedirectClick('main', setGenre, history, setQ)}
                         className='btn-go'>
                         <Title className='check-title' >
                             TAKE A LOOK
