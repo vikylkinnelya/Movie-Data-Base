@@ -6,7 +6,7 @@ import MyContext from '../../servises/Context';
 import Loader from '../loader';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
-import FilmsContainer from '../films-container';
+import MovieContainer from '../movie-container';
 import getDataRequest from '../../servises/getDataRequest';
 import defTotalRes from '../../servises/defTotalRes';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
@@ -83,11 +83,7 @@ function App() {
 
           <MenuSider
             collapsedMenu={collapsedMenu}
-            setPage={setCurrPage}
-            setGenre={setGenreList}
             loc={location}
-            q={q}
-            setQ={setQuery}
           />
         </Sider>
 
@@ -95,9 +91,7 @@ function App() {
 
           <Header className='header'>
             <SearchBox
-              q={q}
-              searchHandler={setQuery}
-            />
+              history={history} />
           </Header>
 
           <Content>
@@ -126,7 +120,7 @@ function App() {
 
 
 
-            <FilmsContainer />
+            <MovieContainer />
 
 
             <div className='modal-detail' >

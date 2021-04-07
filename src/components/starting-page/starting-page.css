@@ -27,7 +27,7 @@ h1.ant-typography,
 .anticon-more,
 .anticon-field-time,
 .series-icon,
-.film-icon,
+.movie-icon,
 .genre-icon {
     color: #FFD500;
     margin-right: 10px;
@@ -53,7 +53,7 @@ h1.ant-typography,
     font-size: 80px;
 }
 
-.ant-typography.film-title,
+.ant-typography.movie-title,
 .ant-typography.series-title {
     font-size: 50px;
     margin: 0
@@ -98,7 +98,7 @@ h1.ant-typography,
     padding-left: 40px;
 }
 
-.ant-col.ant-col-12.film {
+.ant-col.ant-col-12.movie {
     text-align: right;
     padding-right: 40px;
 }
@@ -107,7 +107,7 @@ h1.ant-typography,
 .btn-discover,
 .btn-go,
 .btn-series,
-.btn-film {
+.btn-movie {
     width: auto;
     height: auto;
     padding: 0;

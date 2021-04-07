@@ -1,12 +1,14 @@
 import './menu-sider.css'
 import { Menu } from 'antd';
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
-
-import React from 'react';
+import MyContext from '../../servises/Context';
+import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
 import randomMovie from '../../servises/choseRandomMovie';
 
-const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
+const MenuSider = ({ loc, collapsedMenu }) => {
+
+    let { q, setQuery, setGenreList, setCurrPage } = useContext(MyContext);
 
     const titleLogo = <svg width="200" height="70" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M43.7656 13.9863H38.1553V33H35.4746V13.9863H29.8789V11.6719H43.7656V13.9863ZM48.2416 18.7764C49.2279 17.4971 50.4877 16.8574 52.0209 16.8574C54.8236 16.8574 56.2445 18.7275 56.2836 22.4678V33H53.7055V22.585C53.7055 21.3447 53.4955 20.4658 53.0756 19.9482C52.6654 19.4209 52.0453 19.1572 51.2152 19.1572C50.5707 19.1572 49.9896 19.3721 49.4721 19.8018C48.9643 20.2314 48.5541 20.793 48.2416 21.4863V33H45.6488V10.5H48.2416V18.7764ZM64.9197 33.293C62.9471 33.293 61.4334 32.707 60.3787 31.5352C59.324 30.3535 58.7869 28.625 58.7674 26.3496V24.4307C58.7674 22.0674 59.2801 20.2168 60.3055 18.8789C61.3406 17.5312 62.7811 16.8574 64.6268 16.8574C66.4822 16.8574 67.8689 17.4482 68.7869 18.6299C69.7049 19.8115 70.1736 21.6523 70.1932 24.1523V25.8516H61.3455V26.2178C61.3455 27.917 61.6629 29.1523 62.2977 29.9238C62.9422 30.6953 63.865 31.0811 65.0662 31.0811C65.8279 31.0811 66.4969 30.9395 67.073 30.6562C67.659 30.3633 68.2059 29.9043 68.7137 29.2793L70.0613 30.9199C68.9383 32.502 67.2244 33.293 64.9197 33.293ZM64.6268 19.084C63.5525 19.084 62.7566 19.4551 62.2391 20.1973C61.7215 20.9297 61.4285 22.0723 61.3602 23.625H67.6004V23.2734C67.532 21.7695 67.2586 20.6953 66.7801 20.0508C66.3113 19.4062 65.5936 19.084 64.6268 19.084Z" fill="#FFD500" />
@@ -35,8 +37,8 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
     </svg>
 
     const setRedirectParam = (genres) => {
-        setGenre(genres);
-        q === '' && setQ(() => randomMovie())
+        setGenreList(genres);
+        q === '' && setQuery(() => randomMovie())
     }
 
     return (
@@ -48,7 +50,7 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                 selectedKeys={loc}
                 mode="inline"
                 theme="dark"
-                onClick={() => setPage(1)}
+                onClick={() => setCurrPage(1)}
             >
                 <Menu.Item
                     key="main"
@@ -61,19 +63,19 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                 </Menu.Item>
 
                 <Menu.Item
-                    key="films"
+                    key="movie"
                     className="customclass"
-                    icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-film" viewBox="0 0 16 16">
+                    icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-movie" viewBox="0 0 16 16">
                         <path d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z" />
                     </svg>}
                     onClick={() => setRedirectParam(['movie'])}
                 >
-                    <NavLink to={`/films/query=${q}/page=1`} />
+                    <NavLink to={`/movie/query=${q}/page=1`} />
                     movies
                 </Menu.Item>
 
                 <Menu.Item
-                    key="serials"
+                    key="series"
                     className="customclass"
                     icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-camera-reels" viewBox="0 0 16 16">
                         <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" />
@@ -82,8 +84,8 @@ const MenuSider = ({ setPage, setGenre, loc, collapsedMenu, q, setQ }) => {
                     </svg>}
                     onClick={() => setRedirectParam(['series'])}
                 >
-                    <NavLink to={`/serials/query=${q}/page=1`} />
-                    serials
+                    <NavLink to={`/series/query=${q}/page=1`} />
+                    series
                 </Menu.Item>
 
                 <Menu.Item

@@ -1,13 +1,23 @@
 import './search-box.css';
 import { Row, Col, Input, Button, Dropdown } from 'antd';
-import React, { useState} from 'react';
+import MyContext from '../../servises/Context';
+import React, { useState, useContext } from 'react';
 import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({q, searchHandler }) => {
+const SearchBox = ({ history }) => {
 
-    const [activateFilter, setActivateFilter] = useState(false)
+    let {q, setQuery, genreList} = useContext(MyContext);
+
+    const [activateFilter, setActivateFilter] = useState(false);
+
+    const onSearch = (value) => {
+        setQuery(value)
+        let loc = genreList.length === 2 ? 'main' : genreList;
+        console.log(loc)
+        history.push(`/${loc}/query=${value}/page=1`)
+    }
 
     return (
         <>
@@ -16,7 +26,7 @@ const SearchBox = ({q, searchHandler }) => {
                     <Search
                         placeholder={q || "enter title of the movie"}
                         size="large"
-                        onSearch={value => searchHandler(value)} /> {/* q в стейт */}
+                        onSearch={value => onSearch(value)} /> {/* q в стейт */}
                 </Col>
                 <Col>
                     <Dropdown
@@ -24,7 +34,7 @@ const SearchBox = ({q, searchHandler }) => {
                         placement='bottomLeft'
                         onClick={() => setActivateFilter(!activateFilter)}
                         visible={activateFilter}
-                        overlayStyle={{top:'64px'}}
+                        overlayStyle={{ top: '64px' }}
                     >
                         <Button
                             style={{ background: 'none' }}

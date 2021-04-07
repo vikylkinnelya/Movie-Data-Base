@@ -1,8 +1,8 @@
 const defGenres = (location) => {
-    if (location === 'films') {
+    if (location === 'movie') {
         return (['movie'])
     }
-    else if (location === 'serials') {
+    else if (location === 'series') {
         return (['series'])
     } else {
         return (['movie', 'series'])

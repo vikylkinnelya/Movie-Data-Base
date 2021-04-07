@@ -1,11 +1,11 @@
-import './render-film-card.css'
+import './render-movie-card.css'
 import React, { useContext, useCallback, useEffect } from 'react';
 import MyContext from '../../servises/Context';
-import FilmCard from '../film-card/'
+import MovieCard from '../movie-card/'
 import getDataRequest from '../../servises/getDataRequest';
 import Loader from '../loader';
 
-const RenderFilmCard = ({ state }) => {
+const RenderMovieCard = ({ state }) => {
 
   const { favList, watchList, loading, q, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage } = useContext(MyContext)
 
@@ -24,7 +24,7 @@ const RenderFilmCard = ({ state }) => {
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
 
-  const filmClickHandler = (item) => { //обработчик события клика. при клике на карточку
+  const movieClickHandler = (item) => { //обработчик события клика. при клике на карточку
     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
     setDetailRequest(true); //обновить стейт с состоянием запроса к серверу
     getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
@@ -65,11 +65,11 @@ const RenderFilmCard = ({ state }) => {
 
           return (
 
-            <FilmCard
+            <MovieCard
               isFav={favList.includes(result) || localStorage.getItem('fav_' + result.imdbID) }
               isWatch={watchList.includes(result) || localStorage.getItem('watch_' + result.imdbID)}
 
-              ClickHandler={() => filmClickHandler(result)}
+              ClickHandler={() => movieClickHandler(result)}
               key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
               result={result}
               {...result}
@@ -81,4 +81,4 @@ const RenderFilmCard = ({ state }) => {
   )
 }
 
-export default RenderFilmCard;
+export default RenderMovieCard;

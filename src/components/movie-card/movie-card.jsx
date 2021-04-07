@@ -1,4 +1,4 @@
-import './film-card.css';
+import './movie-card.css';
 import { Card, Tag, Button } from 'antd';
 import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/icons';
 
@@ -9,7 +9,7 @@ import toggleItem from '../../servises/toggleItem';
 
 const { Meta } = Card;
 
-const FilmCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav }) => {
+const MovieCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav }) => {
 
     const { watchList, favList, setWatch, setFav } = useContext(MyContext)
 
@@ -50,5 +50,5 @@ const FilmCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav })
     )
 }
 
-export default FilmCard;
+export default MovieCard;
 

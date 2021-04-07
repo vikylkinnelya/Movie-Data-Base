@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Route, Redirect, Switch } from 'react-router-dom';
 import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
-import RenderFilmCard from '../render-film-card';
+import RenderMovieCard from '../render-movie-card';
 import RedirectPage from '../redirect-page';
 import { Row } from 'antd';
 
 
-const FilmsContainer = () => {
+const MovieContainer = () => {
 
     let { movie, favList, watchList, history, q, setQuery, setGenreList } = useContext(MyContext)
 
@@ -28,19 +28,19 @@ const FilmsContainer = () => {
                 </Route>
 
                 <Route path='/main/:q/:page'>
-                    <RenderFilmCard state={movie} />
+                    <RenderMovieCard state={movie} />
                 </Route>
-                <Route path='/films/:q:page'>
-                    <RenderFilmCard state={movie} />
+                <Route path='/movie/:q:page'>
+                    <RenderMovieCard state={movie} />
                 </Route>
-                <Route path='/serials/:page'>
-                    <RenderFilmCard state={movie} />
+                <Route path='/series/:page'>
+                    <RenderMovieCard state={movie} />
                 </Route>
                 <Route path='/favorites/:page'>
-                    <RenderFilmCard state={favList} />
+                    <RenderMovieCard state={favList} />
                 </Route>
                 <Route exact path='/to-watch/:page'>
-                    <RenderFilmCard state={watchList} />
+                    <RenderMovieCard state={watchList} />
                 </Route>
 
                 <Route path='/'>
@@ -57,4 +57,4 @@ const FilmsContainer = () => {
     )
 }
 
-export default FilmsContainer;
+export default MovieContainer;
