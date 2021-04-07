@@ -112,3 +112,8 @@ h1.ant-typography,
     height: auto;
     padding: 0;
 }
+
+a {
+    color: #FFD500;
+    width: 100%;
+}
