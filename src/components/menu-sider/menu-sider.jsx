@@ -6,7 +6,7 @@ import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
 import randomMovie from '../../servises/choseRandomMovie';
 
-const MenuSider = ({ loc, collapsedMenu }) => {
+const MenuSider = ({ location, collapsedMenu }) => {
 
     let { q, setQuery, setGenreList, setCurrPage } = useContext(MyContext);
 
@@ -52,7 +52,7 @@ const MenuSider = ({ loc, collapsedMenu }) => {
                 {collapsedMenu ? logo : titleLogo}
             </NavLink>
             <Menu
-                selectedKeys={loc}
+                selectedKeys={location}
                 mode="inline"
                 theme="dark"
                 onClick={() => setCurrPage(1)}

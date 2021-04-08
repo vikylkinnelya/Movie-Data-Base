@@ -47,7 +47,7 @@ const MovieContainer = () => {
                     <RedirectPage
                         setQ={setQuery}
                         setGenre={setGenreList}
-                        loc={'main'}
+                        location={'main'}
                         history={history}
                     />
                 </Route>

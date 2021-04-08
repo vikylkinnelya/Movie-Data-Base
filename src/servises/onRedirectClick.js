@@ -1,10 +1,10 @@
 import defGenres from './defGenres';
 import choseRandomMovie from './choseRandomMovie';
 
-const onRedirectClick = (loc, setGenre, history, setQ) => {
+const onRedirectClick = (location, setGenre, history, setQ) => {
     let query = choseRandomMovie()
-    setGenre(() => defGenres(loc));
-    history.push(`/${loc}/query=${query}/page=1`)
+    setGenre(() => defGenres(location));
+    history.push(`/${location}/query=${query}/page=1`)
     setQ(query)
 }
 

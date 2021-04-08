@@ -69,7 +69,7 @@ function App() {
 
   const onPageChange = (page) => { //при изменении стр в pagination
     setCurrPage(page)
-    history.push(`/${location}/${page}`) //изменяется url на тек локацию и стр
+    history.push(`/${location}/query=${q}/page=${page}`) //изменяется url на тек локацию и стр
   }
 
   return (
@@ -83,7 +83,7 @@ function App() {
 
           <MenuSider
             collapsedMenu={collapsedMenu}
-            loc={location}
+            location={location}
           />
         </Sider>
 
@@ -91,7 +91,9 @@ function App() {
 
           <Header className='header'>
             <SearchBox
-              history={history} />
+              history={history}
+              location={location}
+            />
           </Header>
 
           <Content>

@@ -6,25 +6,27 @@ import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({ history }) => {
+const SearchBox = ({ history, location }) => {
 
-    let {q, setQuery, genreList} = useContext(MyContext);
+    let { q, setQuery, genreList } = useContext(MyContext);
 
     const [activateFilter, setActivateFilter] = useState(false);
 
     const onSearch = (value) => {
         setQuery(value)
-        let loc = genreList.length === 2 ? 'main' : genreList;
-        console.log(loc)
-        history.push(`/${loc}/query=${value}/page=1`)
+        let location = genreList.length === 2 ? 'main' : genreList;
+        console.log(location)
+        history.push(`/${location}/query=${value}/page=1`)
     }
+
+let value = location === 'main' || location === 'movie' || location === 'series' ? q : "enter title of the movie";
 
     return (
         <>
             <Row className='search-row'>
                 <Col className='search' >
                     <Search
-                        placeholder={q & true || "enter title of the movie"}
+                        placeholder={value}
                         size="large"
                         onSearch={value => onSearch(value)} /> {/* q в стейт */}
                 </Col>
