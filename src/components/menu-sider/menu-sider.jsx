@@ -43,7 +43,12 @@ const MenuSider = ({ loc, collapsedMenu }) => {
 
     return (
         <>
-            <NavLink to={`/start`} >
+            <NavLink to={`/start`}
+                onClick= {() => {
+                    setQuery(false);
+                    setCurrPage(1)
+                }}
+            >
                 {collapsedMenu ? logo : titleLogo}
             </NavLink>
             <Menu

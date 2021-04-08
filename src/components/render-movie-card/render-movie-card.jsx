@@ -1,5 +1,6 @@
 import './render-movie-card.css'
 import React, { useContext, useCallback, useEffect } from 'react';
+import { Card, Tag, Button, List } from 'antd';
 import MyContext from '../../servises/Context';
 import MovieCard from '../movie-card/'
 import getDataRequest from '../../servises/getDataRequest';

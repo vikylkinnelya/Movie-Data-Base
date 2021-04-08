@@ -24,7 +24,7 @@ const SearchBox = ({ history }) => {
             <Row className='search-row'>
                 <Col className='search' >
                     <Search
-                        placeholder={q || "enter title of the movie"}
+                        placeholder={q & true || "enter title of the movie"}
                         size="large"
                         onSearch={value => onSearch(value)} /> {/* q в стейт */}
                 </Col>

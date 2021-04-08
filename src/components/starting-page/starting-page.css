@@ -53,7 +53,7 @@ h1.ant-typography,
     font-size: 80px;
 }
 
-.ant-typography.movie-title,
+.ant-typography.movie-link-title,
 .ant-typography.series-title {
     font-size: 50px;
     margin: 0

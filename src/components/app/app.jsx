@@ -144,14 +144,15 @@ function App() {
           </Content>
 
           <Row>
-            <Pagination
-              current={parseInt(currPage) || parseInt(urlPage)}
-              total={defTotalRes(location, favList, watchList, totalResults)}
-              onChange={page => onPageChange(page)}
-              hideOnSinglePage={true}
-              showSizeChanger={false}
-              pageSize={10}
-            />
+            {q !== false &&
+              <Pagination
+                current={parseInt(currPage) || parseInt(urlPage)}
+                total={defTotalRes(location, favList, watchList, totalResults)}
+                onChange={page => onPageChange(page)}
+                hideOnSinglePage={true}
+                showSizeChanger={false}
+                pageSize={10}
+              />}
           </Row>
 
 
