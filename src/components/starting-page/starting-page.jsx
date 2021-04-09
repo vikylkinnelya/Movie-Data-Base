@@ -1,9 +1,8 @@
 import './starting-page.css'
 import React, { useEffect } from 'react';
 import { NavLink } from "react-router-dom";
-import { Result, Button, Card, Row, Col, Typography } from 'antd';
-import { SmileOutlined, MoreOutlined, UnorderedListOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
-import onRedirectClick from '../../servises/onRedirectClick'
+import {  Button, Row, Col, Typography } from 'antd';
+import { MoreOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
 import defGenres from '../../servises/defGenres';
 import choseRandomMovie from '../../servises/choseRandomMovie';
 
@@ -16,8 +15,6 @@ const StartingPage = ({ history, setQ, setGenre, q }) => {
         let query = choseRandomMovie()
         setQ(query)
     })
-
-
 
     const onRedirectClick = (location, setGenre, history) => {
         setGenre(() => defGenres(location));

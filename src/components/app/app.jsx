@@ -1,13 +1,12 @@
 import './app.css';
-import { Layout, Row, Modal, Empty, Pagination, Result } from 'antd';
-import React, { useEffect, useState, useCallback } from 'react';
+import { Layout, Row, Modal, Pagination, Result, Spin } from 'antd';
+import React, { useState } from 'react';
 import { useLocation, useHistory, withRouter } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import Loader from '../loader';
 import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import MovieContainer from '../movie-container';
-import getDataRequest from '../../servises/getDataRequest';
 import defTotalRes from '../../servises/defTotalRes';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import MovieDetail from '../movie-detail';
@@ -84,6 +83,10 @@ function App() {
           <MenuSider
             collapsedMenu={collapsedMenu}
             location={location}
+            q={q}
+            setQuery={setQuery}
+            setGenreList={setGenreList}
+            setCurrPage={setCurrPage}
           />
         </Sider>
 
@@ -98,7 +101,7 @@ function App() {
 
           <Content>
 
-            {loading && <Loader />}
+            {loading && <Spin style={{ margin: '5% 50% 0 35%', textAlign: 'center', position: 'absolute', zIndex: '100' }} />}
 
             {error !== null &&
               <Result
@@ -146,7 +149,7 @@ function App() {
           </Content>
 
           <Row>
-            {q !== false &&
+            {location !== 'start' &&
               <Pagination
                 current={parseInt(currPage) || parseInt(urlPage)}
                 total={defTotalRes(location, favList, watchList, totalResults)}

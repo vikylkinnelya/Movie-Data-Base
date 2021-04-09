@@ -57,7 +57,6 @@ const RenderMovieCard = ({ state }) => {
   return (
 
     <>
-      {loading && <Loader/>}
 
       {state !== null && state.length > 0 && state.map((result) => {
 

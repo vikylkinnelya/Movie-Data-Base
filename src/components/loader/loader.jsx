@@ -3,9 +3,9 @@ import {Spin} from 'antd';
 
 
 const Loader = () => (
-    <div style={{ margin: '100px 0', textAlign: 'center' }}>
-        <Spin />
-    </div>
+    <>
+        <Spin style={{ margin: '5% 50% 0 35%', textAlign: 'center', position: 'absolute', zIndex: '100' }}/>
+    </>
 )
 
 export default Loader;

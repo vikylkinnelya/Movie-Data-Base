@@ -19,12 +19,20 @@
     padding-bottom: 20px;
 }
 
-.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline {
-    margin-top: 10px;
+.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline, .ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
+    margin-top: 13px;
+}
+
+.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical{
+    justify-content: center;
 }
 
 .ant-menu-item.customclass {
     padding-left: 15px;
+}
+
+.ant-menu-item.customclass.ant-menu-item-active {
+    color: #FFD500
 }
 
 .ant-layout-sider-trigger {
@@ -43,4 +51,9 @@
 .ant-menu-item .anticon,
 .ant-menu-submenu-title .anticon {
     font-size: 20px !important;
+}
+
+a {
+    height: auto;
+    width: auto;
 }
