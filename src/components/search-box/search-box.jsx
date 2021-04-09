@@ -6,9 +6,7 @@ import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({ history, location }) => {
-
-    let { q, setQuery, genreList } = useContext(MyContext);
+const SearchBox = ({ history, location, q, setQuery, genreList, setGenreList, yearValue, setYearValue }) => {
 
     const [activateFilter, setActivateFilter] = useState(false);
 
@@ -19,7 +17,7 @@ const SearchBox = ({ history, location }) => {
         history.push(`/${location}/query=${value}/page=1`)
     }
 
-let value = location === 'main' || location === 'movie' || location === 'series' ? q : "enter title of the movie";
+    let value = location === 'main' || location === 'movie' || location === 'series' ? q : "enter title of the movie";
 
     return (
         <>
@@ -32,7 +30,13 @@ let value = location === 'main' || location === 'movie' || location === 'series'
                 </Col>
                 <Col>
                     <Dropdown
-                        overlay={<FilterMenu />}
+                        overlay={
+                            <FilterMenu
+                                genreList={genreList}
+                                setGenreList={setGenreList}
+                                yearValue={yearValue}
+                                setYearValue={setYearValue}
+                            />}
                         placement='bottomLeft'
                         onClick={() => setActivateFilter(!activateFilter)}
                         visible={activateFilter}

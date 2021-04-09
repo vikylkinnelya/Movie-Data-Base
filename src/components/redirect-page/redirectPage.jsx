@@ -7,7 +7,6 @@ import onRedirectClick from '../../servises/onRedirectClick'
 
 const RedirectPage = ({location, setGenre, history, setQ}) => {
 
-
     return (
         <Result
             //status={'404' || location}

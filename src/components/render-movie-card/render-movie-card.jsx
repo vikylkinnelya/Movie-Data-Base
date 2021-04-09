@@ -1,14 +1,12 @@
 import './render-movie-card.css'
 import React, { useContext, useCallback, useEffect } from 'react';
-import { Card, Tag, Button, List } from 'antd';
 import MyContext from '../../servises/Context';
 import MovieCard from '../movie-card/'
-import getDataRequest from '../../servises/getDataRequest';
-import Loader from '../loader';
+import getDataRequest from '../../servises/getDataRequest'; 
 
 const RenderMovieCard = ({ state }) => {
 
-  const { favList, watchList, loading, q, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage } = useContext(MyContext)
+  const { favList, watchList, q, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage } = useContext(MyContext)
 
   const getData = useCallback(() => {
     getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);

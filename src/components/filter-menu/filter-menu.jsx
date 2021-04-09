@@ -1,14 +1,10 @@
 import './filter-menu.css'
 import { Checkbox, InputNumber, Menu } from 'antd';
+import React from 'react';
 
-import React, { useContext } from 'react';
-import MyContext from '../../servises/Context'
-
-const FilterMenu = () => {
+const FilterMenu = ({ genreList, setGenreList, yearValue, setYearValue }) => {
 
     const filterOptions = ['movie', 'series'];
-
-    const { genreList, setGenreList, yearValue, setYearValue } = useContext(MyContext)
 
     return (
         <Menu className='filter-menu'>

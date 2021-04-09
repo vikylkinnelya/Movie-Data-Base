@@ -15,7 +15,6 @@ const MovieContainer = () => {
 
         <Row className='cards-row' >
             <Switch>
-
                 <Redirect exact from='/' to='/start'/>
 
                 <Route exact path='/start'>

@@ -1,7 +1,6 @@
 import './movie-card.css';
 import { Card, Tag, Button } from 'antd';
 import { HeartOutlined, EyeOutlined, EyeFilled, HeartFilled } from '@ant-design/icons';
-
 import React, { useContext } from 'react';
 import MyContext from '../../servises/Context'
 import toggleItem from '../../servises/toggleItem';
@@ -38,8 +37,8 @@ const MovieCard = ({ result, ClickHandler, Title, Poster, Type, isWatch, isFav }
                 <Button
                     className={isFav ? 'overlay like active' : 'overlay like'} key='fav'
                     shape='circle'
-                    icon={isFav? <HeartFilled /> : <HeartOutlined />}
-                    onClick={() => toggleItem(result, favList, setFav,'fav')} />
+                    icon={isFav ? <HeartFilled /> : <HeartOutlined />}
+                    onClick={() => toggleItem(result, favList, setFav, 'fav')} />
             ]}
         >
             <Meta
