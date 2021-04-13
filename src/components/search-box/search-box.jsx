@@ -1,12 +1,11 @@
 import './search-box.css';
 import { Row, Col, Input, Button, Dropdown } from 'antd';
-import MyContext from '../../servises/Context';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import FilterMenu from '../filter-menu/filter-menu'
 
 const { Search } = Input;
 
-const SearchBox = ({ history, location, q, setQuery, genreList, setGenreList, yearValue, setYearValue }) => {
+const SearchBox = ({ history, location, q, currPage, setQuery, genreList, setGenreList, yearValue, setYearValue }) => {
 
     const [activateFilter, setActivateFilter] = useState(false);
 
@@ -17,7 +16,9 @@ const SearchBox = ({ history, location, q, setQuery, genreList, setGenreList, ye
         history.push(`/${location}/query=${value}/page=1`)
     }
 
-    let value = location === 'main' || location === 'movie' || location === 'series' ? q : "enter title of the movie";
+    let value = location === 'main' || location === 'movie' || location === 'series' ?
+        q :
+        "enter title of the movie";
 
     return (
         <>
@@ -26,16 +27,19 @@ const SearchBox = ({ history, location, q, setQuery, genreList, setGenreList, ye
                     <Search
                         placeholder={value}
                         size="large"
-                        onSearch={value => onSearch(value)} /> {/* q в стейт */}
+                        onSearch={value => onSearch(value)} />
                 </Col>
                 <Col>
                     <Dropdown
                         overlay={
                             <FilterMenu
+                                history={history}
                                 genreList={genreList}
                                 setGenreList={setGenreList}
                                 yearValue={yearValue}
                                 setYearValue={setYearValue}
+                                q={q}
+                                currPage={currPage}
                             />}
                         placement='bottomLeft'
                         onClick={() => setActivateFilter(!activateFilter)}

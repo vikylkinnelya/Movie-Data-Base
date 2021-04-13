@@ -9,15 +9,15 @@ import choseRandomMovie from '../../servises/choseRandomMovie';
 
 const { Title, Text } = Typography
 
-const StartingPage = ({ history, setQ, setGenre, q }) => {
+const StartingPage = ({ history, setQuery, setGenreList, q }) => {
 
     useEffect(() => {
         let query = choseRandomMovie()
-        setQ(query)
+        setQuery(query)
     })
 
-    const onRedirectClick = (location, setGenre, history) => {
-        setGenre(() => defGenres(location));
+    const onRedirectClick = (location, setGenreList, history) => {
+        setGenreList(() => defGenres(location));
         history.push(`/${location}/query=${q}/page=1`)
     }
 
@@ -32,7 +32,7 @@ const StartingPage = ({ history, setQ, setGenre, q }) => {
                         <NavLink to={`/main/query=${q}/page=1`}>
                             <Button
                                 type="text"
-                                onClick={() => onRedirectClick('main', setGenre, history, setQ)}
+                                onClick={() => onRedirectClick('main', setGenreList, history, setQuery)}
                                 className='btn-find'>
 
                                 <Title className='find-title' >
@@ -63,7 +63,7 @@ const StartingPage = ({ history, setQ, setGenre, q }) => {
                         <Button
                             type="text"
                             className='btn-movie'
-                            onClick={() => onRedirectClick('movie', setGenre, history, setQ)}>
+                            onClick={() => onRedirectClick('movie', setGenreList, history, setQuery)}>
                             <Title className='movie-link-title' >
                                 <svg className='movie-icon' width="1em" height="1em" viewBox="0 0 480 480" fill="#FFD500" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0)">
@@ -107,7 +107,7 @@ const StartingPage = ({ history, setQ, setGenre, q }) => {
                     <NavLink to={`/main/query=${q}/page=1`}>
                         <Button
                             type="text"
-                            onClick={() => onRedirectClick('main', setGenre, history, setQ)}
+                            onClick={() => onRedirectClick('main', setGenreList, history, setQuery)}
                             className='btn-go'>
                             <Title className='check-title' >
                                 TAKE A LOOK

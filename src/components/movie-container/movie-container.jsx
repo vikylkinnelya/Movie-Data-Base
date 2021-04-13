@@ -4,24 +4,26 @@ import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
 import RenderMovieCard from '../render-movie-card';
 import RedirectPage from '../redirect-page';
+import Error from '../error';
 import { Row } from 'antd';
 
 
 const MovieContainer = () => {
 
-    let { movie, favList, watchList, history, q, setQuery, setGenreList } = useContext(MyContext)
+    let { movie, error, setError, favList, watchList, history, q, setQuery, setGenreList } = useContext(MyContext)
 
     return (
 
         <Row className='cards-row' >
             <Switch>
-                <Redirect exact from='/' to='/start'/>
+
+                <Redirect exact from='/' to='/start' />
 
                 <Route exact path='/start'>
                     <StartingPage
                         history={history}
-                        setQ={setQuery}
-                        setGenre={setGenreList}
+                        setQuery={setQuery}
+                        setGenreList={setGenreList}
                         q={q}
                     />
                 </Route>
@@ -43,14 +45,16 @@ const MovieContainer = () => {
                 </Route>
 
                 <Route path='/'>
-                    <RedirectPage
+                    <Error
+                        error={() => setError("Please enter your query or try random")}
+                        
                         setQ={setQuery}
-                        setGenre={setGenreList}
+                        setGenreList={setGenreList}
                         location={'main'}
                         history={history}
                     />
                 </Route>
-                
+
             </Switch>
         </Row>
     )

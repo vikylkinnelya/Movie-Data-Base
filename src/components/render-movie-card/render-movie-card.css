@@ -24,8 +24,6 @@
     color: #FFD500
 }
 
-
-
 .ant-pagination-item a {
     color: #d1d1d1;
 }
@@ -38,5 +36,5 @@
     display: flex;
     justify-content: center;
     align-content: space-around;
-    height: 100%;
+    height: auto;
 }

@@ -1,7 +1,7 @@
 import './menu-sider.css'
 import { Menu } from 'antd';
 import { DatabaseOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons'
-import React  from 'react';
+import React from 'react';
 import { NavLink } from "react-router-dom";
 import randomMovie from '../../servises/choseRandomMovie';
 
@@ -38,18 +38,19 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
         q === '' && setQuery(() => randomMovie())
     }
 
-    console.log('menu sider')
-
     return (
         <>
-            <NavLink to={`/start`}
-                onClick={() => {
-                    setQuery(false);
-                    setCurrPage(1)
-                }}
-            >
-                {collapsedMenu ? logo : titleLogo}
-            </NavLink>
+            <div className='logo-sider'>
+                <NavLink to={`/start`}
+                    onClick={() => {
+                        setQuery(false);
+                        setCurrPage(1)
+                    }}
+                    className='start-link'
+                >
+                    {collapsedMenu ? logo : titleLogo}
+                </NavLink>
+            </div>
             <Menu
                 selectedKeys={location}
                 mode="inline"
@@ -104,7 +105,8 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                 <Menu.Item
                     key="to-watch"
                     className="customclass"
-                    icon={<EyeOutlined />}>
+                    icon={<EyeOutlined />}
+                >
                     <NavLink to={`/to-watch/page=1`} />
                     watchlist
                 </Menu.Item>

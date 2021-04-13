@@ -1,0 +1,16 @@
+.result-error{
+    background-color: #313131;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 30px 12px 30px 12px;
+    color: #DFDFDF;
+    font-size: 30px;
+    width: 100%;
+    max-height: 100vh;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.ant-result-icon{
+    margin-bottom: 0;
+}
