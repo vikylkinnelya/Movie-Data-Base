@@ -75,6 +75,11 @@ const RenderMovieCard = ({ state }) => {
           )
         }
       })}
+
+
+      
+
+
     </>
   )
 }

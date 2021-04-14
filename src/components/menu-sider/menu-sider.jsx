@@ -37,7 +37,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
         setGenreList(genres);
         q === '' && setQuery(() => randomMovie())
     }
-
+ 
     return (
         <>
             <div className='logo-sider'>

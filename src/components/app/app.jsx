@@ -8,7 +8,7 @@ import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import MovieContainer from '../movie-container';
 import Error from '../error';
-import defTotalRes from '../../servises/defTotalRes';
+//import defTotalRes from '../../servises/defTotalRes';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import MovieDetail from '../movie-detail';
 import defGenres from '../../servises/defGenres';
@@ -55,7 +55,7 @@ function App() {
    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
  }, [q, currPage, genreList, yearValue])  */
 
-  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, q, setQuery, setGenreList, setMovie, setLoading, setError, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, genreList, yearValue, currPage }
+  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, q, setQuery, setGenreList, setMovie, setLoading, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, setCurrPage, genreList, yearValue, currPage, totalResults }
 
   /* useEffect(() => {
     setLoading(true);
@@ -67,11 +67,7 @@ function App() {
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
 
-  const onPageChange = (page) => { //при изменении стр в pagination
-    setCurrPage(page)
-    history.push(`/${location}/query=${q}/page=${page}`) //изменяется url на тек локацию и стр
-    console.log('on page change')
-  }
+  
 
   return (
 
@@ -127,12 +123,10 @@ function App() {
           <MyContext.Provider value={data}>
             <MovieContainer
               history={history}
+              location={location}
+              urlPage = {urlPage}
               movie={movie}
-              favList={favList}
-              watchList={watchList}
-              q={q}
-              setQuery={setQuery}
-              setGenreList={setGenreList}
+              
             />
           </MyContext.Provider>
 
@@ -152,21 +146,10 @@ function App() {
                 : (<Loader />)}
             </Modal>
           </div>
-
-
+          
         </Content>
 
-        <Row>
-          {location !== 'start' &&
-            <Pagination
-              current={parseInt(currPage) || parseInt(urlPage)}
-              total={defTotalRes(location, favList, watchList, totalResults)}
-              onChange={page => onPageChange(page)}
-              hideOnSinglePage={true}
-              showSizeChanger={false}
-              pageSize={10}
-            />}
-        </Row>
+
 
 
         <Footer>
