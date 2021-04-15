@@ -5,8 +5,8 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
   fetch(`https://www.omdbapi.com/?${searchParam}=${questionParam}&page=${currPage}&type=${type.length === 2 ? type = '' : type}&y=${year}&apikey=${API_KEY}`)
     .then(resp => resp.json())
     .then(response => {
-      if (response.Response === 'False') { //если нет ответа
-        setError(response.Error) //записать в обьект ошибки ошибку
+      if (response.Response === 'False') {
+        setError(response.Error)
         console.log(response.Error)
         throw new Error(response.statusText)
       } else {

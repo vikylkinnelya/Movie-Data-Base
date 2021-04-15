@@ -21,21 +21,29 @@ const MovieContainer = ({ location, urlPage }) => {
 
 
     const defCurrPageList = (location) => {
-        return (location === 'favorites' ? favList : watchList).slice(0, 10)
+        return location === 'favorites' ? favList : watchList
     }
-    const [currPageElems, setCurrPageElems] = useState(() => { return defCurrPageList(location) })
 
+    const [offset, setOffset] = useState(10)
+    const [currPageElems, setCurrPageElems] = useState(() => { return defCurrPageList(location).slice(0,10) })
+
+    const setElemForCurrPage = () => {
+        const allElems = defCurrPageList(location)
+        setCurrPageElems(allElems.slice(offset, offset + 10))
+    }
+
+    const handleClick = (page) => {
+        setElemForCurrPage()
+        setCurrPage(page)
+        const curtPage = page - 1
+        setOffset(curtPage * 10)
+    }
 
     const onFavWatchPageChange = (page) => {
-        setCurrPage(page)
         history.push(`/${location}/query=${q}/page=${page}`)
-        let offset = 0
-
-        //let currPageElems = allElems.slice(offset, offset + 10);
-
-
-
     }
+
+
     return (
         <>
             <Row className='cards-row' >
@@ -62,7 +70,7 @@ const MovieContainer = ({ location, urlPage }) => {
                         <RenderMovieCard state={movie} />
                     </Route>
                     <Route path='/favorites/:page'>
-                        <RenderMovieCard state={favList} />
+                        <RenderMovieCard state={currPageElems} />
                     </Route>
                     <Route exact path='/to-watch/:page'>
                         <RenderMovieCard state={watchList} />
@@ -88,7 +96,7 @@ const MovieContainer = ({ location, urlPage }) => {
                     <Pagination
                         current={parseInt(currPage) || parseInt(urlPage)}
                         total={defTotalRes(location, favList, watchList, totalResults)}
-                        onChange={page => onPageChange(page)}
+                        onChange={page => handleClick(page)}
                         hideOnSinglePage={true}
                         showSizeChanger={false}
                         pageSize={10}
