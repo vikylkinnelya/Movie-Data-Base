@@ -52,11 +52,12 @@ const RenderMovieCard = ({ state }) => {
 
   let uniqueID = []
 
+
   return (
 
     <>
 
-      {state !== null && state.length > 0 && state.map((result) => {
+      {state !== null && state.length > 0 && state.slice(0, 10).map((result) => {
 
         if (!uniqueID.includes(result.imdbID)) {
           uniqueID.push(result.imdbID)

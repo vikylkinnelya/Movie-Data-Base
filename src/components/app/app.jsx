@@ -55,7 +55,7 @@ function App() {
    getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
  }, [q, currPage, genreList, yearValue])  */
 
-  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, q, setQuery, setGenreList, setMovie, setLoading, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, setCurrPage, genreList, yearValue, currPage, totalResults }
+  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, location,  q, setQuery, setGenreList, setMovie, setLoading, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, setCurrPage, genreList, yearValue, currPage, totalResults }
 
   /* useEffect(() => {
     setLoading(true);
@@ -67,7 +67,7 @@ function App() {
   //в кач-ве второго параметра может быть только примитивный обьект
   //при его изменении будет происходить ререндеринг
 
-  
+
 
   return (
 
@@ -116,19 +116,20 @@ function App() {
               location={'main'}
               history={history} />
 
-              /* < className='error-row' style={{ margin: '20px 0' }}>
-            /* <Empty description={error} type='error' /> */}
+            /* < className='error-row' style={{ margin: '20px 0' }}>
+          /* <Empty description={error} type='error' /> */
+          }
 
+          {error !== true &&
+            <MyContext.Provider value={data}>
+              <MovieContainer
+                history={history}
+                location={location}
+                urlPage={urlPage}
+              />
+            </MyContext.Provider>
+          }
 
-          <MyContext.Provider value={data}>
-            <MovieContainer
-              history={history}
-              location={location}
-              urlPage = {urlPage}
-              movie={movie}
-              
-            />
-          </MyContext.Provider>
 
           <div className='modal-detail' >
             <Modal
@@ -146,7 +147,7 @@ function App() {
                 : (<Loader />)}
             </Modal>
           </div>
-          
+
         </Content>
 
 
