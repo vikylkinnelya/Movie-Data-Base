@@ -6,6 +6,7 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     color: whitesmoke;
     display: flex;
+    min-height: 250px;
 }
 
 .ant-modal-header {
@@ -13,7 +14,8 @@
 }
 
 .ant-modal {
-    min-width: 800px;
+    
+    min-width: 900px;
     max-width: 1000px;
 }
 
@@ -46,5 +48,4 @@
 .ant-typography.movie-rating{
     padding: 5px;
     color: #FFD500
-
 }

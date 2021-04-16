@@ -4,7 +4,7 @@ import React from 'react';
 import onRedirectClick from '../../servises/onRedirectClick'
 
 
-const Error = ({ error, location, setGenreList, history, setQ }) => {
+const Error = ({ error, location, setGenreList, history, setQuery, setError }) => {
     return (
         <Result
             className='result-error'
@@ -21,8 +21,8 @@ const Error = ({ error, location, setGenreList, history, setQ }) => {
                 <path d="M299.559 275.996L211.166 187.603C225.838 168.022 234.643 143.808 234.643 117.516C234.643 52.8632 182.049 0.269302 117.396 0.269302C52.7422 0.269302 0.148254 52.8632 0.148254 117.516C0.148254 182.17 52.7422 234.764 117.396 234.764C143.687 234.764 167.901 225.959 187.481 211.287L275.875 299.68L299.559 275.996ZM11.3147 117.516C11.3147 59.0214 58.9003 11.4357 117.396 11.4357C175.891 11.4357 223.477 59.0214 223.477 117.516C223.477 176.012 175.891 223.598 117.396 223.598C58.9003 223.598 11.3147 176.012 11.3147 117.516ZM198.726 201.784C199.72 200.824 200.697 199.847 201.657 198.853C202.472 198.009 203.354 197.234 204.142 196.368L283.769 275.996L275.869 283.896L196.247 204.263C197.113 203.475 197.883 202.594 198.726 201.784Z" fill="#FFD500" />
                 <defs>
                     <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(117.5 117.5) rotate(90) scale(106.5)">
-                        <stop stop-color="#707070" />
-                        <stop offset="1" stop-color="#616161" stopOpacity="0" />
+                        <stop stopColor="#707070" />
+                        <stop offset="1" stopColor="#616161" stopOpacity="0" />
                     </radialGradient>
                 </defs>
             </svg>
@@ -32,8 +32,8 @@ const Error = ({ error, location, setGenreList, history, setQ }) => {
             subTitle="Submission Failed"
             extra={<Button
                 type="primary"
-                onClick={() => onRedirectClick(location, setGenreList, history, setQ)}>
-                Let's go!
+                onClick={() => onRedirectClick(location, setGenreList, history, setQuery)}>
+                Try again
             </Button>}
         />
     )

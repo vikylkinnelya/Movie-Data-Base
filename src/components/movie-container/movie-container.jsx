@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter as Route, Redirect, Switch } from 'react-router-dom';
 import StartingPage from '../starting-page';
 import MyContext from '../../servises/Context';
@@ -13,10 +13,9 @@ const MovieContainer = ({ location, urlPage }) => {
     let { movie, setError, favList, watchList, history, q, setQuery, setGenreList, currPage, setCurrPage, totalResults } = useContext(MyContext)
 
     const [favCurr, setFavCurr] = useState(favList)
-    const [watchCurr, setWatchCurr] = useState(favList)
+    const [watchCurr, setWatchCurr] = useState(watchList)
 
     const handleClick = (page) => {
-        setCurrPage(page)
         if (location === 'favorites') {
             setFavCurr(favList.slice((page - 1) * 10, page * 10))
             history.push(`/${location}/page=${page}`)
@@ -27,17 +26,8 @@ const MovieContainer = ({ location, urlPage }) => {
         } else {
             history.push(`/${location}/query=${q}/page=${page}`)
         }
-
-
-
-
-
-
-
+        setCurrPage(page)
     }
-
-
-
 
     return (
         <>
@@ -74,8 +64,7 @@ const MovieContainer = ({ location, urlPage }) => {
                     <Route path='/'>
                         <Error
                             error={() => setError("Please enter your query or try random")}
-
-                            setQ={setQuery}
+                            setQuery={setQuery}
                             setGenreList={setGenreList}
                             location={'main'}
                             history={history}

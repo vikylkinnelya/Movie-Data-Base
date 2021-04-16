@@ -18,8 +18,8 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
           setState(response)
         }
       }
-      
-      setLoading(false)
+      setError(null);
+      setLoading(false);
       setDetailRequest(false);
     }).catch(( {message} ) => {
       setLoading(false);

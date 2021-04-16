@@ -1,5 +1,5 @@
 import './app.css';
-import { Layout, Row, Modal, Pagination, Spin } from 'antd';
+import { Layout, Modal } from 'antd';
 import React, { useState } from 'react';
 import { useLocation, useHistory, withRouter } from 'react-router-dom';
 import MyContext from '../../servises/Context';
@@ -8,9 +8,8 @@ import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import MovieContainer from '../movie-container';
 import Error from '../error';
-//import defTotalRes from '../../servises/defTotalRes';
-import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import MovieDetail from '../movie-detail';
+import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import defGenres from '../../servises/defGenres';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -28,46 +27,27 @@ function App() {
   let urlPageStr = useLocation().pathname.split('/')[3]
   let urlPage = urlPageStr !== undefined && urlPageStr.split('=')[1]
 
-  const [movie, setMovie] = useState(null); //обьект ответа от сервера
+  const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [q, setQuery] = useState(query);
 
   const [activateModal, setActivateModal] = useState(false);
-  const [detail, setShowDetail] = useState(false); //детали фильма
+  const [detail, setShowDetail] = useState(false);
   const [detailRequest, setDetailRequest] = useState(false); //ответ от сервера
 
   const [favList, setFav] = useState(() => { return getFromLocalStorage('fav') });
-  //const [favId, setFavId] = useState(() => { return getFromLocalStorage('favList') })
-
   const [watchList, setWatch] = useState(() => { return getFromLocalStorage('watch') });
-  //const [watchId, setWatchId] = useState(() => { return getFromLocalStorage('watchList') })
 
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
   const [currPage, setCurrPage] = useState(urlPage || 1) //стр в pagination
-  const [totalResults, setTotalResults] = useState(null); //кол-во ответов от сервера на  q
+  const [totalResults, setTotalResults] = useState(null);
 
-  const [genreList, setGenreList] = useState(() => { return defGenres(location) }); //filter menu
+  const [genreList, setGenreList] = useState(() => { return defGenres(location) });
   const [yearValue, setYearValue] = useState(null)
 
-  /* const getData = useCallback(() => {
-   getDataRequest('s', q, setMovie, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest);
- }, [q, currPage, genreList, yearValue])  */
-
-  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, location,  q, setQuery, setGenreList, setMovie, setLoading, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, setCurrPage, genreList, yearValue, currPage, totalResults }
-
-  /* useEffect(() => {
-    setLoading(true);
-    setError(null);
-    setMovie(null)
-    setTotalResults(null)
-    getData()
-  }, [getData]); */
-  //в кач-ве второго параметра может быть только примитивный обьект
-  //при его изменении будет происходить ререндеринг
-
-
+  const data = { movie, error, setError, watchList, favList, setWatch, setFav, history, location, q, setQuery, setGenreList, setMovie, setLoading, setTotalResults, setActivateModal, setDetailRequest, setShowDetail, setCurrPage, genreList, yearValue, currPage, totalResults }
 
   return (
 
@@ -111,7 +91,8 @@ function App() {
           {error !== null &&
             <Error
               error={error}
-              setQ={setQuery}
+              setError={setError}
+              setQuery={setQuery}
               setGenreList={setGenreList}
               location={'main'}
               history={history} />
@@ -120,15 +101,14 @@ function App() {
           /* <Empty description={error} type='error' /> */
           }
 
-          {error !== true &&
-            <MyContext.Provider value={data}>
-              <MovieContainer
-                history={history}
-                location={location}
-                urlPage={urlPage}
-              />
-            </MyContext.Provider>
-          }
+          <MyContext.Provider value={data}>
+            <MovieContainer
+              history={history}
+              location={location}
+              urlPage={urlPage}
+            />
+          </MyContext.Provider>
+
 
 
           <div className='modal-detail' >
@@ -149,8 +129,6 @@ function App() {
           </div>
 
         </Content>
-
-
 
 
         <Footer>

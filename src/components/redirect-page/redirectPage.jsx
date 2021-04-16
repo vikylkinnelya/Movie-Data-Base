@@ -1,7 +1,5 @@
 import React from 'react';
 import { Result, Button } from 'antd';
-import { SmileOutlined } from '@ant-design/icons';
-import choseRandomMovie from '../../servises/choseRandomMovie';
 import onRedirectClick from '../../servises/onRedirectClick'
 
 

@@ -1,6 +1,5 @@
 import './starting-page.css'
 import React, { useEffect } from 'react';
-import { NavLink } from "react-router-dom";
 import { Button, Row, Col, Typography } from 'antd';
 import { MoreOutlined, FileTextOutlined, FieldTimeOutlined, TeamOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons';
 import defGenres from '../../servises/defGenres';

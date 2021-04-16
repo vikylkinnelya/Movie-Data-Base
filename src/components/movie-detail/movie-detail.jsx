@@ -11,13 +11,13 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
 
     return (
         <Row>
-            <Col span={11}>
+            <Col span={10}>
                 <img
                     src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
                     alt={Title}
                 />
             </Col>
-            <Col span={13} className='detail-row'>
+            <Col span={14} className='detail-row'>
                 <Row>
                     <Col >
                         <TextTitle span={21}
