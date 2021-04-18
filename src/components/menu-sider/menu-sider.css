@@ -20,7 +20,7 @@
 }
 
 .ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline, .ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical{
@@ -55,4 +55,5 @@
 
 .logo-sider {
     height: 70px;
+    margin-top: 10px;
 }

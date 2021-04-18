@@ -12,13 +12,12 @@ const SearchBox = ({ history, location, q, currPage, setQuery, genreList, setGen
     const onSearch = (value) => {
         setQuery(value)
         let location = genreList.length === 2 ? 'main' : genreList;
-        console.log(location)
-        history.push(`/${location}/query=${value}/page=1`)
+        history.push(`/movie-database/${location}/query=${value}/page=1`)
     }
 
     let value = location === 'main' || location === 'movie' || location === 'series' ?
         q :
-        "enter title of the movie";
+        "enter title of the movie"
 
     return (
         <>

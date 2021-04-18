@@ -3,9 +3,9 @@ import choseRandomMovie from './choseRandomMovie';
 
 const onRedirectClick = (location, setGenreList, history, setQuery) => {
     let query = choseRandomMovie()
-    setGenreList(() => defGenres(location));
-    history.push(`/${location}/query=${query}/page=1`)
     setQuery(query)
+    setGenreList(() => defGenres(location));
+    history.push(`/movie-database/${location}/query=${query}/page=1`) 
 }
 
 export default onRedirectClick

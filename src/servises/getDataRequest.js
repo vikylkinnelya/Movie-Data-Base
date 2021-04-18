@@ -23,7 +23,7 @@ const getDataRequest = (searchParam, questionParam, setState, currPage, type = '
       setDetailRequest(false);
     }).catch(( {message} ) => {
       setLoading(false);
-      //setError(message);
+      setError(message);
     })
 }
 

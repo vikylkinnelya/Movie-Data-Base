@@ -19,12 +19,12 @@ const { Header, Content, Footer, Sider } = Layout;
 function App() {
 
   const history = useHistory()
-  let location = useLocation().pathname.split('/')[1];
+  let location = useLocation().pathname.split('/')[2];
 
-  let queryStr = useLocation().pathname.split('/')[2]
+  let queryStr = useLocation().pathname.split('/')[3]
   let query = queryStr !== undefined && queryStr.split('=')[1]
 
-  let urlPageStr = useLocation().pathname.split('/')[3]
+  let urlPageStr = useLocation().pathname.split('/')[4]
   let urlPage = urlPageStr !== undefined && urlPageStr.split('=')[1]
 
   const [movie, setMovie] = useState(null);
@@ -109,8 +109,6 @@ function App() {
             />
           </MyContext.Provider>
 
-
-
           <div className='modal-detail' >
             <Modal
               centered
@@ -133,7 +131,7 @@ function App() {
 
         <Footer>
           footer
-              </Footer>
+        </Footer>
 
       </Layout>
     </Layout>

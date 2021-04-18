@@ -2,12 +2,10 @@ import React from 'react';
 import { Result, Button } from 'antd';
 import onRedirectClick from '../../servises/onRedirectClick'
 
-
 const RedirectPage = ({ location, setGenreList, history, setQuery }) => {
 
     return (
         <Result
-            //status={'404' || location}
             icon={<svg width="300" height="300" viewBox="0 0 664 663" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M170.543 348.729H135.035C131.484 348.729 129.117 351.096 129.117 354.646V378.318C129.117 381.869 131.484 384.236 135.035 384.236H170.543C174.093 384.236 176.46 381.869 176.46 378.318V354.646C176.46 351.096 174.093 348.729 170.543 348.729ZM164.625 372.4H140.953V360.564H164.624V372.4H164.625Z" fill="#FFD500" />
                 <path d="M324.41 348.729H288.902C285.351 348.729 282.984 351.096 282.984 354.646V378.318C282.984 381.869 285.351 384.236 288.902 384.236H324.41C327.96 384.236 330.327 381.869 330.327 378.318V354.646C330.327 351.096 327.96 348.729 324.41 348.729ZM318.491 372.4H294.82V360.564H318.491V372.4V372.4Z" fill="#FFD500" />

@@ -55,14 +55,12 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                         className={isWatch ? 'overlay watch active' : 'overlay watch'} key='watch'
                         shape='circle'
                         icon={isWatch ? <EyeFilled /> : <EyeOutlined />}
-                    //onClick={() => toggleItem(result, watchList, setWatch, 'watch')} 
                     />
 
                     <Button
                         className={isFav ? 'overlay like active' : 'overlay like'} key='fav'
                         shape='circle'
                         icon={isFav ? <HeartFilled /> : <HeartOutlined />}
-                    //onClick={() => toggleItem(result, favList, setFav, 'fav')} 
                     />
                 </Row></Col>
 
