@@ -12,7 +12,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "vikylkinnelya.github.io/movie-database/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
