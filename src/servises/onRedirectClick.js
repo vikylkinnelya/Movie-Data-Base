@@ -5,7 +5,7 @@ const onRedirectClick = (location, setGenreList, history, setQuery) => {
     let query = choseRandomMovie()
     setQuery(query)
     setGenreList(() => defGenres(location));
-    history.push(`/movie-database/${location}/query=${query}/page=1`) 
+    history.push(`/${location}/query=${query}/page=1`) 
 }
 
 export default onRedirectClick

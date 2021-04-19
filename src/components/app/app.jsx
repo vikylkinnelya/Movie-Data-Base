@@ -19,13 +19,13 @@ const { Header, Content, Footer, Sider } = Layout;
 function App() {
 
   const history = useHistory()
-  let location = useLocation().pathname.split('/')[2];
+  let location = useLocation().pathname.split('/')[1];
+  
+  let queryStr = useLocation().pathname.split('query=')[1]
+  let query = queryStr !== undefined && queryStr.split('/')[0]
 
-  let queryStr = useLocation().pathname.split('/')[3]
-  let query = queryStr !== undefined && queryStr.split('=')[1]
-
-  let urlPageStr = useLocation().pathname.split('/')[4]
-  let urlPage = urlPageStr !== undefined && urlPageStr.split('=')[1]
+  let urlPageStr = useLocation().pathname.split('page=')[1]
+  let urlPage = urlPageStr !== undefined && urlPageStr.split('/')[0]
 
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
@@ -53,7 +53,7 @@ function App() {
 
     <Layout>
 
-      <Sider
+      <Sider 
         breakpoint="lg"
         collapsible={true}
         onCollapse={() => setCollapsedMenu(!collapsedMenu)} >

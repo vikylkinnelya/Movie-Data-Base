@@ -69,7 +69,7 @@ const RenderMovieCard = ({ state }) => {
               isWatch={watchList.includes(result) || localStorage.getItem('watch_' + result.imdbID)}
 
               ClickHandler={() => movieClickHandler(result)}
-              key={result.imdbID} //присв ключ обьекту из списка в соотв с его номером в базе 
+              key={result.imdbID}
               result={result}
               {...result}
             />

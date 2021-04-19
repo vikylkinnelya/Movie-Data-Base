@@ -9,7 +9,7 @@ const FilterMenu = ({ genreList, setGenreList, yearValue, setYearValue, history,
     const onFilterChange = (value) => {
         setGenreList(value)
         let loc = value.length === 2 ? 'main' : value 
-        history.push(`/movie-database/${loc}/query=${q}/page=${currPage}`)
+        history.push(`/${loc}/query=${q}/page=${currPage}`)
     }
 
     return (

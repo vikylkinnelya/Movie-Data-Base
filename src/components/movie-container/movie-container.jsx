@@ -16,7 +16,7 @@ const MovieContainer = ({ location, urlPage }) => {
     const [watchCurr, setWatchCurr] = useState(watchList)
 
     const handleClick = (page) => {
-        const favWatchLink = `movie-database/${location}/page=${page}`
+        const favWatchLink = `/${location}/page=${page}`
 
         if (location === 'favorites') {
             setFavCurr(favList.slice((page - 1) * 10, page * 10))
@@ -26,7 +26,7 @@ const MovieContainer = ({ location, urlPage }) => {
             setWatchCurr(watchCurr.slice((page - 1) * 10, page * 10))
             history.push(favWatchLink)
         } else {
-            history.push(`movie-database/${location}/query=${q}/page=${page}`)
+            history.push(`/${location}/query=${q}/page=${page}`)
         }
         setCurrPage(page)
     }
@@ -36,11 +36,9 @@ const MovieContainer = ({ location, urlPage }) => {
             <Row className='cards-row' >
                 <Switch>
 
-                    <Redirect exact from='/movie-database' to='/movie-database/start' />
-                    <Redirect exact from='/' to='/movie-database/start' />
-
-
-                    <Route exact path='/movie-database/start'>
+                    <Redirect exact from='/' to= '/start' />
+                    
+                    <Route exact path='/start'>
                         <StartingPage
                             history={history}
                             setQuery={setQuery}
@@ -49,19 +47,19 @@ const MovieContainer = ({ location, urlPage }) => {
                         />
                     </Route>
 
-                    <Route path='/movie-database/main/:q/:page'>
+                    <Route path='/main/:q/:page'>
                         <RenderMovieCard state={movie} />
                     </Route>
-                    <Route path='/movie-database/movie/:q:page'>
+                    <Route path='/movie/:q:page'>
                         <RenderMovieCard state={movie} />
                     </Route>
-                    <Route path='/movie-database/series/:page'>
+                    <Route path='/series/:page'>
                         <RenderMovieCard state={movie} />
                     </Route>
-                    <Route path='/movie-database/favorites/:page'>
+                    <Route path='/favorites/:page'>
                         <RenderMovieCard state={favCurr} />
                     </Route>
-                    <Route exact path='/movie-database/to-watch/:page'>
+                    <Route exact path='/to-watch/:page'>
                         <RenderMovieCard state={watchCurr} />
                     </Route>
 

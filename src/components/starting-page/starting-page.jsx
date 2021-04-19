@@ -17,7 +17,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
 
     const onRedirectClick = (location, setGenreList, history) => {
         setGenreList(() => defGenres(location));
-        history.push(`/movie-database/${location}/query=${q}/page=1`)
+        history.push(`/${location}/query=${q}/page=1`)
     }
 
     return (

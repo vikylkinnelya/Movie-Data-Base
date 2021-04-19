@@ -41,7 +41,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
     return (
         <>
             <div className='logo-sider'>
-                <NavLink to={`/movie-database/start`}
+                <NavLink to={`/start`}
                     onClick={() => {
                         setQuery(false);
                         setCurrPage(1)
@@ -63,7 +63,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                     icon={<DatabaseOutlined />}
                     onClick={() => setRedirectParam(['movie', 'series'])}
                 >
-                    <NavLink to={`/movie-database/main/query=${q}/page=1`} />
+                    <NavLink to={`/main/query=${q}/page=1`} />
                     main
                 </Menu.Item>
 
@@ -75,7 +75,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                     </svg>}
                     onClick={() => setRedirectParam(['movie'])}
                 >
-                    <NavLink to={`/movie-database/movie/query=${q}/page=1`} />
+                    <NavLink to={`/movie/query=${q}/page=1`} />
                     movies
                 </Menu.Item>
 
@@ -89,7 +89,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                     </svg>}
                     onClick={() => setRedirectParam(['series'])}
                 >
-                    <NavLink to={`/movie-database/series/query=${q}/page=1`} />
+                    <NavLink to={`/series/query=${q}/page=1`} />
                     series
                 </Menu.Item>
 
@@ -98,7 +98,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                     className="customclass"
                     icon={<HeartOutlined />}
                 >
-                    <NavLink to={`/movie-database/favorites/page=1`} />
+                    <NavLink to={`/favorites/page=1`} />
                     liked
                 </Menu.Item>
 
@@ -107,7 +107,7 @@ const MenuSider = ({ location, collapsedMenu, q, setQuery, setGenreList, setCurr
                     className="customclass"
                     icon={<EyeOutlined />}
                 >
-                    <NavLink to={`/movie-database/to-watch/page=1`} />
+                    <NavLink to={`/to-watch/page=1`} />
                     watchlist
                 </Menu.Item>
 
