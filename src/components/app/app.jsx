@@ -55,6 +55,7 @@ function App() {
 
       <Sider 
         breakpoint="lg"
+        collapsedWidth={70}
         collapsible={true}
         onCollapse={() => setCollapsedMenu(!collapsedMenu)} >
 

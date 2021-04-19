@@ -1,14 +1,14 @@
 .ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
     background: none;
-    
+
 }
+
 
 .ant-menu.ant-menu-dark,
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #313131;
     background: linear-gradient(60deg, #313131 40%, #414141 100%);
-
 }
 
 .ant-menu.ant-menu-dark.ant-menu-root {
@@ -19,16 +19,19 @@
     padding-bottom: 20px;
 }
 
-.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline, .ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
+.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline,
+.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
     margin-top: 10px;
 }
 
-.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical{
+.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
     justify-content: center;
+    width: 70px;
 }
 
 .ant-menu-item.customclass {
-    padding-left: 15px;
+    padding-left: 17px;
+    font-size: 30px;
 }
 
 .ant-menu-item.customclass.ant-menu-item-active {
@@ -50,7 +53,7 @@
 .ant-menu-submenu-title .ant-menu-item-icon,
 .ant-menu-item .anticon,
 .ant-menu-submenu-title .anticon {
-    font-size: 20px !important;
+    font-size: 25px !important;
 }
 
 .logo-sider {
