@@ -12,7 +12,8 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "vikylkinnelya.github.io/../startpoint.html",
+  "start_url": "./",
+   "scope": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
