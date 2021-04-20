@@ -1,6 +1,5 @@
 .ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
     background: none;
-
 }
 
 
@@ -46,6 +45,7 @@
 
 .ant-menu-item.customclass.ant-menu-item-selected {
     background-color: #FFD500;
+    color: #212121;
     border-radius: 10px;
 }
 
@@ -59,4 +59,8 @@
 .logo-sider {
     height: 70px;
     margin-top: 10px;
+}
+
+.ant-tooltip-inner {
+    color: #FFD500;
 }

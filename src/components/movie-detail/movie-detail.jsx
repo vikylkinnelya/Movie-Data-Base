@@ -17,16 +17,16 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                     alt={Title}
                 />
             </Col>
-            <Col className='detail-row' xs={24} sm={24} md={24} lg={10}>
+            <Col className='detail-row' xs={24} sm={24} md={24} lg={{span: 13, offset: 1}}>
                 <Row>
-                    <Col >
+                    <Col>
                         <TextTitle span={21}
                         className='movie-title'
                             level={4}>
                             {Title}
                         </TextTitle>
                     </Col>
-                    <Col style={{ textAlign: 'right' }}>
+                    <Col style={{ textAlign: 'right' }} >
                         <TextTitle
                         className='movie-rating'
                             level={4}>
@@ -37,7 +37,7 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                     </Col>
                 </Row>
                 <Row style={{ marginBottom: '20px' }}>
-                    <Col className='movie-tags' xs={24} sm={24} md={24} lg={10}>
+                    <Col className='movie-tags' xs={24} sm={24} md={24} lg={24}>
                         <Tag>{Runtime}</Tag>
                         <Tag>{Genre}</Tag>
                         <Tag>{Rated}</Tag>
