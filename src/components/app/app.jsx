@@ -20,7 +20,7 @@ function App() {
 
   const history = useHistory()
   let location = useLocation().pathname.split('/')[1];
-  
+
   let queryStr = useLocation().pathname.split('query=')[1]
   let query = queryStr !== undefined && queryStr.split('/')[0]
 
@@ -53,7 +53,7 @@ function App() {
 
     <Layout>
 
-      <Sider 
+      <Sider
         breakpoint="lg"
         collapsedWidth={70}
         collapsible={true}
@@ -110,22 +110,22 @@ function App() {
             />
           </MyContext.Provider>
 
-          <div className='modal-detail' >
-            <Modal
-              centered
-              visible={activateModal}
-              maskStyle={{ backdropFilter: 'blur(1.0px)' }}
-              onCancel={() => { setActivateModal(false); setShowDetail(null) }}
-              footer={null}
-            >
-              {detailRequest === false && detail != null ?
-                (<MovieDetail
-                  {...detail}
-                  isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
-                  isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
-                : (<Loader />)}
-            </Modal>
-          </div>
+
+          <Modal
+            centered
+            visible={activateModal}
+            maskStyle={{ backdropFilter: 'blur(1.0px)' }}
+            onCancel={() => { setActivateModal(false); setShowDetail(null) }}
+            footer={null}
+          >
+            {detailRequest === false && detail != null ?
+              (<MovieDetail
+                {...detail}
+                isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
+                isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
+              : (<Loader />)}
+          </Modal>
+
 
         </Content>
 

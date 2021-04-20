@@ -1,15 +1,37 @@
-.result-error{
+.result-error {
     background-color: #313131;
     border-radius: 10px;
     margin-top: 15px;
     padding: 8% 12px 5% 12px;
-    color: #DFDFDF;
+    color: #d4d4d4;
     font-size: 30px;
     width: 100%;
     min-height: 80vh;
     text-align: center;
 }
 
-.ant-result-icon{
+.result-error>.ant-result-subtitle {
+    font-size: 40px;
+}
+
+.ant-result-extra>.ant-btn-primary {
+    color: #212121
+}
+
+.ant-result-extra>.ant-btn-primary:hover {
+    color: #FFD500
+}
+
+.ant-result-icon {
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .result-error-svg {
+        width: 250px;
+    }
+
+    .result-error>.ant-result-subtitle {
+        font-size: 20px;
+    }
 }

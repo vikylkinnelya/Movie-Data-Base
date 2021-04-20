@@ -11,13 +11,13 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
 
     return (
         <Row>
-            <Col span={10}>
-                <img
+            <Col span={10} className='modal-img'>
+                <img 
                     src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
                     alt={Title}
                 />
             </Col>
-            <Col span={14} className='detail-row'>
+            <Col className='detail-row' xs={24} sm={24} md={24} lg={10}>
                 <Row>
                     <Col >
                         <TextTitle span={21}
@@ -37,7 +37,7 @@ const MovieDetail = ({ isFav, isWatch, Title, Actors, Year, Country, Language, P
                     </Col>
                 </Row>
                 <Row style={{ marginBottom: '20px' }}>
-                    <Col className='movie-tags'>
+                    <Col className='movie-tags' xs={24} sm={24} md={24} lg={10}>
                         <Tag>{Runtime}</Tag>
                         <Tag>{Genre}</Tag>
                         <Tag>{Rated}</Tag>

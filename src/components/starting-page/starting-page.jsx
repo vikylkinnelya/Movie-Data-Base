@@ -26,7 +26,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
 
             <Row className='find-discover-row'>
 
-                <Col className='find-col' >
+                <Col className='find-col' span={24}>
                     <Row className='find-row'>
                         <Button
                             type="text"
@@ -54,7 +54,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
             </Row>
 
             <Row className='movie-type-row'>
-                <Col xs={24} lg={12} className='movie'>
+                <Col xs={24} md={12} lg={12} className='movie'>
                     <Button
                         type="text"
                         className='btn-movie'
@@ -70,7 +70,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
                         </Title>
                     </Button>
                 </Col>
-                <Col xs={24} lg={12} className='series'>
+                <Col xs={24} md={12} lg={12} className='series'>
                     <Button
                         type="text"
                         onClick={() => onRedirectClick('series')}
@@ -106,13 +106,13 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
                     </Button>
                 </Col>
 
-                <Col xs={24} md={12} lg={8} className='description'>
+                <Col xs={24} sm={12} lg={8} className='description'>
                     <Text >
                         <FileTextOutlined />
                             description
                     </Text>
                 </Col>
-                <Col xs={24} md={12} lg={8} className='genre'>
+                <Col xs={24} sm={12} lg={8} className='genre'>
                     <Text >
                         <svg className='genre-icon' width="1.2em" height="1.2em" viewBox="0 0 488 480" fill="#FFD500" xmlns="http://www.w3.org/2000/svg">
                             <g>
@@ -128,26 +128,26 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
                         genre
                     </Text>
                 </Col>
-                <Col xs={24} md={12} lg={8} className='actors'>
+                <Col xs={24} sm={12} lg={8} className='actors'>
                     <TeamOutlined />
                     <Text >
                         actors
                 </Text>
                 </Col>
-                <Col xs={24} md={12} lg={8} className='duration'>
+                <Col xs={24} sm={12} lg={8} className='duration'>
                     <Text>
                         <FieldTimeOutlined />
                             duration
                     </Text>
                 </Col>
 
-                <Col xs={24} md={12} lg={8} className='revievs'>
+                <Col xs={24} sm={12} lg={8} className='revievs'>
                     <Text >
                         <StarOutlined />
                             reviews
                     </Text>
                 </Col>
-                <Col xs={24} md={12} lg={8} className='other'>
+                <Col xs={24} sm={12} lg={8} className='other'>
                     <MoreOutlined />
                     <Text>
                         other

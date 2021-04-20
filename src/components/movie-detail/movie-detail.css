@@ -5,18 +5,11 @@
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     color: whitesmoke;
-    display: flex;
     min-height: 250px;
 }
 
 .ant-modal-header {
     background: none
-}
-
-.ant-modal {
-    
-    min-width: 900px;
-    max-width: 1000px;
 }
 
 .ant-modal-close-x {
@@ -28,13 +21,17 @@
     border: none;
     color: #e7e7e7;
     background: rgba(119, 119, 119, 0.4);
+    
+}
+.ant-tag{
+    white-space: normal;
 }
 
 .ant-result-title,
 .ant-result-subtitle,
 .ant-typography,
 .ant-typography.movie-title {
-    color: whitesmoke;
+    color: #d4d4d4;
 }
 
 .ant-typography.movie-detail-paragraph,
@@ -45,7 +42,53 @@
     padding: 5px 10px 5px 10px;
 }
 
-.ant-typography.movie-rating{
+.ant-typography.movie-rating {
     padding: 5px;
     color: #FFD500
 }
+
+.modal-img {
+    max-width: fit-content;
+}
+
+.ant-modal-body {
+    display: flex;
+}
+
+@media screen and (min-width: 769px) {
+    .ant-modal-content {
+        width: 800px;
+    }
+
+    .ant-modal {
+        right: 100px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ant-modal-body {
+        width: 500px;
+    }
+
+    .modal-img {
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .ant-modal-body {
+        width: 350px;
+    }
+    
+
+    .modal-img img{
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+
+}
+

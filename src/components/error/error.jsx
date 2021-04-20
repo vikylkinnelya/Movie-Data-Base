@@ -8,7 +8,7 @@ const Error = ({ error, location, setGenreList, history, setQuery, setError }) =
     return (
         <Result
             className='result-error'
-            icon={<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            icon={<svg className='result-error-svg'width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="117.5" cy="117.5" r="106.5" fill="url(#paint0_radial)" />
                 <path d="M80.7503 152H67.25C65.8999 152 65 153 65 154.5V164.5C65 166 65.8999 167 67.25 167H80.7503C82.1001 167 83 166 83 164.5V154.5C83 153 82.1001 152 80.7503 152ZM78.5003 162H69.5001V157H78.4999V162H78.5003Z" fill="#FFD500" />
                 <path d="M142.75 152H129.25C127.9 152 127 153 127 154.5V164.5C127 166 127.9 167 129.25 167H142.75C144.1 167 145 166 145 164.5V154.5C145 153 144.1 152 142.75 152ZM140.5 162H131.5V157H140.5V162Z" fill="#FFD500" />
