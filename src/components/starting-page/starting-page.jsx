@@ -29,6 +29,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
                 <Col className='find-col' span={24}>
                     <Row className='find-row'>
                         <Button
+                            aria-label="find movies"
                             type="text"
                             onClick={() => onRedirectClick('main', setGenreList, history, setQuery)}
                             className='btn-find'>
@@ -56,6 +57,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
             <Row className='movie-type-row'>
                 <Col xs={24} md={12} lg={12} className='movie'>
                     <Button
+                        aria-label="movies page"
                         type="text"
                         className='btn-movie'
                         onClick={() => onRedirectClick('movie', setGenreList, history, setQuery)}>
@@ -72,6 +74,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
                 </Col>
                 <Col xs={24} md={12} lg={12} className='series'>
                     <Button
+                        aria-label="series page"
                         type="text"
                         onClick={() => onRedirectClick('series')}
                         className='btn-series'>
@@ -97,6 +100,7 @@ const StartingPage = ({ history, setQuery, setGenreList, q }) => {
             <Row className='check-row'>
                 <Col className='check-row-title' span={24}>
                     <Button
+                        aria-label="main page"
                         type="text"
                         onClick={() => onRedirectClick('main', setGenreList, history, setQuery)}
                         className='btn-go'>

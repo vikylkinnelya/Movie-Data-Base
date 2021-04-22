@@ -38,15 +38,6 @@ h1.ant-typography,
     margin-bottom: 0;
 }
 
-.ant-typography.find-title,
-.ant-typography.check-title {
-    font-size: 10vw;
-}
-
-.ant-typography.check-title {
-    font-size: 8vw;
-}
-
 .ant-typography.movie-link-title,
 .ant-typography.series-title {
     font-size: 5vw;
@@ -62,7 +53,8 @@ h1.ant-typography,
 .check-row {
     margin-bottom: 20px;
 }
-.movie-type-row{
+
+.movie-type-row {
     margin-bottom: 10px;
 }
 
@@ -104,12 +96,13 @@ a {
         margin-top: 5px;
     }
 
-    .ant-typography.find-title{
+    .ant-typography.find-title {
         font-size: 50px;
     }
-    .ant-typography.check-title{
+
+    .ant-typography.check-title {
         font-size: 45px;
-        white-space:normal;
+        white-space: normal;
     }
 }
 
@@ -123,8 +116,24 @@ a {
         font-size: 40px;
     }
 
-    .ant-typography.find-title,
-    .ant-typography.check-title{
+    .ant-typography.find-title {
         font-size: 90px;
     }
+
+    .ant-typography.check-title {
+        font-size: 80px;
+    }
+}
+
+
+.btn-find:hover,
+.btn-movie:hover,
+.btn-series:hover {
+    transition: transform 0.5s;
+    transform: scale(1.15);
+}
+
+.btn-go:hover{
+    transition: transform 0.5s;
+    transform: scale(1.09);
 }

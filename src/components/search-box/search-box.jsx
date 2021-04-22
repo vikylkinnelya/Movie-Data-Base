@@ -28,32 +28,33 @@ const SearchBox = ({ history, location, q, currPage, setQuery, genreList, setGen
                         size="large"
                         onSearch={value => onSearch(value)} />
                 </Col>
-                <Col>
-                    <Dropdown
-                        overlay={
-                            <FilterMenu
-                                history={history}
-                                genreList={genreList}
-                                setGenreList={setGenreList}
-                                yearValue={yearValue}
-                                setYearValue={setYearValue}
-                                q={q}
-                                currPage={currPage}
-                            />}
-                        placement='bottomLeft'
-                        onClick={() => setActivateFilter(!activateFilter)}
-                        visible={activateFilter}
-                        overlayStyle={{ top: '64px' }}
-                    >
-                        <Button
-                            style={{ background: 'none' }}
-                            className='filter-menu-btn'
-                            icon={<svg xmlns="http://www.w3.org/2000/svg" fill='#FFD500' width="40" height="40" className="bi bi-filter" viewBox="0 0 16 16">
-                                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
-                            </svg>}
-                        />
-                    </Dropdown>
-                </Col>
+
+                <Dropdown
+                    overlay={
+                        <FilterMenu
+                            history={history}
+                            genreList={genreList}
+                            setGenreList={setGenreList}
+                            yearValue={yearValue}
+                            setYearValue={setYearValue}
+                            q={q}
+                            currPage={currPage}
+                        />}
+                    placement='bottomLeft'
+                    onClick={() => setActivateFilter(!activateFilter)}
+                    visible={activateFilter}
+                    overlayStyle={{ top: '64px' }}
+                >
+                    <Button
+                        aria-label="filter"
+                        style={{ background: 'none' }}
+                        className='filter-menu-btn'
+                        icon={<svg xmlns="http://www.w3.org/2000/svg" fill='#FFD500' width="40" height="40" className="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                        </svg>}
+                    />
+                </Dropdown>
+
             </Row>
         </>
     )
