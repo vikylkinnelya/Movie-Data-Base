@@ -1,12 +1,11 @@
 .result-error {
-    background-color: #313131;
+    background: linear-gradient(90deg, #313131 10%, #212121 70% );
     border-radius: 10px;
-    margin-top: 15px;
-    padding: 8% 12px 5% 12px;
+    padding: 3% 12px 5% 12px;
     color: #d4d4d4;
     font-size: 30px;
     width: 100%;
-    min-height: 80vh;
+    height: auto;
     text-align: center;
 }
 
@@ -33,5 +32,11 @@
 
     .result-error>.ant-result-subtitle {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .result-error-svg {
+        width: 180px;
     }
 }

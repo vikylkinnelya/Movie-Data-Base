@@ -9,4 +9,3 @@ const onRedirectClick = (location, setGenreList, history, setQuery) => {
 }
 
 export default onRedirectClick
-

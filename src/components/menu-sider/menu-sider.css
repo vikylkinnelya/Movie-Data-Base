@@ -29,7 +29,8 @@
 
 .ant-layout-sider-children  .ant-menu-item.customclass {
     padding-left: 17px;
-    font-size: 30px;
+    font-size: 25px;
+    margin: 10px 0 10px 0;
 }
 
 .ant-layout-sider-children  .ant-menu-item.customclass.ant-menu-item-active {

@@ -3,10 +3,6 @@ a {
     width: 100%;
 }
 
-* {
-    font-family: 'Roboto', sans-serif;
-}
-
 .ant-layout.ant-layout-has-sider {
     min-height: 100vh;
 }
@@ -17,8 +13,7 @@ a {
 }
 
 .ant-layout {
-    background: linear-gradient(60deg, #212121 50%, #313131 100%);
-
+    background: #212121 ;
 }
 
 .error-row>.ant-empty * {
@@ -63,7 +58,8 @@ a {
     color:rgba(255, 255, 255, 0.65)
 }
 
-.author-text, .email-text {
-    margin-left: 5px;
+.ant-typography.author-text, .ant-typography.email-text {
+    margin-left: 20px;
+    color: #707070;
 }
 

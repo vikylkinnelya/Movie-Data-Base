@@ -9,10 +9,9 @@ import MenuSider from '../menu-sider';
 import MovieContainer from '../movie-container';
 import Error from '../error';
 import MovieDetail from '../movie-detail';
-import SiteFooter from '../site-footer';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import defGenres from '../../servises/defGenres';
-const { Title, Text } = Typography
+const { Text } = Typography
 const { Header, Content, Footer, Sider } = Layout;
 //const API_KEY = 'eb9d8a81';
 //const API_KEY = 'a6a004a3'
@@ -42,7 +41,7 @@ function App() {
 
   const [collapsedMenu, setCollapsedMenu] = useState(false);
 
-  const [currPage, setCurrPage] = useState(urlPage || 1) //стр в pagination
+  const [currPage, setCurrPage] = useState(urlPage || 1)
   const [totalResults, setTotalResults] = useState(null);
 
   const [genreList, setGenreList] = useState(() => { return defGenres(location) });
@@ -139,9 +138,6 @@ function App() {
               setGenreList={setGenreList}
               location={'main'}
               history={history} />
-
-            /* < className='error-row' style={{ margin: '20px 0' }}>
-          /* <Empty description={error} type='error' /> */
           }
 
           <MyContext.Provider value={data}>
@@ -151,7 +147,6 @@ function App() {
               urlPage={urlPage}
             />
           </MyContext.Provider>
-
 
           <Modal
             centered
@@ -168,12 +163,9 @@ function App() {
               : (<Loader />)}
           </Modal>
 
-
         </Content>
 
-
         <Footer>
-
           <MenuSider
             collapsedMenu={false}
             mode={"horizontal"}
@@ -189,14 +181,10 @@ function App() {
           <Row><Text className='email-text'>
             vikylkinnelya@gmail.com
           </Text></Row>
-
-
-          {/* <SiteFooter /> */}
         </Footer>
 
       </Layout>
     </Layout>
-
   )
 }
 
