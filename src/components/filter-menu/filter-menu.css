@@ -1,7 +1,4 @@
-.ant-dropdown.ant-dropdown-placement-bottomRight {
-    top: 64px;
 
-}
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background: none
@@ -9,7 +6,7 @@
 
 .ant-menu.ant-menu-light.filter-menu.ant-menu-root.ant-menu-vertical {
     background: linear-gradient(60deg, #313131 40%, #616161 100%);
-
+    width: fit-content;
     border-radius: 10px;
     border-right: none;
 }

@@ -45,9 +45,25 @@ a {
 
 .ant-layout-footer {
     background: #313131;
+    background: linear-gradient(30deg, #313131 10%, #212121 90%);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     margin: 0px 20px 0px 20px;
 }
 
+.ant-menu-root.ant-menu-horizontal{
+    background: none;
+}
+.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-selected, 
+.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-active{
+    background: none;
+}
+
+.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-selected {
+    color:rgba(255, 255, 255, 0.65)
+}
+
+.author-text, .email-text {
+    margin-left: 5px;
+}
 

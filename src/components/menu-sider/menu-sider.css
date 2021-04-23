@@ -1,16 +1,15 @@
-.ant-layout-sider.ant-layout-sider-dark.ant-layout-sider-has-trigger {
+.ant-layout-sider-dark.ant-layout-sider-has-trigger {
     background: none;
 }
 
-
-.ant-menu.ant-menu-dark,
+.ant-layout-sider-children .ant-menu.ant-menu-dark,
 .ant-menu-dark .ant-menu-sub,
 .ant-menu.ant-menu-dark .ant-menu-sub {
     background: #313131;
-    background: linear-gradient(60deg, #313131 40%, #414141 100%);
+    background: linear-gradient(210deg, #313131 50%, #212121 100%);
 }
 
-.ant-menu.ant-menu-dark.ant-menu-root {
+.ant-layout-sider-children .ant-menu-dark.ant-menu-root {
     color: #D6D9DC;
     padding-left: 5px;
     font-size: 26px;
@@ -18,22 +17,22 @@
     padding-bottom: 20px;
 }
 
-.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-inline,
-.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
+.ant-menu-root.ant-menu-inline,
+.ant-menu-root.ant-menu-vertical {
     margin-top: 10px;
 }
 
-.ant-menu.ant-menu-dark.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
+.ant-menu-root.ant-menu-vertical {
     justify-content: center;
     width: 70px;
 }
 
-.ant-menu-item.customclass {
+.ant-layout-sider-children  .ant-menu-item.customclass {
     padding-left: 17px;
     font-size: 30px;
 }
 
-.ant-menu-item.customclass.ant-menu-item-active {
+.ant-layout-sider-children  .ant-menu-item.customclass.ant-menu-item-active {
     color: #FFD500
 }
 
@@ -43,7 +42,7 @@
     width: max-content;
 }
 
-.ant-menu-item.customclass.ant-menu-item-selected {
+.ant-layout-sider-children  .ant-menu-item.customclass.ant-menu-item-selected {
     background-color: #FFD500;
     color: #212121;
     border-radius: 10px;
