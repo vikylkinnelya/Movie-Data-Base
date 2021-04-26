@@ -1,5 +1,5 @@
 <h1 align="center">The Movie Database</h1>
-<img src='./images/readme_assets/logo.png' width="100%">
+<img src='./readme_assets/logo.png' width="100%">
 <h2 align="center"><a  href="https://https://vikylkinnelya.github.io/movie-database/">Try it</a></h2>
 
 ## Description 
