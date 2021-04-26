@@ -1,5 +1,5 @@
 <h1 align="center">The Movie Database</h1>
-<img src='./readme_assets/logo.png' width="100%">
+<img src='./images/readme_assets/logo.png' width="100%">
 <h2 align="center"><a  href="https://https://vikylkinnelya.github.io/movie-database/">Try it</a></h2>
 
 ## Description 
@@ -7,7 +7,7 @@
 **Find** 
 - * the movie you are looking for
 - * something new by random
-<img src='./readme_assets/search-panel.jpg' width="100%">
+<img src='./images/readme_assets/search-panel.jpg' width="100%">
 
 **Take a look**
 - * description
@@ -16,7 +16,7 @@
 - * duration
 - * reviews
 - * other
-<img src='./readme_assets/modal.jpg' width="100%">
+<img src='./images/readme_assets/modal.jpg' width="100%">
 
 ## About the project.
 - * The movie database uses [OMDb API](http://www.omdbapi.com/) to obtain movie information.
