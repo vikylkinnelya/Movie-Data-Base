@@ -125,7 +125,6 @@ a {
     }
 }
 
-
 .btn-find:hover,
 .btn-movie:hover,
 .btn-series:hover {
@@ -136,4 +135,9 @@ a {
 .btn-go:hover{
     transition: transform 0.5s;
     transform: scale(1.09);
+}
+
+.ant-btn.ant-btn-primary{
+    background-color:#FFD500;
+    border-color: #FFD500
 }

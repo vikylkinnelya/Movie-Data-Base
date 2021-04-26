@@ -13,7 +13,7 @@ a {
 }
 
 .ant-layout {
-    background: #212121 ;
+    background: #212121;
 }
 
 .error-row>.ant-empty * {
@@ -30,6 +30,7 @@ a {
 .ant-spin-dot-item {
     width: 50px;
     height: 50px;
+    background-color: #FFD500
 }
 
 .ant-tag {
@@ -46,20 +47,28 @@ a {
     margin: 0px 20px 0px 20px;
 }
 
-.ant-menu-root.ant-menu-horizontal{
+@media screen and (max-width: 800px) {
+    .ant-layout-footer {
+        margin: 0px 0px 0px 0px;
+        padding: 10px 0 20px 0;
+    }
+}
+
+.ant-menu-root.ant-menu-horizontal {
     background: none;
 }
-.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-selected, 
-.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-active{
+
+.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-selected,
+.ant-layout-footer .ant-menu-item.customclass.ant-menu-item-active {
     background: none;
 }
 
 .ant-layout-footer .ant-menu-item.customclass.ant-menu-item-selected {
-    color:rgba(255, 255, 255, 0.65)
+    color: rgba(255, 255, 255, 0.65)
 }
 
-.ant-typography.author-text, .ant-typography.email-text {
+.ant-typography.author-text,
+.ant-typography.email-text {
     margin-left: 20px;
     color: #707070;
 }
-

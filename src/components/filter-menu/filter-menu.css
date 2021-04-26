@@ -1,5 +1,3 @@
-
-
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background: none
 }
@@ -34,4 +32,9 @@
 
 .ant-input-number-handler-wrap{
     width: 25px;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner{
+    background-color: #FFD500;
+    border-color: #FFD500;
 }

@@ -1,7 +1,11 @@
 .ant-pagination {
     margin: 20px auto 20px auto;
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .ant-pagination .ant-pagination-item {
@@ -11,6 +15,46 @@
     border-radius: 10px;
     border: none;
     background: #414141;
+}
+
+
+@media screen and (max-width: 576px) {
+
+    .ant-pagination-prev.ant-pagination,
+    .ant-pagination-item,
+    .ant-pagination-jump-next,
+    .ant-pagination-jump-prev,
+    .ant-pagination-prev,
+    .ant-pagination-next {
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+
+    .ant-pagination {
+        margin: 0;
+    }
+
+    .ant-pagination .ant-pagination-item,
+    .ant-pagination-prev,
+    .ant-pagination-next {
+        width: auto;
+        min-width: 22px;
+        height: 45px;
+        line-height: 45px;
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next,
+    .ant-pagination-item {
+        margin: 2px;
+    }
+
+    .ant-pagination-jump-next,
+    .ant-pagination-jump-prev {
+        margin: 0px;
+    }
 }
 
 .ant-pagination .ant-pagination-item-link {
