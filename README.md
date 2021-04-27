@@ -16,7 +16,7 @@
  * duration
  * reviews
  * other
-<img src='./readme_assets/modal.jpg' width="100%">
+<img src='./readme_assets/modal.png' width="100%">
 
 ## About the project.
  * The movie database uses [OMDb API](http://www.omdbapi.com/) to obtain movie information.
