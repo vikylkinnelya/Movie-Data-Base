@@ -1,6 +1,6 @@
 import './app.css';
 import { Layout, Modal, Typography, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useLocation, useHistory, withRouter, NavLink } from 'react-router-dom';
 import MyContext from '../../servises/Context';
 import Loader from '../loader';
@@ -8,9 +8,11 @@ import SearchBox from '../search-box';
 import MenuSider from '../menu-sider';
 import MovieContainer from '../movie-container';
 import Error from '../error';
-import MovieDetail from '../movie-detail';
 import getFromLocalStorage from '../../servises/getFromLocalStorage';
 import defGenres from '../../servises/defGenres';
+
+const MovieDetail = React.lazy(() => import('../movie-detail'))
+
 const { Text } = Typography
 const { Header, Content, Footer, Sider } = Layout;
 //const API_KEY = 'eb9d8a81';
@@ -148,6 +150,7 @@ function App() {
             />
           </MyContext.Provider>
 
+
           <Modal
             centered
             visible={activateModal}
@@ -155,13 +158,16 @@ function App() {
             onCancel={() => { setActivateModal(false); setShowDetail(null) }}
             footer={null}
           >
-            {detailRequest === false && detail != null ?
-              (<MovieDetail
-                {...detail}
-                isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
-                isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
-              : (<Loader />)}
+            <Suspense fallback={<Loader />}>
+              {detailRequest === false && detail != null ?
+                (<MovieDetail
+                  {...detail}
+                  isFav={favList.includes(detail) || localStorage.getItem('fav_' + detail.imdbID)}
+                  isWatch={watchList.includes(detail) || localStorage.getItem('watch_' + detail.imdbID)} />)
+                : (<Loader />)}
+            </Suspense>
           </Modal>
+
 
         </Content>
 

@@ -17,6 +17,9 @@
     background: #414141;
 }
 
+.ant-pagination .ant-pagination-item a:hover {
+    color: #FFD500
+}
 
 @media screen and (max-width: 576px) {
 

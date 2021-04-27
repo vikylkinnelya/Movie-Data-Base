@@ -10,13 +10,12 @@
     justify-content: space-between;
 }
 
-.ant-row.find-row {
-    justify-content: center;
+.welcome-page .ant-typography{
+    color: #DFDFDF
 }
 
-h1.ant-typography,
-.ant-typography h1 {
-    color: #DFDFDF
+.ant-row.find-row {
+    justify-content: center;
 }
 
 .anticon-profile,
