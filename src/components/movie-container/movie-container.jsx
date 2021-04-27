@@ -5,7 +5,8 @@ import MyContext from '../../servises/Context';
 import defTotalRes from '../../servises/defTotalRes';
 import Loader from '../loader';
 import Error from '../error';
-import { Row, Pagination } from 'antd';
+import { Row } from 'antd';
+import { Pagination } from 'antd';
 
 const RenderMovieCard = React.lazy(() => import('../render-movie-card'))
 
@@ -36,22 +37,22 @@ const MovieContainer = ({ location, urlPage }) => {
         <>
             <Row className='cards-row' >
                 <Suspense fallback={<Loader />}>
-                <Switch>
+                    <Switch>
 
-                    <Redirect exact from='/' to='/start' />
+                        <Redirect exact from='/' to='/start' />
 
-                    <Route exact path='/start'>
-                        <StartingPage
-                            history={history}
-                            setQuery={setQuery}
-                            setGenreList={setGenreList}
-                            q={q}
-                        />
-                    </Route>
+                        <Route exact path='/start'>
+                            <StartingPage
+                                history={history}
+                                setQuery={setQuery}
+                                setGenreList={setGenreList}
+                                q={q}
+                            />
+                        </Route>
                         <Route path='/main/:q/:page'>
                             <RenderMovieCard state={movie} />
                         </Route>
-                        
+
                         <Route path='/movie/:q:page'>
                             <RenderMovieCard state={movie} />
                         </Route>
@@ -63,19 +64,19 @@ const MovieContainer = ({ location, urlPage }) => {
                         </Route>
                         <Route exact path='/to-watch/:page'>
                             <RenderMovieCard state={watchCurr} />
-                        </Route> 
+                        </Route>
 
-                    <Route path='/'>
-                        <Error
-                            error={() => setError("Please enter your query or try random")}
-                            setQuery={setQuery}
-                            setGenreList={setGenreList}
-                            location={'main'}
-                            history={history}
-                        />
-                    </Route>
+                        <Route path='/'>
+                            <Error
+                                error={() => setError("Please enter your query or try random")}
+                                setQuery={setQuery}
+                                setGenreList={setGenreList}
+                                location={'main'}
+                                history={history}
+                            />
+                        </Route>
 
-                </Switch>
+                    </Switch>
                 </Suspense>
             </Row>
 

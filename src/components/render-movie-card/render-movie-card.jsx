@@ -1,8 +1,10 @@
 import './render-movie-card.css'
-import React, { useContext, useCallback, useEffect } from 'react';
+import React, { Suspense, useContext, useCallback, useEffect } from 'react';
 import MyContext from '../../servises/Context';
-import MovieCard from '../movie-card/'
-import getDataRequest from '../../servises/getDataRequest'; 
+import getDataRequest from '../../servises/getDataRequest';
+import Loader from '../loader';
+
+const MovieCard = React.lazy(() => import('../movie-card/'))
 
 const RenderMovieCard = ({ state }) => {
 
@@ -19,9 +21,6 @@ const RenderMovieCard = ({ state }) => {
     setTotalResults(null)
     getData()
   }, [getData]);
-  
-  //в кач-ве второго параметра может быть только примитивный обьект
-  //при его изменении будет происходить ререндеринг
 
   const movieClickHandler = (item) => { //обработчик события клика. при клике на карточку
     setActivateModal(true); //показать модалку. эл импортируется из другого компонента
@@ -29,58 +28,30 @@ const RenderMovieCard = ({ state }) => {
     getDataRequest('i', item.imdbID, setShowDetail, currPage, genreList, yearValue, setError, setTotalResults, setLoading, setDetailRequest) //запрос к серверу за деталями фильма
   }
 
-  /* const getIdRequest = (questionParam) => { //гибкий запрос на сервер
-
-    const API_KEY = 'a6a004a3'
-
-    fetch(`https://www.omdbapi.com/?i=${questionParam}&apikey=${API_KEY}`)
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.Response === 'False') { //если нет ответа
-          setError(response.Error) //записать в обьект ошибки ошибку
-          throw new Error(response.statusText)
-        } else {
-          //setTermState(response)
-        }
-        setLoading(false)
-        setDetailRequest(false);
-      }).catch(({ message }) => {
-        setLoading(false);
-        setError(message);
-      })
-  } */
-
   let uniqueID = []
 
-
   return (
-
     <>
-
       {state !== null && state.length > 0 && state.slice(0, 10).map((result) => {
 
         if (!uniqueID.includes(result.imdbID)) {
           uniqueID.push(result.imdbID)
 
           return (
+            <Suspense fallback={<Loader />}>
+              <MovieCard
+                isFav={favList.includes(result) || localStorage.getItem('fav_' + result.imdbID)}
+                isWatch={watchList.includes(result) || localStorage.getItem('watch_' + result.imdbID)}
 
-            <MovieCard
-              isFav={favList.includes(result) || localStorage.getItem('fav_' + result.imdbID) }
-              isWatch={watchList.includes(result) || localStorage.getItem('watch_' + result.imdbID)}
-
-              ClickHandler={() => movieClickHandler(result)}
-              key={result.imdbID}
-              result={result}
-              {...result}
-            />
+                ClickHandler={() => movieClickHandler(result)}
+                key={result.imdbID}
+                result={result}
+                {...result}
+              />
+            </Suspense>
           )
         }
       })}
-
-
-      
-
-
     </>
   )
 }
