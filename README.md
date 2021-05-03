@@ -20,7 +20,8 @@
 
 ## About the project
  * The movie database uses [OMDb API](http://www.omdbapi.com/) to obtain movie information.
- * Design and UI were created by using [Ant Design](https://ant.design/).
+ * Design was created by me.
+ * UI components were created by using [Ant Design](https://ant.design/) library.
  * For navigation between pages there is [React Router](https://reactrouter.com/web/guides/quick-start).
  * Responsive design:
  <img src='./readme_assets/responsive.jpg' width="100%">
